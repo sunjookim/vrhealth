@@ -82,11 +82,11 @@ public class Player : MonoBehaviour
                 if(newEf) // 오브젝트가 할당 된 상태야 함
                 {
                     newEf.transform.position = transform.position;
-                    newEf.transform.Translate(new Vector3(0, 2, 0));
+                    newEf.transform.Translate(new Vector3(0, 4, 0));
                 }
                     
-                pSpeed *= 1.03f;
-                nvSpeed *= 1.03f;
+                pSpeed *= 1.02f;
+                nvSpeed *= 1.02f;
             }
         }
 
