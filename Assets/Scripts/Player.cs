@@ -110,8 +110,8 @@ namespace Ardunity
                             newEf.transform.Translate(new Vector3(0, 2, 0));
                         }
 
-                        pSpeed *= 1.03f;
-                        nvSpeed *= 1.03f;
+                        pSpeed *= 1.2f;
+                        nvSpeed *= 1.2f;
 
                         if (pSpeed >= 0.3f) pSpeed = 0.3f;
                         if (nvSpeed >= 4f) nvSpeed = 4f;

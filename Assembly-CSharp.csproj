@@ -137,6 +137,7 @@
     <Compile Include="Assets\Scripts\Flicker.cs" />
     <Compile Include="Assets\Scripts\FollowCam.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
+    <Compile Include="Assets\Scripts\miniMap.cs" />
     <Compile Include="Assets\Scripts\Movie.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\RotationReactor.cs" />
