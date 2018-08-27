@@ -51,7 +51,9 @@ public class EnemyState : MonoBehaviour
             // 폭발 효과, 오브젝트 삭제
             Destroy(this.gameObject);
             GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
+            newExplosion.transform.Translate(Vector3.up * 1.3f);
             Debug.Log("Enemy Hit!");
+            Destroy(newExplosion, 1.2f);
         }
     }
 }

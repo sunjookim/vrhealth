@@ -12,16 +12,18 @@ public class GameUI: MonoBehaviour
     public Text txtScore;
     public Text txtBestScore;
     public Text txtCorner;
+    public Text txtGameOverMs;
 
-    private int totScore = 0;
     //public float done = 13.0f; // 컨트롤러 초기화 영상 재생될 시간
 
     // Use this for initialization
     void Start()
     {
-        txtScore.text = "<color=#00ff00ff>Score</color> <color=#ff0000>0</color>";
-        txtBestScore.text = "<color=#00ff00ff>BestScore</color> <color=#ff0000>" +
-            PlayerPrefs.GetInt("BestScore", 0).ToString() + "</color>";
+        txtGameOverMs.text = "";
+        //PlayerPrefs.SetFloat("BestScore", 300f);
+        float bestTime = PlayerPrefs.GetFloat("BestScore");
+        txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
+        ((int)bestTime / 60) + " : " + ((int)bestTime % 60) + " : " + (int)((bestTime % 1) * 100) + "</color>";
     }
 
     public void ChangeCorner(int Corner)
@@ -35,20 +37,30 @@ public class GameUI: MonoBehaviour
     public void ChangeScore(float time)
     {
         txtScore.text = "<color=#00ff00ff>Current time : </color> <color=#ff0000>" +
-            ((int)time/60) + " : " + ((int)time%60) + " : "  + "</color>";
+            ((int)time/60) + " : " + ((int)time%60) + " : " + (int)((time % 1) * 100) + "</color>";
+    }
 
-        if (time < PlayerPrefs.GetInt("BestScore"))
+    public void ChangeBest()
+    {
+        if (_time < PlayerPrefs.GetFloat("BestScore"))
         {
-            PlayerPrefs.SetFloat("BestScore", time);
-
-            txtBestScore.text = "<color=#00ff00ff>BestScore</color> <color=#ff0000>" +
-                ((int)time / 60) + " : " + ((int)time % 60) + " : " + "</color>" + "</color>";
+            PlayerPrefs.SetFloat("BestScore", _time);
+            PlayerPrefs.Save();
+            txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
+            ((int)_time / 60) + " : " + ((int)_time % 60) + " : " + (int)((_time % 1) * 100) + "</color>";
         }
     }
 
-    public void ChangeLife()
+    public void ChangeGameOver(int mode)
     {
-        // 라이프를 깎는 스크립트 넣음
+        if(mode == 0)   // 라이프가 없음
+        {
+            txtGameOverMs.text = "목숨을 모두 소진 하셨습니다 ㅜㅜ";
+        }
+        else if(mode == 1) // 맵을 다 돌음
+        {
+            txtGameOverMs.text = "맵을 다 돌으셨어요!";
+        }
     }
 
     void Update()

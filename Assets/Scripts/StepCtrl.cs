@@ -11,13 +11,11 @@ namespace Ardunity
         private GameObject playerPr;
         private Player player;
         private float[] spownPo1, spownPo2, spownPo3, spownPo4;
-
+        
         public GameObject EnemyPrefabs;
         public GameObject EnemyPrefabs2;
         public GameObject UIObj;
         public Animator animator;       // 애니메이션 객체
-        public EnemyState enemyState;   // 장애물 동작 스크립트
-        public int Life;
 
         private int count;
         private float dis;      // 장애물이 떨어져있는 거리
@@ -33,10 +31,10 @@ namespace Ardunity
             UIObj = GameObject.Find("Game_UI");
 
             spownPo1 = new float[] { -315, -(315 + 330) / 2, -330 };
-            spownPo2 = new float[] { 270, (270 + 243) / 2, 243 };
-            spownPo3 = new float[] { -55, -(55 + 81) / 2, -81 };
-            spownPo4 = new float[] { -108, -(108 + 130) / 2, -130 };
-
+            spownPo2 = new float[] { 265, (265 + 247) / 2, 247 };
+            spownPo3 = new float[] { -48, -(48 + 76) / 2, -76 };
+            spownPo4 = new float[] { -103, -(103 + 125) / 2, -125 };
+            
             count = player.cornerCount;
             dis = 30;
         }
@@ -46,14 +44,14 @@ namespace Ardunity
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("lose"))
             {
                 clear(); // 애니메이션 초기화
+                player.Clear();
             }
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("win"))
             {
+                player.Clear();
                 clear();
             }
             count = player.cornerCount;
-
-
         }
 
         // 동작 1, 팔 모으기

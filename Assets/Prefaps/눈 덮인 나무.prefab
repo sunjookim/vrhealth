@@ -28375,10 +28375,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c8058a9ff100749b098f5fe1e87729, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  viewCamera: {fileID: 0}
-  count: 6
-  x: 0
 --- !u!114 &114560789540965124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28390,21 +28386,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfd40f9e82509a842b3f655acafedb25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletMax: 50
-  BulletNow: 50
-  BetweenShots: 100
-  ReloadTime: 3
-  muzzleVelocity: 500
-  nextShotTime: 0
-  nextReloadTime: 0
-  Bullet: {fileID: 1515715629854134, guid: 161d7d98d11abde42952feb0b717f887, type: 2}
-  muzzle: {fileID: 4798704385421980}
-  hand: {fileID: 4914039250637852}
-  fireSfx: {fileID: 8300000, guid: 8602b7d5cd15c1943a50aa53f171c8cf, type: 3}
-  reloadSfx: {fileID: 8300000, guid: 3c5c1d4d7b9307c458890a4beb12e4ae, type: 3}
+  EnemyPrefabs: {fileID: 0}
+  EnemyPrefabs2: {fileID: 0}
   UIObj: {fileID: 0}
   animator: {fileID: 0}
-  viewCamera: {fileID: 0}
 --- !u!114 &114872976336763130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -28416,7 +28401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4665ea5c2fbd6e34d853f2be037b4a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newGun: {fileID: 114560789540965124}
 --- !u!136 &136390620673551102
 CapsuleCollider:
   m_ObjectHideFlags: 1

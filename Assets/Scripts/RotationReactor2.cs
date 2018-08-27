@@ -111,20 +111,20 @@ namespace Ardunity
 
            if (time >= 3.5f) 
                {
-               if (decision == 0) // 팔운동1 
-               {
-                    if (Math.Abs(_curRotation2._curRotation.y) < 0.8f && Math.Abs(_curRotation2._curRotation.y) > 0.4f      // 1번 y: 0.4 < 현재값 < 0.8
-                          && Math.Abs(_curRotation4._curRotation.y) < 0.8f && Math.Abs(_curRotation4._curRotation.y) > 0.4f) // 4번 y: 0.4 < 현재값 < 0.8
+                    if (decision == 0) // 팔운동1 
                     {
+                        if (Math.Abs(_curRotation2._curRotation.y) < 0.8f && Math.Abs(_curRotation2._curRotation.y) > 0.4f      // 1번 y: 0.4 < 현재값 < 0.8
+                                && Math.Abs(_curRotation4._curRotation.y) < 0.8f && Math.Abs(_curRotation4._curRotation.y) > 0.4f) // 4번 y: 0.4 < 현재값 < 0.8
+                        {
 
-                       //animator.Play("Makehuman_gameskel|gun_game_1_bullet", -1, 0);  // 팔운동1 애니메이션 실행
-                       count1++;
-                       decision++;  // 팔운동 1 애니메이션이 실행되면 팔운동2 애니메이션이 실행될수있도록 decision = 1로 바꿔준다.
-                        snow0 = true;
-                        snow2 = false;
+                            //animator.Play("Makehuman_gameskel|gun_game_1_bullet", -1, 0);  // 팔운동1 애니메이션 실행
+                            count1++;
+                            decision++;  // 팔운동 1 애니메이션이 실행되면 팔운동2 애니메이션이 실행될수있도록 decision = 1로 바꿔준다.
+                            snow0 = true;
+                            snow2 = false;
                        
-                   }
-               }
+                        }
+                    }
                }
 
            else { }

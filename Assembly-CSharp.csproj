@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\AimCtrl.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\EnemyState.cs" />
+    <Compile Include="Assets\Scripts\Flicker.cs" />
     <Compile Include="Assets\Scripts\FollowCam.cs" />
     <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Movie.cs" />
@@ -142,7 +143,9 @@
     <Compile Include="Assets\Scripts\RotationReactor2.cs" />
     <Compile Include="Assets\Scripts\RotationReactor4.cs" />
     <Compile Include="Assets\Scripts\StepCtrl.cs" />
+    <Compile Include="Assets\UETools\Magic_Particle_Effects\Scripts\CameraMovement.cs" />
     <None Include="Assets\MapBuilding\효과\폭발\Shader\Exposion.shader" />
+    <None Include="Assets\UETools\Magic_Particle_Effects\Readme.txt" />
     <None Include="Assets\ARDUnity\Examples\Buzzer\SampleSongs.txt" />
     <None Include="Assets\ARDUnity\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEditor.StandardEvents">
@@ -355,14 +358,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="ArdunityCore">
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/sleigh game/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCore">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/sleigh game/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/unity/mscorlib.dll</HintPath>
