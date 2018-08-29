@@ -1,4 +1,8 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: "Assets/gameSleigh/Scenes/\uC370\uB9E4 \uAC8C\uC784.unity"
+=======
+- path: "Assets/Scenes/\uC370\uB9E4 \uAC8C\uC784.unity"
+>>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   isLoaded: 1
   isActive: 1

@@ -293,6 +293,7 @@ InputManager:
     type: 0
     axis: 0
     joyNum: 0
+<<<<<<< HEAD
   - serializedVersion: 3
     m_Name: Oculus_GearVR_LThumbstickX
     descriptiveName: 
@@ -421,3 +422,5 @@ InputManager:
     type: 2
     axis: 11
     joyNum: 0
+=======
+>>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
