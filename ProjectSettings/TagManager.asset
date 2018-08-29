@@ -3,7 +3,6 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-<<<<<<< HEAD
   tags:
   - Initialize
   - Life1
@@ -33,9 +32,6 @@ TagManager:
   - fail_color
   - test
   - bird_01
-=======
-  tags: []
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   layers:
   - Default
   - TransparentFX

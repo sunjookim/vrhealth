@@ -6,7 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-<<<<<<< HEAD
     path: Assets/Row/Scene/Main.unity
     guid: e9479535997de4e46906f6dd66023a83
   - enabled: 1
@@ -30,8 +29,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Rocket/Scenes/WaterRocket.unity
     guid: e227e094dff9af7449dc64009146747b
-=======
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   m_configObjects: {}

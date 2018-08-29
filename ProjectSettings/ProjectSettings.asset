@@ -4,11 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-<<<<<<< HEAD
   productGUID: ee1b3e9160eb27441a6cd38e5f340b02
-=======
-  productGUID: 80652374b28f5e44da34433bf51ffcf3
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -17,11 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-<<<<<<< HEAD
   productName: 2018_start
-=======
-  productName: sleigh game
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -158,21 +150,13 @@ PlayerSettings:
   resolutionScalingMode: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-<<<<<<< HEAD
   applicationIdentifier:
     Standalone: com.oculus.UnitySample
-=======
-  applicationIdentifier: {}
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
   AndroidTargetSdkVersion: 0
-<<<<<<< HEAD
   AndroidPreferredInstallLocation: 0
-=======
-  AndroidPreferredInstallLocation: 1
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
@@ -252,13 +236,8 @@ PlayerSettings:
   iOSRequireARKit: 0
   appleEnableProMotion: 0
   vulkanEditorSupport: 0
-<<<<<<< HEAD
   clonedFromGUID: 56e7a2d3a00f33d44bdd161b773c35b5
   templatePackageId: com.unity.template.3d@1.0.0
-=======
-  clonedFromGUID: c0afd0d1d80e3634a9dac47e8a0426ea
-  templatePackageId: com.unity.3d@1.0.2
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   templateDefaultScene: Assets/Scenes/SampleScene.unity
   AndroidTargetArchitectures: 5
   AndroidSplashScreenScale: 0
@@ -310,11 +289,7 @@ PlayerSettings:
     m_Automatic: 1
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
-<<<<<<< HEAD
     m_Enabled: 1
-=======
-    m_Enabled: 0
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
     m_Devices:
     - Oculus
     - OpenVR
@@ -585,11 +560,7 @@ PlayerSettings:
   webGLMemorySize: 256
   webGLExceptionSupport: 1
   webGLNameFilesAsHashes: 0
-<<<<<<< HEAD
   webGLDataCaching: 0
-=======
-  webGLDataCaching: 1
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
@@ -597,7 +568,6 @@ PlayerSettings:
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
   webGLCompressionFormat: 1
-<<<<<<< HEAD
   webGLLinkerTarget: 0
   scriptingDefineSymbols:
     1: UNITY_POST_PROCESSING_STACK_V2;CROSS_PLATFORM_INPUT
@@ -614,14 +584,6 @@ PlayerSettings:
     25: UNITY_POST_PROCESSING_STACK_V2
     26: UNITY_POST_PROCESSING_STACK_V2
     27: UNITY_POST_PROCESSING_STACK_V2
-=======
-  webGLLinkerTarget: 1
-  scriptingDefineSymbols:
-    1: CROSS_PLATFORM_INPUT
-    4: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    7: CROSS_PLATFORM_INPUT;MOBILE_INPUT
-    14: MOBILE_INPUT
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   platformArchitecture: {}
   scriptingBackend: {}
   il2cppCompilerConfiguration: {}
@@ -629,12 +591,8 @@ PlayerSettings:
   allowUnsafeCode: 0
   additionalIl2CppArgs: 
   scriptingRuntimeVersion: 0
-<<<<<<< HEAD
   apiCompatibilityLevelPerPlatform:
     Standalone: 1
-=======
-  apiCompatibilityLevelPerPlatform: {}
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: Template_3D
@@ -706,15 +664,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-<<<<<<< HEAD
   cloudProjectId: 6610efd8-fdd8-4522-83a0-c8ecf6c0965e
   projectName: 2018_start
   organizationId: sunjookim
-=======
-  cloudProjectId: 
-  projectName: 
-  organizationId: 
->>>>>>> 7f47f0e5c157fc9021e7f698a0d2040570c4a718
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
