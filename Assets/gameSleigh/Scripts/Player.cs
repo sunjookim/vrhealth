@@ -46,7 +46,7 @@ namespace Ardunity
             img = GameObject.FindGameObjectsWithTag("img"); // 이미지 UI 오브젝트들
             Life = img.Length;
             Debug.Log("목숨 : " + Life);
-            isSt1 = false; isSt2 = false; isSt3 = false; // 스텝 1,2,3은 다 비활성 상태
+            isSt1 = false; isSt2 = false; isSt3 = true; // 스텝 1,2,3은 다 비활성 상태
             isBoost = false; isColl = false;
 
             stepCtrl = GetComponent<StepCtrl>();
@@ -127,23 +127,24 @@ namespace Ardunity
 
                 }
 
-                if (Input.GetKeyDown(KeyCode.Q) && !isSt1) // Time.time <= countTime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
+                if (Input.GetKeyDown(KeyCode.Q) && isSt3) // Time.time <= countTime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
                 {
                     stepCtrl.StepOne();
                     isSt1 = true;
-                    
+                    isSt3 = false;
                 }
-                else if (Input.GetKeyDown(KeyCode.W) && !isSt2)
+                else if (Input.GetKeyDown(KeyCode.W) && isSt1)
                 {
                     stepCtrl.StepTwo();
+                    isSt1 = false;
                     isSt2 = true;
                     
                 }
-                else if (Input.GetKeyDown(KeyCode.E) && !isSt3)
+                else if (Input.GetKeyDown(KeyCode.E) && isSt2)
                 {
                     stepCtrl.StepThree();
+                    isSt2 = false;
                     isSt3 = true;
-                    
                 }
 
                 /**** 밑에는 아두니티 쓰는거 *****/

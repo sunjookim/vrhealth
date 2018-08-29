@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.5690016, g: 0.57571656, b: 0.57401115, a: 1}
+  m_IndirectSpecularColor: {r: 0.56900555, g: 0.5757101, b: 0.5740129, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6723,11 +6723,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4447116350376264, guid: d96b62e8199962b46b630135986216a9, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.06
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4447116350376264, guid: d96b62e8199962b46b630135986216a9, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 0.32
+      value: 0.164
       objectReference: {fileID: 0}
     - target: {fileID: 4447116350376264, guid: d96b62e8199962b46b630135986216a9, type: 2}
       propertyPath: m_LocalRotation.x
@@ -38620,7 +38620,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0.3
+  m_BaseOffset: -0.1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!65 &856678738
@@ -38634,8 +38634,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1504939, y: 1.9208151, z: 1.9667374}
-  m_Center: {x: 0.029802771, y: 0.6049031, z: 0.3059083}
+  m_Size: {x: 0.9646014, y: 1.515885, z: 2.2214785}
+  m_Center: {x: 0.061597448, y: 0.848177, z: 0.12737077}
 --- !u!95 &856678739
 Animator:
   serializedVersion: 3
@@ -38663,7 +38663,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 856678734}
   m_LocalRotation: {x: -0, y: 0.000001952052, z: -0, w: 1}
-  m_LocalPosition: {x: -326.31, y: 1.1, z: -35.51}
+  m_LocalPosition: {x: -326.31, y: 2.61, z: -35.51}
   m_LocalScale: {x: 1.8569, y: 1.8569, z: 1.8569}
   m_Children:
   - {fileID: 1699499490}

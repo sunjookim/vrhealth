@@ -60,6 +60,7 @@ namespace Ardunity
             clear();
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("wait"))
             {
+                animator.SetBool("step1", true);
                 Debug.Log("1번째 동작!");
                 for (int i = 0; i < 2; i++)
                 {
@@ -71,7 +72,6 @@ namespace Ardunity
                     Enemy[i].SetActive(false); // 비활성화 상태로 생성
                     Debug.Log("생성된 에너미 : " + num);
                 }
-                animator.SetBool("step1", true);
             }
         }
 
@@ -82,6 +82,7 @@ namespace Ardunity
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("step1"))
             {
                 Debug.Log("2번째 동작!");
+                animator.SetBool("step2", true);
                 Vector3 v = playerPr.transform.position;
                 int idx = Random.Range(0, spownPo1.Length); // 스폰 지역 중 랜덤으로 선택(좌, 중, 우)
                 if (count == 1)
@@ -147,7 +148,7 @@ namespace Ardunity
                     Debug.Log("장애물 위치 : " + idx);
                     Enemy[i].SetActive(true);
                 }
-                animator.SetBool("step2", true);
+                
             }
         }
 
@@ -157,9 +158,9 @@ namespace Ardunity
             clear();
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("step2"))
             {
+                animator.SetBool("step3", true);
                 Debug.Log("3번째 동작!");
                 player.Booster(); // 속도 일시적으로 상승
-                animator.SetBool("step3", true);
             }
         }
 
