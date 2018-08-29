@@ -1,0 +1,4 @@
+sceneSetups:
+- path: "Assets/Sleigh/Scenes/\uC370\uB9E4 \uAC8C\uC784.unity"
+  isLoaded: 1
+  isActive: 1

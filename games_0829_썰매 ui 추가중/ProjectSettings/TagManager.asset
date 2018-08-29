@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Initialize
+  - Life1
+  - Life2
+  - Life3
+  - Life4
+  - Light
+  - pauseMenu
+  - player
+  - barPlayer
+  - finishLine
+  - destination_01
+  - destination_02
+  - destination_03
+  - slope_01
+  - sound_01
+  - slope_02
+  - sound_02
+  - slope_03
+  - slope_04
+  - slope_05
+  - slope_06
+  - slope_07
+  - slope_08
+  - slope_09
+  - slope_10
+  - fail_color
+  - test
+  - bird_01
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - PostProcessing
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
