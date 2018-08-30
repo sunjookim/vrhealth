@@ -370,7 +370,6 @@ MonoBehaviour:
   sndPause: {fileID: 0}
   sndPauseButton: {fileID: 8300000, guid: 67b404e2b5dc9c04ca358bf99e77c0cf, type: 3}
   PauseButton: {fileID: 0}
-  done: 13
   _time: 0
 --- !u!20 &282840813
 Camera:
@@ -597,7 +596,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 282840812}
-        m_MethodName: SceneChange1
+        m_MethodName: SceneToGame1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
