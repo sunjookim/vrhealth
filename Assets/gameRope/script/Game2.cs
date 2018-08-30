@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // 캔버스 제어
 using UnityEngine.SceneManagement; // 씬 전환
-using UnityEngine.AI; // 네비메쉬
+//using UnityEngine.AI; // 네비메쉬
 
 namespace Ardunity
 {
@@ -13,54 +13,71 @@ namespace Ardunity
         Animator animator1; // 플레이어 애니메이터
         Animator animator2; // teacher 애니메이터
 
-        public NavMeshAgent nvAgent; // 네비메쉬 에이전트(플레이어)
+        //public NavMeshAgent nvAgent; // 네비메쉬 에이전트(플레이어)
+
         public Transform playerNav;
         public Transform destination3; // 목적지
 
+
         public float _time = 0.0f; // 타이머 변수 초기화
         public float slopeGoodtime = 0.0f; // 타이머 변수 초기화 (각 시간 구간 내에서 올바른 동작의 시간을 재는 변수)
+        public float slopeArrowTime = 0.0f; // teacher 캐릭터에 화살표 깜박임에 사용됨
+        public float CountDown = 6.0f; // 기울이기 동작 카운트 다운 숫자 (시작 전)
+        public float CountDownDo = 6.3f; // 기울이기 동작 카운트 다운 숫자 (시작 후)
+        public float fail_color_Time = 0.0f; // 플레이어 캐릭터 깜박임에 사용됨
+
+
         public Text _timerText; // 진행 시간 표시될 텍스트
         public Text upText; // 디버깅용
-        public float slopeArrowTime = 0.0f; // teacher 캐릭터에 화살표 깜박임에 사용됨
-
         public Text txtSound; // 음성 안내 자막
         public Text txtSoundCountDown; // 기울이기 동작 카운트 다운 출력 (시작 전)
         public Text txtSoundCountDownDo; // 기울이기 동작 카운트 다운 출력 (시작 후)
         public Text txtLifeReason; // 별 깎인 이유 출력
 
-        public float CountDown = 6.0f; // 기울이기 동작 카운트 다운 숫자 (시작 전)
-        //public float CountDownDo = 8.0f; // 기울이기 동작 카운트 다운 숫자 (시작 후)
-        public float CountDownDo = 6.3f; // 기울이기 동작 카운트 다운 숫자 (시작 후)
+        
         bool IsCountDown = false; // 기울이기 동작 카운트 다운이 진행되고 있는지의 여부
         bool IsCountDownDo = false; // 기울이기 동작 남은 시간을 보여줄지의 여부
-        public GameObject slopeArrowLeft; // teacher 캐릭터에 화살표 출력
-        public GameObject slopeArrowRight; // teacher 캐릭터에 화살표 출력
         bool IsSlopeArrowLeft = false;
         bool IsSlopeArrowRight = false;
-        int countdowntime; // 운동 동작 중 카운트 다운 숫자
-
-        float speed = 0.68f; // 플레이어 상태바가 움직이는 속도
-        //int bird_speed = 100; // 새가 날아가는 속도
-        int Life = 4; // 목숨의 개수
-      
-        //int playerSlope = 0; // 플레이어가 기울인 횟수(up 키보드 누른 횟수)
-        //int playerSlopeGood = 1; // 플레이어가 기울인 횟수와 비교할 올바른 누름 횟수
-      
-        public AudioClip sndLeft; // 왼쪽으로 기울기 안내 음성
-        public AudioClip sndRight; // 오른쪽으로 기울기 안내 음성
-        public AudioClip sndLeftPrev; // 왼쪽으로 기울기 안내 음성 (시작 전)
-        public AudioClip sndRightPrev; // 오른쪽으로 기울기 안내 음성 (시작 후)
-
         bool leftGood = false; // 사용자가 왼쪽 동작을 올바르게 했는가?
         bool rightGood = false; // 사용자가 오른쪽 동작을 올바르게 했는가?
         bool isFail = false; // 실패를 해서 플레이어 캐릭터를 깜박이게 해야하는가?
         bool isDeath = false; // 실패를 해서 별을 깎아야 하는가?
         bool AudioPlay = false; // 오디오 출력을 한 번만 하게 하기 위한 변수
         bool isSlope = false;
-        //bool Bird_01 = false; // bird_01 움직이기 시작하는가?
+
+
+        public GameObject slopeArrowLeft; // teacher 캐릭터에 화살표 출력
+        public GameObject slopeArrowRight; // teacher 캐릭터에 화살표 출력
+        
+        
+        int countdowntime; // 운동 동작 중 카운트 다운 숫자
+        int Life = 4; // 목숨의 개수
+
+
+        float speed = 0.68f; // 플레이어 상태바가 움직이는 속도              
+        float turnspeed = 2f; // 마우스 커서로 회전하는 속도
+
+
+        Vector3 v3; // 마우스 커서 회전에 사용되는 변수
+
+
+        public AudioClip sndLeft; // 왼쪽으로 기울기 안내 음성
+        public AudioClip sndRight; // 오른쪽으로 기울기 안내 음성
+        public AudioClip sndLeftPrev; // 왼쪽으로 기울기 안내 음성 (시작 전)
+        public AudioClip sndRightPrev; // 오른쪽으로 기울기 안내 음성 (시작 후)
+
 
         public Projector fail_color; // 실패 시 플레이어를 깜박이게 하기 위한 프로젝터 컴포넌트
-        public float fail_color_Time = 0.0f; // 플레이어 캐릭터 깜박임에 사용됨
+
+
+        //int playerSlope = 0; // 플레이어가 기울인 횟수(up 키보드 누른 횟수)
+        //int playerSlopeGood = 1; // 플레이어가 기울인 횟수와 비교할 올바른 누름 횟수
+        //public float CountDownDo = 8.0f; // 기울이기 동작 카운트 다운 숫자 (시작 후)
+        //int bird_speed = 100; // 새가 날아가는 속도
+        //bool Bird_01 = false; // bird_01 움직이기 시작하는가?
+
+
 
         void Start()
         {
@@ -73,17 +90,19 @@ namespace Ardunity
 
             Time.timeScale = 1; // 일시정지 버튼 - 재시작 버튼을 눌렀을 때 time이 멈추는 현상 방지
 
-            GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; // 초기화 영상 재생
+            //GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; // 초기화 영상 재생
 
             // 애니메이터 설정
             animator1 = GetComponent<Animator>();
             animator2 = GameObject.Find("teacher").GetComponent<Animator>();
 
+            /*
             // 네비메쉬
             playerNav = GameObject.FindWithTag("Player").GetComponent<Transform>();
             destination3 = GameObject.FindWithTag("finishLine").GetComponent<Transform>();
+            */
 
-            nvAgent = gameObject.GetComponent<NavMeshAgent>();
+            //nvAgent = gameObject.GetComponent<NavMeshAgent>(); // 네비메쉬
         }
       
 
@@ -105,10 +124,10 @@ namespace Ardunity
 
                 IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-                //nvAgent.Stop(true);
-                nvAgent.velocity = Vector3.zero;
-                //nvAgent.isStopped = true;
+                /*
+                nvAgent.velocity = Vector3.zero; // 네비메쉬
                 nvAgent.Stop(true);
+                */
 
                 // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
                 animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
@@ -433,9 +452,14 @@ namespace Ardunity
 
         void Update()
         {
+            // 마우스 커서로 시선 회전
+            v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
+            transform.Rotate(v3 * turnspeed);
+
 
             // 다른 스크립트에서 아두이노 컨트롤러 값을 받아온다
             distinctionB Controller = GameObject.Find("movingPerson").GetComponent<distinctionB>();
+
 
             // bool 변수에 컨트롤러 값들을 저장(trigger 함수에서 사용하기 위함)
             leftGood = Controller.leftback;
@@ -444,9 +468,6 @@ namespace Ardunity
             // true/false 값 출력하기
             print(Controller.leftback);
             print(Controller.rightback);
-            //print("LeftBack: " + animator1.GetBool("LeftBack"));
-            //print("RightBack: " + animator1.GetBool("RightBack"));
-            //print("slopeFail: " + animator1.GetBool("slopeFail"));
             print("slopeGoodtime: " + slopeGoodtime);
             print("isSlope: " + isSlope);
 
@@ -455,15 +476,7 @@ namespace Ardunity
             _time += Time.deltaTime;
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
-
-            /*
-            // 새 이동시키기
-            if(Bird_01 == true)
-            {
-                float birdMove = Time.deltaTime * bird_speed;
-                GameObject.FindWithTag("bird_01").transform.Translate(Vector3.forward * birdMove);
-            }
-            */
+            
 
             // 깜박깜박
             // 플레이어 캐릭터 깜박임 구현
@@ -484,16 +497,18 @@ namespace Ardunity
                 fail_color.enabled = false;
             }
 
+            /*
             //20초 뒤에 박스 사라지게 하기
             if (_time > 20.0f)
             {
                 Destroy(GameObject.FindWithTag("Initialize")); // 초기화 영상 삭제
-                nvAgent.destination = destination3.position; // 네비메쉬 시작
+                //nvAgent.destination = destination3.position; // 네비메쉬 시작
 
                 // 상태바 이동
                 float fMove2 = Time.deltaTime * speed;
                 GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
             }
+            */
 
             if (IsSlopeArrowLeft == true) // 왼쪽 동작이라면
             {
@@ -556,16 +571,6 @@ namespace Ardunity
                 if(countdowntime <= 5)
                 {
                     txtSoundCountDownDo.text = ((countdowntime).ToString() + "초 남음...");
-                    /*
-                    if (countdowntime == 0)
-                    {
-                        IsCountDownDo = false;
-                    }
-                    else
-                    {
-                        txtSoundCountDownDo.text = ((countdowntime).ToString() + "초 남음...");
-                    }
-                    */
                 }
               
             } else {
@@ -584,12 +589,15 @@ namespace Ardunity
             }
             */
 
+            
             // 남은 목숨이 없을 경우 게임 종료시키기
             if (Life == 0)
             {
                 SceneManager.LoadScene("Fail");
             }
           
+
+            /*
             // 플레이어 실패 시 깜박임 종료 시간 (time을 int로 변환해서 equal 조건주면 멈추지 않음)
             if((int)_time == 36 || (int)_time == 57 || (int)_time == 75 || (int)_time == 93 || (int)_time == 118 || (int)_time == 148 || (int)_time == 165 || (int)_time == 180 || (int)_time == 193 || (int)_time == 204 )
             {
@@ -598,714 +606,701 @@ namespace Ardunity
                 AudioPlay = false; // 오디오 출력을 한 번만 하게 하기 위한 변수
                 isSlope = false;
             } 
-          
-            // 시간 구간
-            // trigger 대신 시간 구간으로 slope들을 나누고, 각 구간에서 true/false로 애니메이터 조작
-            if (_time >= 26f && _time <= 31.9f) // slope_01
-            {
+            */
 
-                // 운동 동작 중 안내문 출력
-                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+            
+        //    // 시간 구간
+        //    // trigger 대신 시간 구간으로 slope들을 나누고, 각 구간에서 true/false로 애니메이터 조작
+        //    if (_time >= 26f && _time <= 31.9f) // slope_01
+        //    {
 
-                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+        //        // 운동 동작 중 안내문 출력
+        //        txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //        IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-
-                // 여기에서 타이머를 쓰면 타이머가 동작은 하지만 애니메이터가 멈춤.. 그래서 성공/실패 동작이 재생되지 않는다.
-
-                if (leftGood == true) // 올바른 왼쪽 동작을 하면
-                {
-                    slopeGoodtime += Time.deltaTime; // 카운트 시작
-                } else
-                {
-                    slopeGoodtime = 0.0f; // 올바른 왼쪽 동작이 나오지 않으면 바로 타이머 초기화
-
-                    txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                }
+        //        IsCountDownDo = true; // 운동 동작 중 카운트 다운
 
 
-                // 0815 에러를 수정하고자 고친 코드
-                if(_time >= 26f && _time <= 28.95f) // 기울여서 내려가는 동작이 실행되는 시간에 다음 동작의 파라미터를 결정(실제보다 좀 더 촉박하게 잡음)
-                {
-                    if ((int)slopeGoodtime >= 3)
-                    {
-                        // 멈춤
-                        animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
-                        animator1.SetBool("LeftBack", true); // 성공 동작
+        //        // 여기에서 타이머를 쓰면 타이머가 동작은 하지만 애니메이터가 멈춤.. 그래서 성공/실패 동작이 재생되지 않는다.
 
-                        isDeath = false;
-                    }
-                    else
-                    {
-                        animator1.SetBool("slopeFail", true); // 실패 동작
+        //        if (leftGood == true) // 올바른 왼쪽 동작을 하면
+        //        {
+        //            slopeGoodtime += Time.deltaTime; // 카운트 시작
+        //        } else
+        //        {
+        //            slopeGoodtime = 0.0f; // 올바른 왼쪽 동작이 나오지 않으면 바로 타이머 초기화
 
-                        isDeath = true;
+        //            txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //        }
 
-                        txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
 
-                    }
-                }
+        //        // 0815 에러를 수정하고자 고친 코드
+        //        if(_time >= 26f && _time <= 28.95f) // 기울여서 내려가는 동작이 실행되는 시간에 다음 동작의 파라미터를 결정(실제보다 좀 더 촉박하게 잡음)
+        //        {
+        //            if ((int)slopeGoodtime >= 3)
+        //            {
+        //                // 멈춤
+        //                animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
+        //                animator1.SetBool("LeftBack", true); // 성공 동작
+
+        //                isDeath = false;
+        //            }
+        //            else
+        //            {
+        //                animator1.SetBool("slopeFail", true); // 실패 동작
+
+        //                isDeath = true;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
+
+        //            }
+        //        }
 
               
 
-                /*
-                // 0815 에러가 발생한 코드
-                if ((int)slopeGoodtime >= 3)
-                {
-                    // 멈춤
-                    animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
-                    animator1.SetBool("LeftBack", true); // 성공 동작
+        //        /*
+        //        // 0815 에러가 발생한 코드
+        //        if ((int)slopeGoodtime >= 3)
+        //        {
+        //            // 멈춤
+        //            animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
+        //            animator1.SetBool("LeftBack", true); // 성공 동작
 
-                    isDeath = false;
-                }
-                else
-                {
-                    animator1.SetBool("slopeFail", true); // 실패 동작
+        //            isDeath = false;
+        //        }
+        //        else
+        //        {
+        //            animator1.SetBool("slopeFail", true); // 실패 동작
 
-                    isDeath = true;
+        //            isDeath = true;
 
-                    txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
+        //            txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
 
-                }
-                */
+        //        }
+        //        */
 
-                /*
-                 * 컨트롤러 없을 때 키보드로 테스트하기 위한 코드
-                // 기울이기 동작이 끝나기 전까지 조건(3초 이상)을 맞춰야 성공 동작이 실행됨... 애니메이터가 예전에 멈췄던 것도 이와 관련된 문제인 것 같음
-                // 노트에 적어놓은 대로 생각하면 큰 문제가 되지 않는다고 생각함..
-                if (playerSlope >= 3)
-                {
-                    animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
-                    animator1.SetBool("LeftBack", true); // 성공 동작
-                }
-                else
-                {
-                    animator1.SetBool("slopeFail", true); // 실패 동작
+        //        /*
+        //         * 컨트롤러 없을 때 키보드로 테스트하기 위한 코드
+        //        // 기울이기 동작이 끝나기 전까지 조건(3초 이상)을 맞춰야 성공 동작이 실행됨... 애니메이터가 예전에 멈췄던 것도 이와 관련된 문제인 것 같음
+        //        // 노트에 적어놓은 대로 생각하면 큰 문제가 되지 않는다고 생각함..
+        //        if (playerSlope >= 3)
+        //        {
+        //            animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
+        //            animator1.SetBool("LeftBack", true); // 성공 동작
+        //        }
+        //        else
+        //        {
+        //            animator1.SetBool("slopeFail", true); // 실패 동작
 
-                    txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
-                }
-                */
+        //            txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
+        //        }
+        //        */
               
-                /*
-                 * 가장 오래 전 코드, 기본(단순하게 시간 조건 없이 검사)
-                // 사용자의 올바른 입력 값
-                if (leftGood == true)
-                {
-                    animator1.SetBool("LeftBack", true);
-                }
-                else // 올바르지 않은 입력 값
-                {
-                    animator1.SetBool("slopeFail", true);
-                }
-                */
+        //        /*
+        //         * 가장 오래 전 코드, 기본(단순하게 시간 조건 없이 검사)
+        //        // 사용자의 올바른 입력 값
+        //        if (leftGood == true)
+        //        {
+        //            animator1.SetBool("LeftBack", true);
+        //        }
+        //        else // 올바르지 않은 입력 값
+        //        {
+        //            animator1.SetBool("slopeFail", true);
+        //        }
+        //        */
 
-            } else if(_time >= 46.9f && _time <= 52.9f) // slope_02
-            {
-              
-                    // 시간 구간으로 네비메쉬 중지시키기?
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
-              
-                    animator1.SetBool("LeftBack", false);
+        //    } else if(_time >= 46.9f && _time <= 52.9f) // slope_02
+        //    {
+        //            /*
+        //            // 시간 구간으로 네비메쉬 중지시키기?
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+        //            animator1.SetBool("LeftBack", false);
 
-                    IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //            IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
 
-                    if (rightGood == true)
-                    {
-                        slopeGoodtime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        slopeGoodtime = 0.0f;
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-              
-              
+        //            if (rightGood == true)
+        //            {
+        //                slopeGoodtime += Time.deltaTime;
+        //            }
+        //            else
+        //            {
+        //                slopeGoodtime = 0.0f;
 
-
-                if (_time >= 46.9f && _time <= 49.9f)
-                {
-                    if ((int)slopeGoodtime >= 3)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("RightBack", true);
-
-                        isDeath = false;
-                    }
-                    else
-                    {
-                        animator1.SetBool("slopeFail", true);
-
-                        isDeath = true;
-
-                        txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
-
-                    }
-                }
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
               
               
 
-            } else if(_time >= 64.8f && _time <= 71.4f) // slope_03
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
 
+        //        if (_time >= 46.9f && _time <= 49.9f)
+        //        {
+        //            if ((int)slopeGoodtime >= 3)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("RightBack", true);
 
-                    animator1.SetBool("RightBack", false);
+        //                isDeath = false;
+        //            }
+        //            else
+        //            {
+        //                animator1.SetBool("slopeFail", true);
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+        //                isDeath = true;
 
-                    IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+        //                txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
-
-                    if (leftGood == true)
-                    {
-                        slopeGoodtime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        slopeGoodtime = 0.0f;
-
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
+        //            }
+        //        }
+              
               
 
-                if(_time >= 64.8f && _time <= 68.1f)
-                {
-                    if ((int)slopeGoodtime >= 3)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("LeftBack", true);
+        //    } else if(_time >= 64.8f && _time <= 71.4f) // slope_03
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                        isDeath = false;
-                    }
-                    else
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //            animator1.SetBool("RightBack", false);
 
-                        isDeath = true;
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                        txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
+        //            IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-                    }
-                }
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+        //            if (leftGood == true)
+        //            {
+        //                slopeGoodtime += Time.deltaTime;
+        //            }
+        //            else
+        //            {
+        //                slopeGoodtime = 0.0f;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
               
 
-            } else if(_time >= 83.4f && _time <= 89.6f) // slope_04
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
+        //        if(_time >= 64.8f && _time <= 68.1f)
+        //        {
+        //            if ((int)slopeGoodtime >= 3)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("LeftBack", true);
 
+        //                isDeath = false;
+        //            }
+        //            else
+        //            {
+        //                animator1.SetBool("slopeFail", true);
+
+        //                isDeath = true;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
+
+        //            }
+        //        }
+              
+
+        //    } else if(_time >= 83.4f && _time <= 89.6f) // slope_04
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
                   
 
-                    animator1.SetBool("LeftBack", false);
+        //            animator1.SetBool("LeftBack", false);
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                    IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+        //            IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
 
-                    if (rightGood == true)
-                    {
-                        slopeGoodtime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        slopeGoodtime = 0.0f;
+        //            if (rightGood == true)
+        //            {
+        //                slopeGoodtime += Time.deltaTime;
+        //            }
+        //            else
+        //            {
+        //                slopeGoodtime = 0.0f;
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
               
 
-                if(_time >= 83.4f && _time <= 86.5f)
-                {
-                    if ((int)slopeGoodtime >= 3)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("RightBack", true);
+        //        if(_time >= 83.4f && _time <= 86.5f)
+        //        {
+        //            if ((int)slopeGoodtime >= 3)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("RightBack", true);
 
-                        isDeath = false;
-                    }
-                    else
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //                isDeath = false;
+        //            }
+        //            else
+        //            {
+        //                animator1.SetBool("slopeFail", true);
 
-                        isDeath = true;
+        //                isDeath = true;
 
-                        txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
+        //                txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
 
-                    }
-                }
+        //            }
+        //        }
               
-            } else if(_time >= 107.4f && _time <= 114.5f) // slope_05
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
-                }
+        //    } else if(_time >= 107.4f && _time <= 114.5f) // slope_05
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
+        //        }
                   
 
-                    animator1.SetBool("RightBack", false);
+        //            animator1.SetBool("RightBack", false);
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                    IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+        //            IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
 
-                    if (leftGood == true)
-                    {
-                        slopeGoodtime += Time.deltaTime;
-                    }
-                    else
-                    {
-                        slopeGoodtime = 0.0f;
+        //            if (leftGood == true)
+        //            {
+        //                slopeGoodtime += Time.deltaTime;
+        //            }
+        //            else
+        //            {
+        //                slopeGoodtime = 0.0f;
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
               
               
 
-                if(_time >= 107.4f && _time <= 110.95f)
-                {
-                    if ((int)slopeGoodtime >= 3)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("LeftBack", true);
+        //        if(_time >= 107.4f && _time <= 110.95f)
+        //        {
+        //            if ((int)slopeGoodtime >= 3)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("LeftBack", true);
 
-                        isDeath = false;
-                    }
-                    else
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //                isDeath = false;
+        //            }
+        //            else
+        //            {
+        //                animator1.SetBool("slopeFail", true);
 
-                        isDeath = true;
+        //                isDeath = true;
 
-                        txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
+        //                txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!";
 
-                    }
-                }
+        //            }
+        //        }
               
-            } else if(_time >= 138f && _time <= 144.5f) // slope_06
-            {
-                // slope_06 이후 시간 구간과 slope가 맞지 않아 생기는 문제를 위해 조건 검사 추가
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
+        //    } else if(_time >= 138f && _time <= 144.5f) // slope_06
+        //    {
+        //        // slope_06 이후 시간 구간과 slope가 맞지 않아 생기는 문제를 위해 조건 검사 추가
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                    if (AudioPlay == false)
-                    {
-                        AudioPlay = true;
-                        AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
-                    }
-
-
-                    IsSlopeArrowRight = true;
-
-                    IsCountDown = false;
-                    //IsCountDownDo = true;
+        //            if (AudioPlay == false)
+        //            {
+        //                AudioPlay = true;
+        //                AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
+        //            }
 
 
-                    animator1.SetBool("IsSlopeRight", true);
-                    animator2.SetBool("IsSlopeRight", true);
+        //            IsSlopeArrowRight = true;
 
-                    animator1.SetBool("LeftBack", false);
-
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
-
-                    IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
-
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
-                }
-
-                if (_time >= 138f && _time <= 141.25f)
-                {
-                    // 사용자의 올바른 입력 값
-                    if (rightGood == true)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("RightBack", true);
-
-                        isDeath = false;
-                    }
-                    else // 올바르지 않은 입력 값
-                    {
-                        animator1.SetBool("slopeFail", true);
-
-                        isDeath = true;
-
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
-                if((int)_time >= 144)
-                {
-                    txtSound.text = " ";
-                }
-
-            } else if(_time >= 155f && _time <= 161.5f) // slope_07
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
-
-                    if (AudioPlay == false)
-                    {
-                        AudioPlay = true;
-                        AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
-                    }
+        //            IsCountDown = false;
+        //            //IsCountDownDo = true;
 
 
-                    //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+        //            animator1.SetBool("IsSlopeRight", true);
+        //            animator2.SetBool("IsSlopeRight", true);
 
-                    IsSlopeArrowLeft = true;
+        //            animator1.SetBool("LeftBack", false);
 
-                    IsCountDown = false;
-                    //IsCountDownDo = true;
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
+        //            IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
 
-                    animator1.SetBool("IsSlopeLeft", true);
-                    animator2.SetBool("IsSlopeLeft", true);
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //        }
 
-                    animator1.SetBool("RightBack", false);
+        //        if (_time >= 138f && _time <= 141.25f)
+        //        {
+        //            // 사용자의 올바른 입력 값
+        //            if (rightGood == true)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("RightBack", true);
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+        //                isDeath = false;
+        //            }
+        //            else // 올바르지 않은 입력 값
+        //            {
+        //                animator1.SetBool("slopeFail", true);
 
-                    IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+        //                isDeath = true;
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
-                }
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
+        //        if((int)_time >= 144)
+        //        {
+        //            txtSound.text = " ";
+        //        }
 
-                if (_time >= 155f && _time <= 158.25f)
-                {
-                    // 사용자의 올바른 입력 값
-                    if (leftGood == true)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("LeftBack", true);
+        //    } else if(_time >= 155f && _time <= 161.5f) // slope_07
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                        isDeath = false;
-                    }
-                    else // 올바르지 않은 입력 값
-                    {
-                        animator1.SetBool("slopeFail", true);
-
-                        isDeath = true;
-
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
-              
-
-            } else if(_time >= 168.7f && _time <= 176f) // slope_08
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
-
-                    if (AudioPlay == false)
-                    {
-                        AudioPlay = true;
-                        AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
-                    }
+        //            if (AudioPlay == false)
+        //            {
+        //                AudioPlay = true;
+        //                AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+        //            }
 
 
-                    //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+        //            //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                    IsSlopeArrowRight = true;
+        //            IsSlopeArrowLeft = true;
 
-                    IsCountDown = false;
-                    //IsCountDownDo = true;
+        //            IsCountDown = false;
+        //            //IsCountDownDo = true;
 
 
-                    animator1.SetBool("IsSlopeRight", true);
-                    animator2.SetBool("IsSlopeRight", true);
+        //            animator1.SetBool("IsSlopeLeft", true);
+        //            animator2.SetBool("IsSlopeLeft", true);
 
-                    animator1.SetBool("LeftBack", false);
+        //            animator1.SetBool("RightBack", false);
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                    IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+        //            IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
-                }
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //        }
 
-                if (_time >= 168.7f && _time <= 172.35f)
-                {
-                    // 사용자의 올바른 입력 값
-                    if (rightGood == true)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("RightBack", true);
+        //        if (_time >= 155f && _time <= 158.25f)
+        //        {
+        //            // 사용자의 올바른 입력 값
+        //            if (leftGood == true)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("LeftBack", true);
 
-                        isDeath = false;
-                    }
-                    else // 올바르지 않은 입력 값
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //                isDeath = false;
+        //            }
+        //            else // 올바르지 않은 입력 값
+        //            {
+        //                animator1.SetBool("slopeFail", true);
 
-                        isDeath = true;
+        //                isDeath = true;
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
               
 
-            } else if(_time >= 182.9f && _time <= 189f) // slope_09
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
+        //    } else if(_time >= 168.7f && _time <= 176f) // slope_08
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                    if (AudioPlay == false)
-                    {
-                        AudioPlay = true;
-                        AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
-                    }
-
-
-                    //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
-
-                    IsSlopeArrowLeft = true;
-
-                    IsCountDown = false;
-                    //IsCountDownDo = true;
+        //            if (AudioPlay == false)
+        //            {
+        //                AudioPlay = true;
+        //                AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
+        //            }
 
 
-                    animator1.SetBool("IsSlopeLeft", true);
-                    animator2.SetBool("IsSlopeLeft", true);
+        //            //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                    animator1.SetBool("RightBack", false);
+        //            IsSlopeArrowRight = true;
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+        //            IsCountDown = false;
+        //            //IsCountDownDo = true;
 
-                    IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
-                }
+        //            animator1.SetBool("IsSlopeRight", true);
+        //            animator2.SetBool("IsSlopeRight", true);
 
-                if (_time >= 182.9f && _time <= 185.95f)
-                {
-                    // 사용자의 올바른 입력 값
-                    if (leftGood == true)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("LeftBack", true);
+        //            animator1.SetBool("LeftBack", false);
 
-                        isDeath = false;
-                    }
-                    else // 올바르지 않은 입력 값
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                        isDeath = true;
+        //            IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //        }
+
+        //        if (_time >= 168.7f && _time <= 172.35f)
+        //        {
+        //            // 사용자의 올바른 입력 값
+        //            if (rightGood == true)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("RightBack", true);
+
+        //                isDeath = false;
+        //            }
+        //            else // 올바르지 않은 입력 값
+        //            {
+        //                animator1.SetBool("slopeFail", true);
+
+        //                isDeath = true;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
               
 
-            } else if(_time >= 194.1f && _time <= 200.5f) // slope_10
-            {
-                if (isSlope == true)
-                {
-                    // 네비메쉬 중지
-                    nvAgent.velocity = Vector3.zero;
-                    nvAgent.Stop(true);
+        //    } else if(_time >= 182.9f && _time <= 189f) // slope_09
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
 
-                    if (AudioPlay == false)
-                    {
-                        AudioPlay = true;
-                        AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
-                    }
-
-                    //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
-
-                    IsSlopeArrowRight = true;
-
-                    IsCountDown = false;
-                    //IsCountDownDo = true;
+        //            if (AudioPlay == false)
+        //            {
+        //                AudioPlay = true;
+        //                AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+        //            }
 
 
-                    animator1.SetBool("IsSlopeRight", true);
-                    animator2.SetBool("IsSlopeRight", true);
+        //            //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                    animator1.SetBool("LeftBack", false);
+        //            IsSlopeArrowLeft = true;
 
-                    // 운동 동작 중 안내문 출력
-                    txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+        //            IsCountDown = false;
+        //            //IsCountDownDo = true;
 
-                    IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
 
-                    IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //            animator1.SetBool("IsSlopeLeft", true);
+        //            animator2.SetBool("IsSlopeLeft", true);
 
-                }
+        //            animator1.SetBool("RightBack", false);
 
-                if (_time >= 194.1f && _time <= 197.2f)
-                {
-                    // 사용자의 올바른 입력 값
-                    if (rightGood == true)
-                    {
-                        animator1.SetBool("slopeFail", false);
-                        animator1.SetBool("RightBack", true);
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                        isDeath = false;
-                    }
-                    else // 올바르지 않은 입력 값
-                    {
-                        animator1.SetBool("slopeFail", true);
+        //            IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
 
-                        isDeath = true;
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+        //        }
 
-                        txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
-                    }
-                }
+        //        if (_time >= 182.9f && _time <= 185.95f)
+        //        {
+        //            // 사용자의 올바른 입력 값
+        //            if (leftGood == true)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("LeftBack", true);
+
+        //                isDeath = false;
+        //            }
+        //            else // 올바르지 않은 입력 값
+        //            {
+        //                animator1.SetBool("slopeFail", true);
+
+        //                isDeath = true;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
               
-            }
+
+        //    } else if(_time >= 194.1f && _time <= 200.5f) // slope_10
+        //    {
+        //        if (isSlope == true)
+        //        {
+        //            /*
+        //            // 네비메쉬 중지
+        //            nvAgent.velocity = Vector3.zero;
+        //            nvAgent.Stop(true);
+        //            */
+
+        //            if (AudioPlay == false)
+        //            {
+        //                AudioPlay = true;
+        //                AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
+        //            }
+
+        //            //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+        //            IsSlopeArrowRight = true;
+
+        //            IsCountDown = false;
+        //            //IsCountDownDo = true;
 
 
-            // 시간으로 다시 네비메쉬 작동 시키기
-            if (_time >= 31.9f && _time < 46.9f)
-            {
-                //nvAgent.Resume(); // 네비메쉬 계속하기
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeLeft", false);
-                animator2.SetBool("IsSlopeLeft", false);
-            }
-            else if (_time >= 52.9f && _time <= 64.8f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeRight", false);
-                animator2.SetBool("IsSlopeRight", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 71.4f && _time <= 83.4f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeLeft", false);
-                animator2.SetBool("IsSlopeLeft", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 89.6f && _time <= 107.4f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeRight", false);
-                animator2.SetBool("IsSlopeRight", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 114.5f && _time <= 138f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeLeft", false);
-                animator2.SetBool("IsSlopeLeft", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 144.5f && _time <= 155f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeRight", false);
-                animator2.SetBool("IsSlopeRight", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);                
-            }
-            else if (_time >= 161.5f && _time <= 168.7f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeLeft", false);
-                animator2.SetBool("IsSlopeLeft", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);                
-            }
-            else if (_time >= 176f && _time <= 182.9f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeRight", false);
-                animator2.SetBool("IsSlopeRight", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 189f && _time <= 194.1f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeLeft", false);
-                animator2.SetBool("IsSlopeLeft", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
-            else if (_time >= 200.5f)
-            {
-                //nvAgent.Resume();
-                //txtSound.text = " ";
-                nvAgent.isStopped = false;
-                //nvAgent.Stop(false);
-                animator1.SetBool("IsSlopeRight", false);
-                animator2.SetBool("IsSlopeRight", false);
-                animator1.SetBool("IsWalk", true);
-                animator2.SetBool("IsWalk", true);
-            }
+        //            animator1.SetBool("IsSlopeRight", true);
+        //            animator2.SetBool("IsSlopeRight", true);
+
+        //            animator1.SetBool("LeftBack", false);
+
+        //            // 운동 동작 중 안내문 출력
+        //            txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+        //            IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+        //            IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+        //        }
+
+        //        if (_time >= 194.1f && _time <= 197.2f)
+        //        {
+        //            // 사용자의 올바른 입력 값
+        //            if (rightGood == true)
+        //            {
+        //                animator1.SetBool("slopeFail", false);
+        //                animator1.SetBool("RightBack", true);
+
+        //                isDeath = false;
+        //            }
+        //            else // 올바르지 않은 입력 값
+        //            {
+        //                animator1.SetBool("slopeFail", true);
+
+        //                isDeath = true;
+
+        //                txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+        //            }
+        //        }
+              
+        //    }
+
+
+        //    // 시간으로 다시 네비메쉬 작동 시키기
+        //    if (_time >= 31.9f && _time < 46.9f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeLeft", false);
+        //        animator2.SetBool("IsSlopeLeft", false);
+        //    }
+        //    else if (_time >= 52.9f && _time <= 64.8f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeRight", false);
+        //        animator2.SetBool("IsSlopeRight", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 71.4f && _time <= 83.4f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeLeft", false);
+        //        animator2.SetBool("IsSlopeLeft", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 89.6f && _time <= 107.4f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeRight", false);
+        //        animator2.SetBool("IsSlopeRight", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 114.5f && _time <= 138f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeLeft", false);
+        //        animator2.SetBool("IsSlopeLeft", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 144.5f && _time <= 155f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeRight", false);
+        //        animator2.SetBool("IsSlopeRight", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);                
+        //    }
+        //    else if (_time >= 161.5f && _time <= 168.7f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeLeft", false);
+        //        animator2.SetBool("IsSlopeLeft", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);                
+        //    }
+        //    else if (_time >= 176f && _time <= 182.9f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeRight", false);
+        //        animator2.SetBool("IsSlopeRight", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 189f && _time <= 194.1f)
+        //    {
+        //        //nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeLeft", false);
+        //        animator2.SetBool("IsSlopeLeft", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
+        //    else if (_time >= 200.5f)
+        //    {
+        //        // nvAgent.isStopped = false; // 네비메쉬
+        //        animator1.SetBool("IsSlopeRight", false);
+        //        animator2.SetBool("IsSlopeRight", false);
+        //        animator1.SetBool("IsWalk", true);
+        //        animator2.SetBool("IsWalk", true);
+        //    }
 
         }
 

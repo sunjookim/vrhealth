@@ -16,6 +16,7 @@ using UnityEngine.Video; // 초기화 영상 제어
  * 6 : 실패화면
  * 7 : 물로켓 게임
  * 8 : 썰매 게임
+ * 9 : 썰매 게임 방법
  */
 
 
@@ -49,6 +50,11 @@ public class move_scene : MonoBehaviour {
     }
 
     public void SceneToGame1()
+    {
+        SceneManager.LoadScene("썰매 게임 방법");
+    }
+
+    public void SceneToGame1_Play()
     {
         SceneManager.LoadScene("썰매 게임");
     }

@@ -86,10 +86,10 @@ namespace Ardunity
             print("시간 :" + time2);
          
 
-            RotationReactorA _curRotation1 = GameObject.Find("movingPerson").GetComponent<RotationReactorA>(); // 1번
-            RotationReactor2A _curRotation2 = GameObject.Find("movingPerson").GetComponent<RotationReactor2A>(); // 2번
-            RotationReactor3A _curRotation3 = GameObject.Find("movingPerson").GetComponent<RotationReactor3A>(); // 3번
-            RotationReactor4A _curRotation4 = GameObject.Find("movingPerson").GetComponent<RotationReactor4A>(); // 4번
+            RotationReactorA _curRotation1 = GameObject.Find("사람").GetComponent<RotationReactorA>(); // 1번
+            RotationReactor2A _curRotation2 = GameObject.Find("사람").GetComponent<RotationReactor2A>(); // 2번
+            RotationReactor3A _curRotation3 = GameObject.Find("사람").GetComponent<RotationReactor3A>(); // 3번
+            RotationReactor4A _curRotation4 = GameObject.Find("사람").GetComponent<RotationReactor4A>(); // 4번
 
 
 

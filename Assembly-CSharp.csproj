@@ -403,14 +403,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="ArdunityCore">
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
       <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCore">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>

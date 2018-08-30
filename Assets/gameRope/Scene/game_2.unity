@@ -5939,6 +5939,7 @@ GameObject:
   m_Component:
   - component: {fileID: 733537056}
   - component: {fileID: 170141537}
+  - component: {fileID: 170141540}
   - component: {fileID: 170141532}
   - component: {fileID: 170141533}
   - component: {fileID: 170141531}
@@ -6325,6 +6326,38 @@ MonoBehaviour:
   smoothFollow: 1
   _curRotation: {x: 0, y: 0, z: 0, w: 0}
   a: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &170141540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 170141530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476230a409ccbc840970508cb51f7138, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerNav: {fileID: 0}
+  destination3: {fileID: 0}
+  _time: 0
+  slopeGoodtime: 0
+  slopeArrowTime: 0
+  CountDown: 6
+  CountDownDo: 6.3
+  fail_color_Time: 0
+  _timerText: {fileID: 849261516}
+  upText: {fileID: 0}
+  txtSound: {fileID: 104757832}
+  txtSoundCountDown: {fileID: 1346890411}
+  txtSoundCountDownDo: {fileID: 1605079755}
+  txtLifeReason: {fileID: 2044665971}
+  slopeArrowLeft: {fileID: 1902217682}
+  slopeArrowRight: {fileID: 2086121242}
+  sndLeft: {fileID: 8300000, guid: 6e4fdc0e2c17f0d49a62b9302d42d8a9, type: 3}
+  sndRight: {fileID: 8300000, guid: 64cf923b123fba148a22b9587a18468a, type: 3}
+  sndLeftPrev: {fileID: 8300000, guid: 3797777224e9a984b9157bb08064cac8, type: 3}
+  sndRightPrev: {fileID: 8300000, guid: 7c4ed449e7078524c85d621561638279, type: 3}
+  fail_color: {fileID: 0}
 --- !u!1 &171363717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6866,7 +6899,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &191515440
 Transform:
   m_ObjectHideFlags: 0
@@ -61762,7 +61795,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1740270930
 Transform:
   m_ObjectHideFlags: 0

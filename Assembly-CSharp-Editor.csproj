@@ -379,6 +379,12 @@
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="ArdunityCore">
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+    </Reference>
+    <Reference Include="ArdunityCoreEditor">
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>
     </Reference>
@@ -396,12 +402,6 @@
     </Reference>
     <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/2015/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCore">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCoreEditor">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>

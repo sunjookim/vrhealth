@@ -65,7 +65,7 @@ namespace Ardunity
             }
             else
             {
-                //RotationReactor2 snowsnow = GameObject.Find("snow").GetComponent<RotationReactor2>(); // 나중에 형이 바꿔줌
+                distinctionA snowsnow = GameObject.Find("사람").GetComponent<distinctionA>(); // 나중에 형이 바꿔줌
 
                 if (cornerCount != 5) // 코너를 다 돌지 않았으면 계속 코너를 따라가도록 함
                 {
@@ -127,39 +127,45 @@ namespace Ardunity
 
                 }
 
-                if (Input.GetKeyDown(KeyCode.Q) && isSt3) // Time.time <= countTime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
+                //if (input.getkeydown(keycode.q) && isst3) // time.time <= counttime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
+                //{
+                //    stepctrl.stepone();
+                //    isst1 = true;
+                //    isst3 = false;
+                //}
+                //else if (input.getkeydown(keycode.w) && isst1)
+                //{
+                //    stepctrl.steptwo();
+                //    isst1 = false;
+                //    isst2 = true;
+
+                //}
+                //else if (input.getkeydown(keycode.e) && isst2)
+                //{
+                //    stepctrl.stepthree();
+                //    isst2 = false;
+                //    isst3 = true;
+                //}
+
+                /**** 밑에는 아두니티 쓰는거 *****/
+                if (snowsnow.snow0 && isSt3)
                 {
                     stepCtrl.StepOne();
                     isSt1 = true;
                     isSt3 = false;
                 }
-                else if (Input.GetKeyDown(KeyCode.W) && isSt1)
+                else if (snowsnow.snow1 && isSt1)
                 {
                     stepCtrl.StepTwo();
                     isSt1 = false;
                     isSt2 = true;
-                    
                 }
-                else if (Input.GetKeyDown(KeyCode.E) && isSt2)
+                else if (snowsnow.snow2 && isSt2)
                 {
                     stepCtrl.StepThree();
                     isSt2 = false;
                     isSt3 = true;
                 }
-
-                /**** 밑에는 아두니티 쓰는거 *****/
-                //if (snowsnow.snow0)
-                //{
-                //    stepCtrl.StepOne();
-                //}
-                //else if (snowsnow.snow1)
-                //{
-                //    stepCtrl.StepTwo();
-                //}
-                //else if (snowsnow.snow2)
-                //{
-                //    stepCtrl.StepThree();
-                //}
                 else if (Input.GetKeyDown(KeyCode.R))
                 {
                     stepCtrl.StepSuccess();
