@@ -19,10 +19,10 @@ MonoBehaviour:
     y: 30
     width: 1536
     height: 731
-  m_MinSize: {x: 913, y: 442}
+  m_MinSize: {x: 913, y: 421}
   m_MaxSize: {x: 22008, y: 10000}
   vertical: 1
-  controlID: 18533
+  controlID: 148
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -124,10 +124,10 @@ MonoBehaviour:
     y: 0
     width: 1536
     height: 731
-  m_MinSize: {x: 913, y: 442}
+  m_MinSize: {x: 913, y: 421}
   m_MaxSize: {x: 22008, y: 10000}
   vertical: 0
-  controlID: 18534
+  controlID: 149
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -148,10 +148,10 @@ MonoBehaviour:
     y: 0
     width: 773
     height: 731
-  m_MinSize: {x: 202, y: 442}
-  m_MaxSize: {x: 4002, y: 8042}
+  m_MinSize: {x: 202, y: 421}
+  m_MaxSize: {x: 4002, y: 8021}
   vertical: 1
-  controlID: 18405
+  controlID: 101
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -203,14 +203,14 @@ MonoBehaviour:
     height: 323
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 4507.87932817698
+  lastFramingTime: 116.78482158610801
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 385.5, y: 174.5, z: 0}
+    m_Target: {x: 70, y: 7, z: -176.8}
     speed: 2
-    m_Value: {x: 385.5, y: 174.5, z: 0}
+    m_Value: {x: 70, y: 7, z: -176.8}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -242,9 +242,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0, y: 0, z: -0, w: -1}
   m_Size:
-    m_Target: 347.30682
+    m_Target: 22
     speed: 2
-    m_Value: 347.30682
+    m_Value: 22
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
   m_LastLockedObject: {fileID: 0}
-  m_ViewIsLockedToObject: 0
+  m_ViewIsLockedToObject: 1
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -274,8 +274,8 @@ MonoBehaviour:
     y: 344
     width: 773
     height: 387
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -297,7 +297,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 773
     y: 0
-    width: 247
+    width: 214
     height: 731
   m_MinSize: {x: 204, y: 221}
   m_MaxSize: {x: 4004, y: 4021}
@@ -328,14 +328,14 @@ MonoBehaviour:
     serializedVersion: 2
     x: 775.2
     y: 92.8
-    width: 243
+    width: 210
     height: 710
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 7aab0500
-    m_LastClickedID: 0
-    m_ExpandedIDs: da74f2ff3687f2ff5a5ff5ff1a77f5ff3e7df5ff26f7f5ff5207f6fffa3bf6ff6e5af6ff809df6ffde5bf7ff364bf8ff587ff8ff86e8ffff000000006c4300003c450000da5100000003050018bb0500dacc0500165b0900ccdb090058ff0900c2440a009a5b0a00745c0a00d6620a0096880a0096240f00
+    m_SelectedIDs: 20d60000
+    m_LastClickedID: 54816
+    m_ExpandedIDs: 1ad1fffff8e1ffffd8e7ffffb0edffff52faffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -354,7 +354,7 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 8}
     m_SearchString: 
   m_ExpandedScenes:
-  - game_2
+  - howto_game_2
   m_CurrenRootInstanceID: 0
   m_LockTracker:
     m_IsLocked: 0
@@ -373,9 +373,9 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1020
+    x: 987
     y: 0
-    width: 236
+    width: 269
     height: 731
   m_MinSize: {x: 230, y: 250}
   m_MaxSize: {x: 10000, y: 10000}
@@ -404,9 +404,9 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1022.4
+    x: 989.60004
     y: 92.8
-    width: 232
+    width: 265
     height: 710
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SearchFilter:
@@ -421,20 +421,20 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/gameSleigh/Scenes
+    - Assets/gameRocket/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/gameSleigh/Scenes
+  - Assets/gameRocket/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\sunjoo\Documents\vrhealth
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: fc0f0000
-    m_LastClickedID: 4092
-    m_ExpandedIDs: 00000000500c0000de0d0000e60d0000180e00009a0f000080120000ca120000b613000098140000aa150000141700006418000078180000881a0000001b00005a1b00006a1b0000687100006a7100006c7100006e71000070710000727100007471000076710000787100007a7100007c7100007e71000080710000827100008471000086710000887100008a7100008c7100008e710000907100009271000000ca9a3b
+    m_SelectedIDs: e23f0000
+    m_LastClickedID: 16354
+    m_ExpandedIDs: 00000000fa350000863700008e3700003c38000042390000283c0000723c00005e3d00001c3e0000403e0000503f0000ba4000000a4200001e4200003044000046440000a844000002450000124500003e7e0000407e0000427e0000447e0000467e0000487e00004a7e00004c7e00004e7e0000507e0000527e0000547e0000567e0000587e00005a7e00005c7e00005e7e0000607e0000627e0000647e0000667e0000687e000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -462,7 +462,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000500c0000de0d0000e60d0000180e00009a0f000080120000ca120000b613000098140000aa150000141700006418000078180000881a0000001b00005a1b00006a1b0000687100006a7100006c7100006e71000070710000727100007471000076710000787100007a7100007c7100007e71000080710000827100008471000086710000887100008a7100008c7100008e710000907100009271000000ca9a3b
+    m_ExpandedIDs: 00000000fa350000863700008e370000c03700003c38000042390000283c0000723c00005e3d00001c3e0000403e0000503f0000ba4000000a4200001e42000030440000a844000002450000124500003e7e0000407e0000427e0000447e0000467e0000487e00004a7e00004c7e00004e7e0000507e0000527e0000547e0000567e0000587e00005a7e00005c7e00005e7e0000607e0000627e0000647e0000667e0000687e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -487,8 +487,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7aab0500
-    m_LastClickedInstanceID: 371578
+    m_SelectedInstanceIDs: 20d60000
+    m_LastClickedInstanceID: 54816
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 261c0000721c0000961c0000921c0000361d0000c41c0000e61d0000d81c0000b01d0000b81c0000de1d00005c1d00008a1c0000322500004841ffff7819ffff00000000
     m_RenameOverlay:
@@ -516,7 +516,7 @@ MonoBehaviour:
     m_NewAssetIndexInList: -1
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
-  m_DirectoriesAreaWidth: 110
+  m_DirectoriesAreaWidth: 145
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
