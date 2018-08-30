@@ -13,6 +13,7 @@ public class GameUI: MonoBehaviour
     public Text txtBestScore;
     public Text txtCorner;
     public Text txtGameOverMs;
+    public Text txtCount;
 
     //public float done = 13.0f; // 컨트롤러 초기화 영상 재생될 시간
 
@@ -20,6 +21,7 @@ public class GameUI: MonoBehaviour
     void Start()
     {
         txtGameOverMs.text = "";
+        txtCount.text = "";
         //PlayerPrefs.SetFloat("BestScore", 300f);
         float bestTime = PlayerPrefs.GetFloat("BestScore");
         txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
@@ -44,11 +46,27 @@ public class GameUI: MonoBehaviour
     {
         if (_time < PlayerPrefs.GetFloat("BestScore"))
         {
+            txtCount.text = "최고 기록 갱신입니다!";
             PlayerPrefs.SetFloat("BestScore", _time);
             PlayerPrefs.Save();
             txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
             ((int)_time / 60) + " : " + ((int)_time % 60) + " : " + (int)((_time % 1) * 100) + "</color>";
         }
+    }
+
+    public void ChangeCount(int time)
+    {
+        txtCount.text = time.ToString() + " 초 남았습니다.";
+        if (time < 1)
+        {
+            txtCount.text = "실패 ㅜㅜ";
+            Invoke("test", 2f);
+        }
+    }
+
+    void test()
+    {
+        txtCount.text = "";
     }
 
     public void ChangeGameOver(int mode)

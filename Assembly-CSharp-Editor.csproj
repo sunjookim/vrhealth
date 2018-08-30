@@ -61,7 +61,72 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Oculus\VR\Scripts\Editor\OVRManagerEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\AxisInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\BitFlagInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ColorInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ColorOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\CurveOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\DragInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\FloatProbeEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ImpulseInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\InputFilterEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\MappingInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\OutputCombineEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\RTTTLSongEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ToggleInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ToneOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\TriggerInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Bridge\Editor\ValueOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\CommSocket\Editor\CommBluetoothEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\CommSocket\Editor\CommSerialEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\CommSocket\Editor\CommWifiEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\CommSocket\Editor\HM10Editor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\AnalogInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\AnalogOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\CapSenseEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\DHT11Editor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\DigitalInputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\DigitalOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\GenericMotorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\GenericServoEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\GenericStepperEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\GenericToneEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\HCSR04Editor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\MPR121Editor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\MPUSeriesEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Controller\Editor\PulseOutputEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Internal\Editor\AboutArdunity.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\AudioSourceReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\ButtonReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\CharacterReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\ColliderReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\DeviceRollReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\DeviceRotationReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\DialSliderReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\DropdownReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\ExplosionReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\ForceReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\LightColorReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\LightIntensityReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\MoveAxisReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\Rotation2DReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\RotationAxisReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\RotationReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\SliderReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\TextReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\ToggleReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Reactor\Editor\TorqueReactorEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\ArdunityAppUIEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\CommBluetoothUIEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\CommSerialUIEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\CommWifiUIEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\DeviceCameraEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\DialSliderEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\HM10UIEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\ListItemEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\ListViewEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\SliderSnapEditor.cs" />
+    <Compile Include="Assets\ARDUnity\Scripts\Utility\Editor\ToggleEventEditor.cs" />
     <Reference Include="UnityEditor.StandardEvents">
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
@@ -313,6 +378,12 @@
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ArdunityCore">
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+    </Reference>
+    <Reference Include="ArdunityCoreEditor">
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

@@ -30,10 +30,10 @@ namespace Ardunity
             audiosource = GetComponent<AudioSource>(); // 오디오
             UIObj = GameObject.Find("Game_UI");
 
-            spownPo1 = new float[] { -315, -(315 + 330) / 2, -330 };
-            spownPo2 = new float[] { 265, (265 + 247) / 2, 247 };
-            spownPo3 = new float[] { -48, -(48 + 76) / 2, -76 };
-            spownPo4 = new float[] { -103, -(103 + 125) / 2, -125 };
+            spownPo1 = new float[] { -310, -(310 + 330) / 2, -335 };
+            spownPo2 = new float[] { 270, (270 + 243) / 2, 243 };
+            spownPo3 = new float[] { -45, -(43 + 80) / 2, -75 };
+            spownPo4 = new float[] { -98, -(98 + 130) / 2, -130 };
             
             count = player.cornerCount;
             dis = 30;
