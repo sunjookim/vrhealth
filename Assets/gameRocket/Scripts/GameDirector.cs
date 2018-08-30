@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameDirector : MonoBehaviour {
 
-    private float x;
+    public float x;
     private float y;
     private float mouse_x;
     private float mouse_y;
