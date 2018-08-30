@@ -183,9 +183,9 @@ namespace Ardunity
 
                 if(cornerCount < 5)
                 {
-                    Quaternion turn = Quaternion.Euler(0, x * 180 + 30 * (cornerCount - 1), 0);
+                    Quaternion turn = Quaternion.Euler(0, 90 * (cornerCount - 1), 0);
                     transform.rotation = Quaternion.Slerp(transform.rotation, turn, 0.01f * Time.deltaTime); // 부드럽게 턴
-                    Invoke("isCollFalse", 2f); // 3초 후에 정상
+                    Invoke("isCollFalse", 1f); // 3초 후에 정상
                 }
                 else
                 {
@@ -248,7 +248,7 @@ namespace Ardunity
         {
             isSt1 = false;
             isSt2 = false;
-            isSt3 = false;
+            isSt3 = true;
         }
     }
 }
