@@ -53,6 +53,7 @@ namespace Ardunity
         
         int countdowntime; // 운동 동작 중 카운트 다운 숫자
         int Life = 4; // 목숨의 개수
+        int PlayerSpeed = 4; // 플레이어 걸어가는 속도
 
 
         float speed = 0.68f; // 플레이어 상태바가 움직이는 속도              
@@ -104,6 +105,8 @@ namespace Ardunity
 
             //nvAgent = gameObject.GetComponent<NavMeshAgent>(); // 네비메쉬
         }
+
+       
       
 
         // 외줄 위를 이동하다가 정지, 기울이기 동작 처리에 관한 부분
@@ -112,28 +115,34 @@ namespace Ardunity
             // 첫 번째 기울이기
             if (other.gameObject.tag == "slope_01")
             {
-                isSlope = true; // slope에 해당하는지의 변수
+                PlayerSpeed = 0;
 
-                // 오디오가 여러 번 출력이 되어서 수정함
+
+                 isSlope = true; // slope에 해당하는지의 변수
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
                     AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position); // 안내음성 출력
                 }
-              
+
 
                 IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-                /*
-                nvAgent.velocity = Vector3.zero; // 네비메쉬
-                nvAgent.Stop(true);
-                */
+                ///*
+                //nvAgent.velocity = Vector3.zero; // 네비메쉬
+                //nvAgent.Stop(true);
+                //*/
 
+                // 이 부분 때문에 떨어지는 현상 발생..
                 // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
                 animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
 
-                // 중지된 네비메쉬는 update 문에서 _time을 검사하여 다시 동작됨
+                PlayerSpeed = 4;
+
+                //// 중지된 네비메쉬는 update 문에서 _time을 검사하여 다시 동작됨
             }
             else if (other.gameObject.tag == "slope_02")
             {
@@ -454,7 +463,7 @@ namespace Ardunity
         {
             // 마우스 커서로 시선 회전
             v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
-            transform.Rotate(v3 * turnspeed);
+            GameObject.FindWithTag("MainCamera").transform.Rotate(v3 * turnspeed);
 
 
             // 다른 스크립트에서 아두이노 컨트롤러 값을 받아온다
@@ -476,7 +485,14 @@ namespace Ardunity
             _time += Time.deltaTime;
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
-            
+
+
+            // 플레이어 이동시키기
+            float PlayerMove = Time.deltaTime * PlayerSpeed;
+            transform.Translate(Vector3.forward * PlayerMove);
+
+           
+
 
             // 깜박깜박
             // 플레이어 캐릭터 깜박임 구현
