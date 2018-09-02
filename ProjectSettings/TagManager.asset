@@ -31,7 +31,20 @@ TagManager:
   - slope_10
   - fail_color
   - test
+  - unitychan
+  - img
+  - enemy
+  - corner
+  - corner1
+  - corner3
+  - corner4
+  - corner2
+  - gun
+  - rotation_01
   - bird_01
+  - RotateCamera
+  - RotateCamera_Real
+  - RotateCamera_RealReal
   layers:
   - Default
   - TransparentFX

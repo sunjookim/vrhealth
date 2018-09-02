@@ -25,7 +25,9 @@ namespace Ardunity
         public float CountDown = 6.0f; // 기울이기 동작 카운트 다운 숫자 (시작 전)
         public float CountDownDo = 6.3f; // 기울이기 동작 카운트 다운 숫자 (시작 후)
         public float fail_color_Time = 0.0f; // 플레이어 캐릭터 깜박임에 사용됨
-
+        public float SlopeGoTime = 4.0f; // 각 slope에서 기울여 내려가는 애니메이션의 시간을 재기 위한 변수
+        public float TwincleTime = 2.0f; // 실패했을 때 캐릭터 깜박이는 시간
+        public float PlayerMove = 0.0f; // 플레이어와 카메라 이동 속도 계산에 사용되는 변수
 
         public Text _timerText; // 진행 시간 표시될 텍스트
         public Text upText; // 디버깅용
@@ -45,7 +47,11 @@ namespace Ardunity
         bool isDeath = false; // 실패를 해서 별을 깎아야 하는가?
         bool AudioPlay = false; // 오디오 출력을 한 번만 하게 하기 위한 변수
         bool isSlope = false;
-
+        bool isSlopeGoTime = false; // 각 slope에서 기울여 내려가는 애니메이션의 시간을 재기 위한 변수
+        bool isLeftSlope = false; // 왼쪽 slope인지?
+        bool isRightSlope = false; // 오른쪽 slope인지?
+        bool isNotSlope = true; // slope 바깥에 있는지?
+        
 
         public GameObject slopeArrowLeft; // teacher 캐릭터에 화살표 출력
         public GameObject slopeArrowRight; // teacher 캐릭터에 화살표 출력
@@ -94,7 +100,7 @@ namespace Ardunity
             //GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; // 초기화 영상 재생
 
             // 애니메이터 설정
-            animator1 = GetComponent<Animator>();
+            animator1 = GameObject.Find("unitychan").GetComponent<Animator>();
             animator2 = GameObject.Find("teacher").GetComponent<Animator>();
 
             /*
@@ -105,9 +111,7 @@ namespace Ardunity
 
             //nvAgent = gameObject.GetComponent<NavMeshAgent>(); // 네비메쉬
         }
-
-       
-      
+        
 
         // 외줄 위를 이동하다가 정지, 기울이기 동작 처리에 관한 부분
         void OnTriggerEnter(Collider other)
@@ -115,10 +119,13 @@ namespace Ardunity
             // 첫 번째 기울이기
             if (other.gameObject.tag == "slope_01")
             {
-                PlayerSpeed = 0;
+                isNotSlope = false;
 
+                PlayerSpeed = 0; // 플레이어 정지
 
-                 isSlope = true; // slope에 해당하는지의 변수
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
+                isSlope = true; // slope에 해당하는지의 변수
 
                 //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
@@ -135,14 +142,19 @@ namespace Ardunity
                 //nvAgent.Stop(true);
                 //*/
 
-                // 이 부분 때문에 떨어지는 현상 발생..
                 // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
                 animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
 
-                PlayerSpeed = 4;
 
-                //// 중지된 네비메쉬는 update 문에서 _time을 검사하여 다시 동작됨
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isLeftSlope = true; // 왼쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_02")
             {
@@ -373,18 +385,32 @@ namespace Ardunity
 
             if (other.gameObject.tag == "sound_01")
             {
+                TwincleTime = 2.0f; // 깜박임 시간 초기화
                 AudioSource.PlayClipAtPoint(sndLeft, transform.position); // 안내음성 출력
-                //txtSound.text = "허리 스트레칭을 왼쪽 방향으로 5초 동안 해주세요.";
                 txtSound.text = "왼쪽 방향 허리 운동이 곧 시작됩니다.";
                 IsCountDown = true; // 카운트 다운 중이다
 
             }
             else if (other.gameObject.tag == "sound_02")
             {
+                TwincleTime = 2.0f; // 깜박임 시간 초기화
                 AudioSource.PlayClipAtPoint(sndRight, transform.position);
-                //txtSound.text = "허리 스트레칭을 오른쪽 방향으로 5초 동안 해주세요.";
                 txtSound.text = "오른쪽 방향 허리 운동이 곧 시작됩니다.";
                 IsCountDown = true;
+
+            }
+
+            // 회전 처리
+            if(other.gameObject.tag == "rotation_01") // 첫 번째 회전
+            {
+                //GameObject.FindWithTag("unitychan").transform.rotation = Quaternion.Euler(0, -90, 0);
+                transform.rotation = Quaternion.Euler(0, -90, 0); // 플레이어 회전
+
+                GameObject.FindWithTag("MainCamera").transform.rotation = Quaternion.Euler(0, 0, 0); // 플레이어 캐릭터만 회전하고, 카메라는 회전하지 않음으로서 오큘러스 착용자가 직접 시선을 회전해야 함
+
+                //GameObject.FindWithTag("RotateCamera").transform.Translate(Vector3.right * PlayerMove); // 2번 카메라도 왼쪽 방향으로 이동(회전x)
+                //GameObject.Find("RotateCameraOut").transform.Find("RotateCamera").gameObject.SetActive(true); // 2번 카메라 활성화와 동시에 2번 카메라 depth에 의해 보이게 됨
+
 
             }
 
@@ -411,7 +437,7 @@ namespace Ardunity
                         Destroy(GameObject.FindWithTag("Life" + Life));
                         Life -= 1;
 
-                        isFail = true;
+                        isFail = true; // 캐릭터 깜박이기 시작
                     }
                   
                 }
@@ -426,6 +452,15 @@ namespace Ardunity
                 //slopeGoodtime = 0.0f; // 올바른 동작 3초 카운트 변수를 초기화
                 animator1.SetBool("slopeFail", false); // 이전 slope에서 실패를 했더라도 다음 slope에 영향을 미치지 않게 exit할 때 초기화를 해준다
                 //isSlope = false; // slope에 해당하는지의 변수
+
+
+                isSlopeGoTime = false;
+                SlopeGoTime = 4.0f;
+                isLeftSlope = false;
+                isRightSlope = false;
+                slopeGoodtime = 0.0f;
+                isNotSlope = true;
+
             }
 
             /*
@@ -464,15 +499,19 @@ namespace Ardunity
             // 마우스 커서로 시선 회전
             v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             GameObject.FindWithTag("MainCamera").transform.Rotate(v3 * turnspeed);
+            //GameObject.FindWithTag("RotateCamera").transform.Rotate(v3 * turnspeed);
 
 
+            // Arduinity
             // 다른 스크립트에서 아두이노 컨트롤러 값을 받아온다
             distinctionB Controller = GameObject.Find("movingPerson").GetComponent<distinctionB>();
 
-
+            // Arduinity
             // bool 변수에 컨트롤러 값들을 저장(trigger 함수에서 사용하기 위함)
             leftGood = Controller.leftback;
             rightGood = Controller.rightback;
+
+
 
             // true/false 값 출력하기
             print(Controller.leftback);
@@ -486,18 +525,64 @@ namespace Ardunity
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
 
+            
+            // 플레이어와 2번 카메라 이동시키기
+            PlayerMove = Time.deltaTime * PlayerSpeed;
+            transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
+            //GameObject.FindWithTag("RotateCamera").transform.Translate(Vector3.forward * PlayerMove); // 2번 카메라 이동
 
-            // 플레이어 이동시키기
-            float PlayerMove = Time.deltaTime * PlayerSpeed;
-            transform.Translate(Vector3.forward * PlayerMove);
 
-           
+            if (isLeftSlope == true) //왼쪽 슬로프에 도달
+            {
+                // 올바른 왼쪽 동작 값이 들어오면 카운트를 시작하고, 올바르지 않은 값이 들어오면 안내문 출력 및 타이머를 초기화한다.
+                if (leftGood == true) // 올바른 왼쪽 동작을 하면
+                {
+                    slopeGoodtime += Time.deltaTime; // 카운트 시작
+                }
+                else
+                {
+                    slopeGoodtime = 0.0f; // 올바른 왼쪽 동작이 나오지 않으면 바로 타이머 초기화
+
+                    txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+                }
+            }
+
+
+            if(isSlopeGoTime == true) // 기울여 내려가는 애니메이션 카운트 감소 시작
+            {
+                SlopeGoTime -= Time.deltaTime;
+            }
+
+
+            // 기울여 내려가는 애니메이션이 끝났을 때 성공/실패여부를 검사
+            if ((int)SlopeGoTime == 0 && isNotSlope == false) 
+            {
+                if(slopeGoodtime >= 3.0f)
+                {
+                    animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
+                    animator1.SetBool("LeftBack", true); // 성공 동작
+
+                    isDeath = false;
+                } else
+                {
+                    animator1.SetBool("slopeFail", true); // 실패 동작
+
+                    isDeath = true;
+
+                    txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
+                }
+            } else if(SlopeGoTime <= -2.1f)
+            {
+                PlayerSpeed = 4;
+            }
 
 
             // 깜박깜박
             // 플레이어 캐릭터 깜박임 구현
             if(isFail == true)
             {
+                TwincleTime -= Time.deltaTime; // 총 깜박일 시간 2초를 카운트 다운 시작
+
                 fail_color_Time += Time.deltaTime; // 시간으로 깜박임 구현
 
                 if (((int)(fail_color_Time * 10)) % 10 == 6)
@@ -512,6 +597,12 @@ namespace Ardunity
             {
                 fail_color.enabled = false;
             }
+
+            if(TwincleTime <= 0) // 2초가 지나면 깜박임 중지
+            {
+                isFail = false;
+            }
+
 
             /*
             //20초 뒤에 박스 사라지게 하기
