@@ -11,10 +11,14 @@
     <RootNamespace>
     </RootNamespace>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <ProjectGuid>{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}</ProjectGuid>
 =======
     <ProjectGuid>{A97BF3CB-C9FC-4F00-EAB5-39C499D6F362}</ProjectGuid>
 >>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
+=======
+    <ProjectGuid>{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}</ProjectGuid>
+>>>>>>> sunjookim1
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -202,16 +206,16 @@
     <None Include="Assets\gameRope\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
     <None Include="Assets\ARDUnity\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -413,16 +417,20 @@
     </Reference>
     <Reference Include="ArdunityCore">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
 =======
       <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
 >>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
+=======
+      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+>>>>>>> sunjookim1
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
-      <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>

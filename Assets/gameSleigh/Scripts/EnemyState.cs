@@ -12,6 +12,7 @@ public class EnemyState : MonoBehaviour
     public enum State {wait, spown, gameover }; // 상태 집합, 대기, 발사, 게임 끝
     public State enemyState = State.wait; // 처음에는 평상 
     public GameObject explosion;   // 폭발 효과
+    private AudioSource audiosource;
 
     public GameObject UIObj;
 
@@ -19,6 +20,7 @@ public class EnemyState : MonoBehaviour
     void Awake()
     {
         UIObj = GameObject.Find("Game_UI");        // UI 오브젝트
+        audiosource = GetComponent<AudioSource>(); // 오디오
     }
 
     void OnEnable() // 활성화 상태 때마다
@@ -37,7 +39,14 @@ public class EnemyState : MonoBehaviour
                 case State.spown:
                     // 장애물이 스폰된다. 장애물의 위치는 플레이어 정면에서 좌, 중, 우 중 하나에서 랜덤하게 생성됨
                     if (Time.time > time)    // 일정 시간이 지나면 자동으로 없앰
+                    {
+                        audiosource.Play();
                         Destroy(this.gameObject);
+                        GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
+                        newExplosion.transform.Translate(Vector3.up * 1.3f);
+                        Destroy(newExplosion, 1.2f);
+                    }
+                        
                     break;
             }
             yield return null;
@@ -49,6 +58,7 @@ public class EnemyState : MonoBehaviour
         if (coll.collider.tag == ("Player"))
         {
             // 폭발 효과, 오브젝트 삭제
+            audiosource.Play();
             Destroy(this.gameObject);
             GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
             newExplosion.transform.Translate(Vector3.up * 1.3f);

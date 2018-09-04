@@ -6,7 +6,7 @@ namespace Ardunity
     [RequireComponent(typeof(AudioSource))]
     public class StepCtrl : MonoBehaviour
     {
-        private AudioSource audiosource = null;
+        private AudioSource audiosource;
         private GameObject[] Enemy;
         private GameObject playerPr;
         private Player player;
@@ -16,12 +16,14 @@ namespace Ardunity
         public GameObject EnemyPrefabs2;
         public GameObject UIObj;
         public Animator animator;       // 애니메이션 객체
+        public Animator aniTeacher;     // 운동 애니메이션
 
         private int count;
         private float dis;      // 장애물이 떨어져있는 거리
 
         void Start()
         {
+            aniTeacher = GameObject.Find("teacher").GetComponent<Animator>();
             player = GameObject.FindWithTag("Player").GetComponent<Player>(); // 플레이어 스크립트 객체
             playerPr = GameObject.FindWithTag("Player"); // 플레이어 위치
             animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
@@ -30,10 +32,10 @@ namespace Ardunity
             audiosource = GetComponent<AudioSource>(); // 오디오
             UIObj = GameObject.Find("Game_UI");
 
-            spownPo1 = new float[] { -310, -(310 + 330) / 2, -335 };
-            spownPo2 = new float[] { 270, (270 + 243) / 2, 243 };
-            spownPo3 = new float[] { -45, -(43 + 80) / 2, -75 };
-            spownPo4 = new float[] { -98, -(98 + 130) / 2, -130 };
+            spownPo1 = new float[] { -314, -(314 + 336) / 2, -336 };
+            spownPo2 = new float[] { 267, (267 + 245) / 2, 245 };
+            spownPo3 = new float[] { -56, -(56 + 77) / 2, -77 };
+            spownPo4 = new float[] { -107, -(107 + 130) / 2, -130 };
             
             count = player.cornerCount;
             dis = 30;
@@ -46,11 +48,11 @@ namespace Ardunity
                 clear(); // 애니메이션 초기화
                 player.Clear();
             }
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("win"))
-            {
-                player.Clear();
-                clear();
-            }
+            //if (animator.GetCurrentAnimatorStateInfo(0).IsName("win"))
+            //{
+            //    player.Clear();
+            //    clear();
+            //}
             count = player.cornerCount;
         }
 
@@ -61,6 +63,7 @@ namespace Ardunity
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("wait"))
             {
                 animator.SetBool("step1", true);
+                aniTeacher.SetBool("step1", true);
                 Debug.Log("1번째 동작!");
                 for (int i = 0; i < 2; i++)
                 {
@@ -83,6 +86,7 @@ namespace Ardunity
             {
                 Debug.Log("2번째 동작!");
                 animator.SetBool("step2", true);
+                aniTeacher.SetBool("step2", true);
                 Vector3 v = playerPr.transform.position;
                 int idx = Random.Range(0, spownPo1.Length); // 스폰 지역 중 랜덤으로 선택(좌, 중, 우)
                 if (count == 1)
@@ -159,6 +163,7 @@ namespace Ardunity
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("step2"))
             {
                 animator.SetBool("step3", true);
+                aniTeacher.SetBool("step3", true);
                 Debug.Log("3번째 동작!");
                 player.Booster(); // 속도 일시적으로 상승
             }
@@ -168,7 +173,9 @@ namespace Ardunity
         public void StepFail()
         {
             Debug.Log("실패! ㅜㅜ");
+            audiosource.Play();
             animator.SetBool("lose", true);
+            aniTeacher.SetBool("lose", true);
         }
 
         // 동작 5, 동작 성공, 제한시간안에 들어옴 등
@@ -176,6 +183,7 @@ namespace Ardunity
         {
             Debug.Log("성공 ^^");
             animator.SetBool("win", true);
+            aniTeacher.SetBool("win", true);
         }
 
         void clear()
@@ -185,6 +193,12 @@ namespace Ardunity
             animator.SetBool("step3", false);
             animator.SetBool("lose", false);
             animator.SetBool("win", false);
+
+            aniTeacher.SetBool("step1", false);
+            aniTeacher.SetBool("step2", false);
+            aniTeacher.SetBool("step3", false);
+            aniTeacher.SetBool("lose", false);
+            aniTeacher.SetBool("win", false);
         }
     }
 }
