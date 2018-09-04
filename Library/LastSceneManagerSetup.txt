@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/gameRope/Scene/game_2.unity
+- path: Assets/gameRocket/Scenes/WaterRocket.unity
   isLoaded: 1
   isActive: 1

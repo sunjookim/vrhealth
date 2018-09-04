@@ -132,6 +132,7 @@
     <Compile Include="Assets\gameRocket\Scripts\distinctionC.cs" />
     <Compile Include="Assets\gameRocket\Scripts\GameDirector.cs" />
     <Compile Include="Assets\gameRocket\Scripts\move_sceneW.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RocketGameUI.cs" />
     <Compile Include="Assets\gameRocket\Scripts\RocketMove.cs" />
     <Compile Include="Assets\gameRocket\Scripts\Rotation.cs" />
     <Compile Include="Assets\gameRocket\Scripts\RotationReactor2C.cs" />

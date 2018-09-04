@@ -45,6 +45,14 @@ TagManager:
   - RotateCamera
   - RotateCamera_Real
   - RotateCamera_RealReal
+  - rocket
+  - target
+  - target (1)
+  - target (2)
+  - target (3)
+  - rotation_02
+  - rotation_03
+  - rotation_04
   layers:
   - Default
   - TransparentFX

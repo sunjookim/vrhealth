@@ -10,7 +10,7 @@ namespace Ardunity
 {
     
 
-        [AddComponentMenu("ARDUnity/Reactor/Transform/distinctionA")]
+        [AddComponentMenu("ARDUnity/Reactor/Transform/distinction")]
     [HelpURL("https://sites.google.com/site/ardunitydoc/references/reactor/distinction")]
 	public class distinctionA : ArdunityReactor
     {

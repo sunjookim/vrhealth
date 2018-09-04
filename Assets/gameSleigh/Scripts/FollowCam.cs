@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Ardunity;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,17 +10,23 @@ public class FollowCam : MonoBehaviour
     public float height= 5f;
     public float smoothRotate = 5.0f;
 
+    private Player player;
+
     Vector3 cameraPo;
+    void Start()
+    {
+        player = GameObject.FindWithTag("Player").GetComponent<Player>(); // 플레이어 스크립트 객체
+    }
+
     private void LateUpdate()
     {
-        float currYAngle = Mathf.LerpAngle(transform.eulerAngles.y, Target.transform.eulerAngles.y, smoothRotate * Time.deltaTime);
-
-        Quaternion rot = Quaternion.Euler(0, currYAngle, 0);
-
-        transform.position = Target.transform.position - (rot * Vector3.forward * dist) + (Vector3.up * height);
-
-        transform.LookAt(Target.transform);
-        //float x = transform.rotation.x;
-        transform.Rotate(-20, 0, 0);
+        if(!player.isCollEnemy)
+        {
+            float currYAngle = Mathf.LerpAngle(transform.eulerAngles.y, Target.transform.eulerAngles.y, smoothRotate * Time.deltaTime);
+            Quaternion rot = Quaternion.Euler(0, currYAngle, 0);
+            transform.position = Target.transform.position - (rot * Vector3.forward * dist) + (Vector3.up * height);
+            transform.LookAt(Target.transform);
+            transform.Rotate(-20, 0, 0);
+        }
     }
 }

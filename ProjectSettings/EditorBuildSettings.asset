@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/gameSleigh/Scenes/\uC370\uB9E4 \uAC8C\uC784 \uBC29\uBC95.unity"
     guid: 49280b2da08da3743b73726bc7184cc4
+  - enabled: 1
+    path: Assets/gameRocket/Scenes/WaterRocket_howto.unity
+    guid: cf839f9d7f46fc243b8bed4dd5269128
   m_configObjects: {}

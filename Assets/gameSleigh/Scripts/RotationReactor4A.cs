@@ -9,7 +9,7 @@ using System.Collections.Generic;
 namespace Ardunity
 {
 
-    [AddComponentMenu("ARDUnity/Reactor/Transform/RotationReactor4A")]
+    [AddComponentMenu("ARDUnity/Reactor/Transform/RotationReactor4")]
     [HelpURL("https://sites.google.com/site/ardunitydoc/references/reactor/rotationreactor")]
     public class RotationReactor4A : ArdunityReactor
     {

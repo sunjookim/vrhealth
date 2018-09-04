@@ -97,7 +97,8 @@ namespace Ardunity
 
             Time.timeScale = 1; // 일시정지 버튼 - 재시작 버튼을 눌렀을 때 time이 멈추는 현상 방지
 
-            //GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; // 초기화 영상 재생
+            // 초기화 영상 재생
+            GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; 
 
             // 애니메이터 설정
             animator1 = GameObject.Find("unitychan").GetComponent<Animator>();
@@ -119,13 +120,14 @@ namespace Ardunity
             // 첫 번째 기울이기
             if (other.gameObject.tag == "slope_01")
             {
-                isNotSlope = false;
+                isNotSlope = false; // 슬로프에 있다.
 
                 PlayerSpeed = 0; // 플레이어 정지
 
                 isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
 
                 isSlope = true; // slope에 해당하는지의 변수
+
 
                 //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
@@ -158,9 +160,16 @@ namespace Ardunity
             }
             else if (other.gameObject.tag == "slope_02")
             {
-                isSlope = true;
+                isNotSlope = false; // 슬로프에 있다.
 
-              
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
+                isSlope = true; // slope에 해당하는지의 변수
+
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
@@ -170,217 +179,316 @@ namespace Ardunity
 
                 animator1.SetBool("slopeFail", false);
 
-                IsSlopeArrowRight = true;
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-                IsCountDown = false;
-              
-              
+
                 animator1.SetBool("IsSlopeRight", true);
                 animator2.SetBool("IsSlopeRight", true);
-              
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isRightSlope = true; // 오른쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_03")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
-                //nvAgent.Stop(true);
-                nvAgent.velocity = Vector3.zero;
-                //nvAgent.isStopped = true;
-                nvAgent.Stop(true);
-                */
 
-              
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
-                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position); // 안내음성 출력
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                animator1.SetBool("RightBack", false);
-                animator1.SetBool("slopeFail", false);
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
+                
 
-                IsSlopeArrowLeft = true;
-
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
-              
-
-                animator1.SetBool("IsSlopeLeft", true);
+                // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
+                animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
-              
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isLeftSlope = true; // 왼쪽 슬로프에 도달했다고 update에 알림
+
             }
             else if (other.gameObject.tag == "slope_04")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-              
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
                     AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowRight = true;
+                animator1.SetBool("slopeFail", false);
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-              
 
                 animator1.SetBool("IsSlopeRight", true);
                 animator2.SetBool("IsSlopeRight", true);
-              
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isRightSlope = true; // 오른쪽 슬로프에 도달했다고 update에 알림
+
             }
             else if (other.gameObject.tag == "slope_05")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-              
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
-                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position); // 안내음성 출력
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowLeft = true;
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
 
-                animator1.SetBool("IsSlopeLeft", true);
+                // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
+                animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
-              
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isLeftSlope = true; // 왼쪽 슬로프에 도달했다고 update에 알림
+
             }
             else if (other.gameObject.tag == "slope_06")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
                     AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowRight = true;
+                animator1.SetBool("slopeFail", false);
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
+
 
                 animator1.SetBool("IsSlopeRight", true);
                 animator2.SetBool("IsSlopeRight", true);
-                */
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isRightSlope = true; // 오른쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_07")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
-                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position); // 안내음성 출력
                 }
-              
-
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
-
-                IsSlopeArrowLeft = true;
-
-                IsCountDown = false;
-                //IsCountDownDo = true;
 
 
-                animator1.SetBool("IsSlopeLeft", true);
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
+
+
+                // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
+                animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
-                */
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isLeftSlope = true; // 왼쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_08")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
                     AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowRight = true;
+                animator1.SetBool("slopeFail", false);
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
+
 
                 animator1.SetBool("IsSlopeRight", true);
                 animator2.SetBool("IsSlopeRight", true);
-                */
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isRightSlope = true; // 오른쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_09")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
-                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position);
+                    AudioSource.PlayClipAtPoint(sndLeftPrev, transform.position); // 안내음성 출력
                 }
-                  
 
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowLeft = true;
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
 
-                animator1.SetBool("IsSlopeLeft", true);
+                // 캐릭터 움직이기(1 : 플레이어, 2 : teacher)
+                animator1.SetBool("IsSlopeLeft", true); // 애니메이션 transition에 사용되는 변수 조정(왼쪽으로 기울기)
                 animator2.SetBool("IsSlopeLeft", true);
-                */
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 왼쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowLeft = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isLeftSlope = true; // 왼쪽 슬로프에 도달했다고 update에 알림
             }
             else if (other.gameObject.tag == "slope_10")
             {
+                isNotSlope = false; // 슬로프에 있다.
+
+                PlayerSpeed = 0; // 플레이어 정지
+
+                isSlopeGoTime = true; // 기울여 내려가는 애니메이션 카운트 감소 시작
+
                 isSlope = true; // slope에 해당하는지의 변수
 
-                /*
+
+                //// 오디오가 여러 번 출력이 되어서 수정함
                 if (AudioPlay == false)
                 {
                     AudioPlay = true;
                     AudioSource.PlayClipAtPoint(sndRightPrev, transform.position);
                 }
-                  
-                //txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
 
-                IsSlopeArrowRight = true;
 
-                IsCountDown = false;
-                //IsCountDownDo = true;
-              
+                animator1.SetBool("slopeFail", false);
+
+                IsCountDown = false; // (UI)카운트 다운 중이 아니다
+
 
                 animator1.SetBool("IsSlopeRight", true);
                 animator2.SetBool("IsSlopeRight", true);
-                */
+
+
+                // 운동 동작 중 안내문 출력
+                txtSound.text = "두 팔을 뻗어 위로 올리고\n허리 운동을 오른쪽 방향으로 5초 동안 해주세요.";
+
+                IsSlopeArrowRight = true; // 화살표를 출력하기 위한 변수 설정
+
+                IsCountDownDo = true; // 운동 동작 중 카운트 다운
+
+                isRightSlope = true; // 오른쪽 슬로프에 도달했다고 update에 알림
             }
 
             if (other.gameObject.tag == "sound_01")
@@ -403,15 +511,20 @@ namespace Ardunity
             // 회전 처리
             if(other.gameObject.tag == "rotation_01") // 첫 번째 회전
             {
-                //GameObject.FindWithTag("unitychan").transform.rotation = Quaternion.Euler(0, -90, 0);
-                transform.rotation = Quaternion.Euler(0, -90, 0); // 플레이어 회전
+                transform.rotation = Quaternion.Euler(0, -89.8f, 0); // 플레이어 회전
 
-                GameObject.FindWithTag("MainCamera").transform.rotation = Quaternion.Euler(0, 0, 0); // 플레이어 캐릭터만 회전하고, 카메라는 회전하지 않음으로서 오큘러스 착용자가 직접 시선을 회전해야 함
+                //GameObject.FindWithTag("MainCamera").transform.rotation = Quaternion.Euler(0, 0, 10); // 플레이어 캐릭터만 회전하고, 카메라는 회전하지 않음으로서 오큘러스 착용자가 직접 시선을 회전해야 함
+                
 
-                //GameObject.FindWithTag("RotateCamera").transform.Translate(Vector3.right * PlayerMove); // 2번 카메라도 왼쪽 방향으로 이동(회전x)
-                //GameObject.Find("RotateCameraOut").transform.Find("RotateCamera").gameObject.SetActive(true); // 2번 카메라 활성화와 동시에 2번 카메라 depth에 의해 보이게 됨
-
-
+            } else if(other.gameObject.tag == "rotation_02") // 두 번째 회전
+            {
+                transform.rotation = Quaternion.Euler(0, -65.1f, 0); // 플레이어 회전
+            } else if(other.gameObject.tag == "rotation_03") // 세 번째 회전
+            {
+                transform.rotation = Quaternion.Euler(0, -93.7f, 0); // 플레이어 회전
+            } else if(other.gameObject.tag == "rotation_04") // 네 번째 회전
+            {
+                transform.rotation = Quaternion.Euler(0, 1.51f, 0); // 플레이어 회전
             }
 
 
@@ -431,7 +544,7 @@ namespace Ardunity
                 if(isDeath == true)
                 {
                     // 별 제거
-                  
+                    
                     if (animator1.GetBool("slopeFail") == true)
                     {
                         Destroy(GameObject.FindWithTag("Life" + Life));
@@ -439,20 +552,28 @@ namespace Ardunity
 
                         isFail = true; // 캐릭터 깜박이기 시작
                     }
-                  
+                    
                 }
 
+                // 안내문 초기화
                 txtLifeReason.text = " ";
                 txtSound.text = " ";
+
                 IsSlopeArrowLeft = false;
                 IsSlopeArrowRight = false;
+
+                // teacher 캐릭터의 화살표 모두 비활성화
                 slopeArrowLeft.SetActive(false);
                 slopeArrowRight.SetActive(false);
-                IsCountDownDo = false;
-                //slopeGoodtime = 0.0f; // 올바른 동작 3초 카운트 변수를 초기화
-                animator1.SetBool("slopeFail", false); // 이전 slope에서 실패를 했더라도 다음 slope에 영향을 미치지 않게 exit할 때 초기화를 해준다
-                //isSlope = false; // slope에 해당하는지의 변수
 
+                IsCountDownDo = false;
+
+                // 이전 slope에서 실패를 했더라도 다음 slope에 영향을 미치지 않게 exit할 때 초기화를 해준다
+                animator1.SetBool("slopeFail", false); 
+                animator1.SetBool("IsSlopeLeft", false);
+                animator1.SetBool("IsSlopeRight", false);
+                animator2.SetBool("IsSlopeLeft", false);
+                animator2.SetBool("IsSlopeRight", false);
 
                 isSlopeGoTime = false;
                 SlopeGoTime = 4.0f;
@@ -460,6 +581,7 @@ namespace Ardunity
                 isRightSlope = false;
                 slopeGoodtime = 0.0f;
                 isNotSlope = true;
+                AudioPlay = false;
 
             }
 
@@ -499,7 +621,7 @@ namespace Ardunity
             // 마우스 커서로 시선 회전
             v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             GameObject.FindWithTag("MainCamera").transform.Rotate(v3 * turnspeed);
-            //GameObject.FindWithTag("RotateCamera").transform.Rotate(v3 * turnspeed);
+            
 
 
             // Arduinity
@@ -525,17 +647,43 @@ namespace Ardunity
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
 
+
+            // 컨초_허리 영상 끝나면 캐릭터 출발시키고 이동하기
+            if(_time >= 18)
+            {
+                Destroy(GameObject.FindWithTag("Initialize")); // 컨초_허리 영상 제거하기
+
+                PlayerMove = Time.deltaTime * PlayerSpeed;
+                transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
+
+                // 상태바 이동
+                float fMove2 = Time.deltaTime * speed;
+                GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
+            }
+
             
-            // 플레이어와 2번 카메라 이동시키기
-            PlayerMove = Time.deltaTime * PlayerSpeed;
-            transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
-            //GameObject.FindWithTag("RotateCamera").transform.Translate(Vector3.forward * PlayerMove); // 2번 카메라 이동
+            
 
 
             if (isLeftSlope == true) //왼쪽 슬로프에 도달
             {
                 // 올바른 왼쪽 동작 값이 들어오면 카운트를 시작하고, 올바르지 않은 값이 들어오면 안내문 출력 및 타이머를 초기화한다.
                 if (leftGood == true) // 올바른 왼쪽 동작을 하면
+                {
+                    slopeGoodtime += Time.deltaTime; // 카운트 시작
+                }
+                else
+                {
+                    slopeGoodtime = 0.0f; // 올바른 왼쪽 동작이 나오지 않으면 바로 타이머 초기화
+
+                    txtLifeReason.text = "※ 동작을 좀 더 정확하게 해주세요!";
+                }
+            }
+
+            if(isRightSlope == true) // 오른쪽 슬로프에 도달
+            {
+                // 올바른 오른쪽 동작 값이 들어오면 카운트를 시작하고, 올바르지 않은 값이 들어오면 안내문 출력 및 타이머를 초기화한다.
+                if (rightGood == true) // 올바른 왼쪽 동작을 하면
                 {
                     slopeGoodtime += Time.deltaTime; // 카운트 시작
                 }
@@ -604,19 +752,9 @@ namespace Ardunity
             }
 
 
-            /*
-            //20초 뒤에 박스 사라지게 하기
-            if (_time > 20.0f)
-            {
-                Destroy(GameObject.FindWithTag("Initialize")); // 초기화 영상 삭제
-                //nvAgent.destination = destination3.position; // 네비메쉬 시작
 
-                // 상태바 이동
-                float fMove2 = Time.deltaTime * speed;
-                GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
-            }
-            */
 
+            // teacher 캐릭터에 화살표 출력
             if (IsSlopeArrowLeft == true) // 왼쪽 동작이라면
             {
                 slopeArrowLeft.SetActive(true); // teacher 캐릭터에 화살표 출력

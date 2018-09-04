@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RocketMove : MonoBehaviour {
 
@@ -53,8 +54,7 @@ public class RocketMove : MonoBehaviour {
             else if (mainCamera.GetComponent<GameDirector>().getX() > 0.063 && mainCamera.GetComponent<GameDirector>().getX() < 0.083)
                 target = GameObject.FindWithTag("target (3)");
             else
-                target = GameObject.FindWithTag("target");
-            //다른 효과를 넣어야 함
+                target = GameObject.Find("fake_target");
 
             animator.SetBool("gamestate", true);
         }
@@ -89,7 +89,15 @@ public class RocketMove : MonoBehaviour {
             {
                 subCameraOn();
 
-                Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+                try
+                {
+                    Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+                }
+                catch (Exception e)
+                {
+                    target = GameObject.Find("fake_target");
+                    Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+                }
 
                 if (exerciseRight == false && timer_check < 4)
                 {

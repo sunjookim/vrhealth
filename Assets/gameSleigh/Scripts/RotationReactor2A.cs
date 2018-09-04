@@ -10,7 +10,7 @@ namespace Ardunity
 {
     
 
-        [AddComponentMenu("ARDUnity/Reactor/Transform/RotationReactor2A")]
+        [AddComponentMenu("ARDUnity/Reactor/Transform/RotationReactor2")]
     [HelpURL("https://sites.google.com/site/ardunitydoc/references/reactor/rotationreactor")]
 	public class RotationReactor2A : ArdunityReactor
     {
