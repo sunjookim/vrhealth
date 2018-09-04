@@ -15,25 +15,29 @@ public class GameUI: MonoBehaviour
     public Text txtGameOverMs;
     public Text txtCount;
 
+    public int corner;
+
     //public float done = 13.0f; // 컨트롤러 초기화 영상 재생될 시간
 
     // Use this for initialization
     void Start()
     {
+        corner = 4;
         txtGameOverMs.text = "";
         txtCount.text = "";
-        //PlayerPrefs.SetFloat("BestScore", 300f);
         float bestTime = PlayerPrefs.GetFloat("BestScore");
+        if (bestTime < 20f) // 설마 20초안에 들어온 사람이 없을거니까 이 때는 최고 기록을 5분으로 초기화함
+            bestTime = 300f;
         txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
         ((int)bestTime / 60) + " : " + ((int)bestTime % 60) + " : " + (int)((bestTime % 1) * 100) + "</color>";
     }
 
     public void ChangeCorner(int Corner)
     {
-        int toCorner = Corner;
+        corner = Corner;
 
         txtCorner.text = "<color=#00ff00ff>현재 남은 Corner</color> <color=#ff0000>" +
-            toCorner.ToString() + "</color>";
+            corner.ToString() + "</color>";
     }
 
     public void ChangeScore(float time)
@@ -46,7 +50,7 @@ public class GameUI: MonoBehaviour
     {
         if (_time < PlayerPrefs.GetFloat("BestScore"))
         {
-            txtCount.text = "최고 기록 갱신입니다!";
+            txtCount.text = "축하합니다! 최고 기록 갱신입니다!";
             PlayerPrefs.SetFloat("BestScore", _time);
             PlayerPrefs.Save();
             txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
@@ -54,17 +58,32 @@ public class GameUI: MonoBehaviour
         }
     }
 
-    public void ChangeCount(int time)
+    public void ChangeCount(int time) // 원래는 시간초에 따라서 하는건데 그냥 메시지 띄우는 함수로 바꿈
     {
-        txtCount.text = time.ToString() + " 초 남았습니다.";
+        txtCount.text = "제한시간 " + time.ToString() + " 초 남았습니다.";
         if (time < 1)
         {
             txtCount.text = "실패 ㅜㅜ";
-            Invoke("test", 2f);
+            Invoke("txtClear", 2f);
+        }
+        if(time > 6 && time < 8)
+        {
+            txtCount.text = "장애물에 부딪혔어요 ㅜㅜ";
+            Invoke("txtClear", 2f);
+        }
+        else if(time >= 8 && time < 10)
+        {
+            txtCount.text = "코너 도는 중..";
+            Invoke("txtClear", 1f);
+        }
+        else if(time >= 11)
+        {
+            txtCount.text = "성공!";
+            Invoke("txtClear", 1f);
         }
     }
 
-    void test()
+    void txtClear()
     {
         txtCount.text = "";
     }
@@ -73,11 +92,13 @@ public class GameUI: MonoBehaviour
     {
         if(mode == 0)   // 라이프가 없음
         {
-            txtGameOverMs.text = "목숨을 모두 소진 하셨습니다 ㅜㅜ";
+            txtGameOverMs.text = "목숨이 더 이상 없네요 ㅜㅜ 다음엔 골인할 수 있을거에요!";
         }
         else if(mode == 1) // 맵을 다 돌음
         {
-            txtGameOverMs.text = "맵을 다 돌으셨어요!";
+            txtCount.text = "";
+            txtGameOverMs.text = "골인 입니다! 수고하셨어요!";
+            ChangeBest();
         }
     }
 
@@ -87,6 +108,7 @@ public class GameUI: MonoBehaviour
         _time += Time.deltaTime; // 초
         int minute = (int)_time / 60;
         _timerText.text = minute.ToString();
-        ChangeScore(_time);
+        if(corner > 0)
+            ChangeScore(_time);
     }
 }

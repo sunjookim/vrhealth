@@ -39,7 +39,6 @@ namespace Ardunity
             originColor = lamp.material.color;
             // 네비게이션
             nvAgent = gameObject.GetComponent<NavMeshAgent>();
-            nvAgent.speed = nvSpeed; // 코너를 따라가는 속도
 
             UIObj = GameObject.Find("Game_UI").GetComponent<GameUI>(); // GameUI 오브젝트 찾음
             UIObj.ChangeCorner(5 - cornerCount);
@@ -123,7 +122,7 @@ namespace Ardunity
 
                         // 속도 제한
                         if (pSpeed >= 0.3f) pSpeed = 0.3f;
-                        if (nvSpeed >= 5f) nvSpeed = 5f;
+                        if (nvSpeed >= 3f) nvSpeed = 3f;
                     }
 
                     if(isCountOk)
@@ -163,9 +162,9 @@ namespace Ardunity
                             Life--;
                             
                             stepCtrl.StepFail();
-                            Invoke("isCollFalse", 2f); // 2초 후에 정상
+                            Invoke("isCollFalse", 4f); // 2초 후에 정상
                             Clear();
-                            Invoke("CountDown", 2f);
+                            Invoke("CountDown", 4f);
                         }
                     }
                 }
@@ -204,22 +203,24 @@ namespace Ardunity
 
                     Quaternion turn = Quaternion.Euler(0, 90 * (cornerCount - 1), 0);
                     transform.rotation = Quaternion.Slerp(transform.rotation, turn, 0.01f * Time.deltaTime); // 부드럽게 턴
+                    UIObj.ChangeCount(9); // 코너 도는중 메시지 띄움
                     Invoke("CountDown", 1f);
                     Invoke("isCollFalse", 1f); // 3초 후에 정상
                 }
                 else
                 {
                     // 맵을 다 돌았으니까 최종 결과가 나오고, 만약 최고기록보다 짧게 들어오면 갱신함
+                    stepCtrl.StepSuccess();
                     UIObj.ChangeGameOver(1);
-                    UIObj.ChangeBest();
                 }
             }
 
             if (coll.collider.tag == ("enemy"))
             {
-                UIObj.ChangeCount(0);
+                UIObj.ChangeCount(7); // 장애물에 부딪힘 알려줌
                 isColl = true;            // 부딪힌 상태
                 isCollEnemy = true;
+                isCountOk = false;
                 // 목숨 깎이고, 뱅글돌아가는 효과 호출
                 nvSpeed = 0f;
                 pSpeed = 0f;
@@ -229,11 +230,9 @@ namespace Ardunity
                 Life--;
 
                 stepCtrl.StepFail();
-                Invoke("isCollFalse", 2f); // 3초 후에 정상
+                Invoke("isCollFalse", 4f); // 3초 후에 정상
                 Clear();
                 Invoke("CountDown", 4f);
-                
-                isCountOk = false;
             }
         }
 
@@ -247,7 +246,9 @@ namespace Ardunity
 
         public void Booster() // 부스터 온
         {
+            GameObject.Find("BoosterSound").GetComponent<AudioSource>().Play();
             isBoost = true;
+            UIObj.ChangeCount(11); // 장애물에 부딪힘 알려줌
             Debug.Log("부스터 온!");
             newEf = Instantiate(BoostEf, this.transform.position, this.transform.rotation) as GameObject;
 
