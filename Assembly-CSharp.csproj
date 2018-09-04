@@ -10,7 +10,11 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
+<<<<<<< HEAD
     <ProjectGuid>{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}</ProjectGuid>
+=======
+    <ProjectGuid>{A97BF3CB-C9FC-4F00-EAB5-39C499D6F362}</ProjectGuid>
+>>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -129,10 +133,19 @@
     <Compile Include="Assets\ARDUnity\Scripts\Utility\ListView.cs" />
     <Compile Include="Assets\ARDUnity\Scripts\Utility\SliderSnap.cs" />
     <Compile Include="Assets\ARDUnity\Scripts\Utility\ToggleEvent.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Assets\gameRocket\Scripts\distinctionC.cs" />
+>>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
     <Compile Include="Assets\gameRocket\Scripts\GameDirector.cs" />
     <Compile Include="Assets\gameRocket\Scripts\move_sceneW.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RocketGameUI.cs" />
     <Compile Include="Assets\gameRocket\Scripts\RocketMove.cs" />
     <Compile Include="Assets\gameRocket\Scripts\Rotation.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RotationReactor2C.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RotationReactor3C.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RotationReactor4C.cs" />
+    <Compile Include="Assets\gameRocket\Scripts\RotationReactorC.cs" />
     <Compile Include="Assets\gameRocket\Scripts\TargetCollision.cs" />
     <Compile Include="Assets\gameRocket\Simple Explosion\Demo\Script (for Demo)\ExplosionControl.cs" />
     <Compile Include="Assets\gameRocket\Simple Explosion\Scripts\GraphicExplosion.cs" />
@@ -142,10 +155,15 @@
     <Compile Include="Assets\gameRope\living birds\scripts\lb_Bird.cs" />
     <Compile Include="Assets\gameRope\living birds\scripts\lb_BirdController.cs" />
     <Compile Include="Assets\gameRope\living birds\scripts\lb_CrowProximity.cs" />
+    <Compile Include="Assets\gameRope\script\distinctionB.cs" />
     <Compile Include="Assets\gameRope\script\Game2.cs" />
     <Compile Include="Assets\gameRope\script\Manual.cs" />
     <Compile Include="Assets\gameRope\script\move_scene.cs" />
+    <Compile Include="Assets\gameRope\script\RotationReactor2B.cs" />
     <Compile Include="Assets\gameRope\script\RotationReactor2R.cs" />
+    <Compile Include="Assets\gameRope\script\RotationReactor3B.cs" />
+    <Compile Include="Assets\gameRope\script\RotationReactor4B.cs" />
+    <Compile Include="Assets\gameRope\script\RotationReactorB.cs" />
     <Compile Include="Assets\gameRope\script\Success.cs" />
     <Compile Include="Assets\gameRope\UnityChan\Scripts\CameraController.cs" />
     <Compile Include="Assets\gameRope\UnityChan\Scripts\FaceUpdate.cs" />
@@ -184,16 +202,16 @@
     <None Include="Assets\gameRope\UnityChan\Models\UnityChanShader\Shader\Unitychan_chara_hada_blend.shader" />
     <None Include="Assets\ARDUnity\Plugins\Android\AndroidManifest.xml" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -394,13 +412,17 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="ArdunityCore">
+<<<<<<< HEAD
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+=======
+      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
+>>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
     </Reference>
     <Reference Include="UnityEngine.Analytics">
-      <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.StandardEvents">
-      <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/sunjoo/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.13/UnityEngine.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
       <HintPath>C:/Program Files/Unity/Editor/Data/MonoBleedingEdge/lib/mono/2.0-api/mscorlib.dll</HintPath>

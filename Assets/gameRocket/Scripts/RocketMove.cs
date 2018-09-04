@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class RocketMove : MonoBehaviour {
 
@@ -14,19 +15,26 @@ public class RocketMove : MonoBehaviour {
     private float timer_check; //시간초 체크를 위한 저장
     public GameObject mainCamera; //메인 카메라
     public GameObject subCamera;  //로켓 카메라
+    public GameObject activeCamera; //액션 카메라
     private Vector3 rocket_init_pos;
     private Quaternion rocket_init_rot;
+    private Vector3 player_init_pos;
+    public GameObject player;
+    private Animator animator;
 
     // Use this for initialization
     void Start () {
         angle = 30f;
-        speed = 50f;
+        speed = 30f;
         rocketLaunchReady = false;
         exerciseRight = false;
         timer = 0;
         mainCameraOn();
         rocket_init_pos = transform.position;
         rocket_init_rot = transform.rotation;
+        player_init_pos = player.transform.position;
+        animator = player.GetComponent<Animator>();
+        animator.SetBool("kickstate", true);
     }
 	
 	// Update is called once per frame
@@ -37,17 +45,18 @@ public class RocketMove : MonoBehaviour {
             exerciseRight = true;
             timer_check = timer;
 
-            if (mainCamera.GetComponent<GameDirector>().getX() > 0.08 && mainCamera.GetComponent<GameDirector>().getX() < 0.11)
+            if (mainCamera.GetComponent<GameDirector>().getX() > -0.131 && mainCamera.GetComponent<GameDirector>().getX() < -0.123)
                 target = GameObject.FindWithTag("target");
-            else if (mainCamera.GetComponent<GameDirector>().getX() > -0.048 && mainCamera.GetComponent<GameDirector>().getX() < -0.026)
+            else if (mainCamera.GetComponent<GameDirector>().getX() > -0.106 && mainCamera.GetComponent<GameDirector>().getX() < -0.086)
                 target = GameObject.FindWithTag("target (1)");
-            else if (mainCamera.GetComponent<GameDirector>().getX() > -0.126 && mainCamera.GetComponent<GameDirector>().getX() < -0.112)
+            else if (mainCamera.GetComponent<GameDirector>().getX() > -0.022 && mainCamera.GetComponent<GameDirector>().getX() < -0.001)
                 target = GameObject.FindWithTag("target (2)");
-            else if (mainCamera.GetComponent<GameDirector>().getX() > -0.096 && mainCamera.GetComponent<GameDirector>().getX() < -0.083)
+            else if (mainCamera.GetComponent<GameDirector>().getX() > 0.063 && mainCamera.GetComponent<GameDirector>().getX() < 0.083)
                 target = GameObject.FindWithTag("target (3)");
             else
-                target = GameObject.FindWithTag("target");
-                //다른 효과를 넣어야 함
+                target = GameObject.Find("fake_target");
+
+            animator.SetBool("gamestate", true);
         }
         else
         {
@@ -65,30 +74,55 @@ public class RocketMove : MonoBehaviour {
             timer += Time.deltaTime;
             Debug.Log(timer);
 
-            subCameraOn();
-
-            Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
-
-            if (exerciseRight == false && timer_check < 4)
+            if (animator.GetBool("kickstate") && animator.GetBool("gamestate"))
             {
-                //로켓을 폭발시키자
-                GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
-                rocketLaunchReady = false;
-            }
-            else if (exerciseRight == false && timer_check >= 4 && timer_check <= 6)
-            {
-                Launch(target.transform.position, speed);
+                activeCameraOn();
             }
 
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.kick") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.83f)
+            {
+                animator.SetBool("kickstate", false);
+                GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+            }
+
+            if(animator.GetBool("kickstate") == false && animator.GetBool("gamestate") == true)
+            {
+                subCameraOn();
+
+                try
+                {
+                    Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+                }
+                catch (Exception e)
+                {
+                    target = GameObject.Find("fake_target");
+                    Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+                }
+
+                if (exerciseRight == false && timer_check < 4)
+                {
+                    //로켓을 폭발시키자
+                    GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
+                    rocketLaunchReady = false;
+                }
+                else if (exerciseRight == false && timer_check >= 4 && timer_check <= 6)
+                {
+                    Launch(target.transform.position, speed);
+                }
+            }
         }
         else
         {
             mainCameraOn();
             transform.position = rocket_init_pos;
             transform.rotation = rocket_init_rot;
+            player.transform.position = player_init_pos;
             timer = 0;
             target = GameObject.FindWithTag("target");
             exerciseRight = false;
+            animator.SetBool("kickstate", true);
+            animator.SetBool("gamestate", false);
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
         }
 
         if(timer >= 6)
@@ -130,12 +164,21 @@ public class RocketMove : MonoBehaviour {
     {
         mainCamera.SetActive(true);
         subCamera.SetActive(false);
+        activeCamera.SetActive(false);
     }
 
     public void subCameraOn()
     {
         mainCamera.SetActive(false);
         subCamera.SetActive(true);
+        activeCamera.SetActive(false);
+    }
+
+    public void activeCameraOn()
+    {
+        mainCamera.SetActive(false);
+        subCamera.SetActive(false);
+        activeCamera.SetActive(true);
     }
 
     public bool getRocketLaunchReady()

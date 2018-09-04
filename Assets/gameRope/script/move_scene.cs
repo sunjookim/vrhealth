@@ -7,15 +7,17 @@ using UnityEngine.Video; // 초기화 영상 제어
 
 
 /* 씬 번호
- * 0 : 메인
- * 1 : 게임 선택 메뉴
- * 2 : 매뉴얼
- * 3 : 외줄타기 게임 설명
- * 4 : 외줄타기 게임
- * 5 : 성공화면
- * 6 : 실패화면
- * 7 : 물로켓 게임
- * 8 : 썰매 게임
+ * 0 : 메인(Main)
+ * 1 : 게임 선택 메뉴(Menu)
+ * 2 : 매뉴얼(manual)
+ * 3 : 외줄타기 게임 설명(howto_game_2)
+ * 4 : 외줄타기 게임(game_2)
+ * 5 : 성공화면(Success)
+ * 6 : 실패화면(Fail)
+ * 7 : 물로켓 게임(WaterRocket)
+ * 8 : 썰매 게임(썰매 게임)
+ * 9 : 썰매 게임 방법(썰매 게임 방법)
+ * 10 : 물로켓 게임 방법(WaterRocket_howto)
  */
 
 
@@ -115,6 +117,9 @@ public class move_scene : MonoBehaviour {
         } else if(SceneManager.GetActiveScene().buildIndex == 4) // 외줄타기 게임
         {
             GameObject.Find("movingPerson").transform.Find("PauseMenu").gameObject.SetActive(true);
+        } else if(SceneManager.GetActiveScene().buildIndex == 7) // 물로켓 게임
+        {
+            GameObject.Find("GameUI").transform.Find("PauseMenu").gameObject.SetActive(true);
         }
 
     } 
@@ -149,6 +154,9 @@ public class move_scene : MonoBehaviour {
         } else if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             GameObject.Find("movingPerson").transform.Find("PauseMenu").gameObject.SetActive(false);
+        } else if(SceneManager.GetActiveScene().buildIndex == 7)
+        {
+            GameObject.Find("GameUI").transform.Find("PauseMenu").gameObject.SetActive(false);
         }
             
 
@@ -161,11 +169,11 @@ public class move_scene : MonoBehaviour {
         {
             light.intensity = +0.5f;
         }
-        else if(SceneManager.GetActiveScene().buildIndex == 4)
+        else if(SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 7)
         {
 
             light.intensity = +1;
-        }
+        } 
         
         Time.timeScale = 1;
 
