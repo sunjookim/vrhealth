@@ -86,18 +86,11 @@ namespace Ardunity
             print("시간 :" + time2);
          
 
-<<<<<<< HEAD
-            RotationReactorA _curRotation1 = GameObject.Find("snow").GetComponent<RotationReactorA>(); // 1번
-            RotationReactor2A _curRotation2 = GameObject.Find("snow").GetComponent<RotationReactor2A>(); // 2번
-            RotationReactor3A _curRotation3 = GameObject.Find("snow").GetComponent<RotationReactor3A>(); // 3번
-            RotationReactor4A _curRotation4 = GameObject.Find("snow").GetComponent<RotationReactor4A>(); // 4번
-=======
+
             RotationReactorA _curRotation1 = GameObject.Find("사람").GetComponent<RotationReactorA>(); // 1번
             RotationReactor2A _curRotation2 = GameObject.Find("사람").GetComponent<RotationReactor2A>(); // 2번
             RotationReactor3A _curRotation3 = GameObject.Find("사람").GetComponent<RotationReactor3A>(); // 3번
             RotationReactor4A _curRotation4 = GameObject.Find("사람").GetComponent<RotationReactor4A>(); // 4번
->>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
-
 
 
             if (d1 == false) // 센서가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.

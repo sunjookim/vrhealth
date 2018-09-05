@@ -10,15 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-<<<<<<< HEAD
-<<<<<<< HEAD
     <ProjectGuid>{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}</ProjectGuid>
-=======
-    <ProjectGuid>{A97BF3CB-C9FC-4F00-EAB5-39C499D6F362}</ProjectGuid>
->>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
-=======
-    <ProjectGuid>{539F47B5-0B56-F7C3-2B55-9FE90DC28D4E}</ProjectGuid>
->>>>>>> sunjookim1
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -137,10 +129,7 @@
     <Compile Include="Assets\ARDUnity\Scripts\Utility\ListView.cs" />
     <Compile Include="Assets\ARDUnity\Scripts\Utility\SliderSnap.cs" />
     <Compile Include="Assets\ARDUnity\Scripts\Utility\ToggleEvent.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Assets\gameRocket\Scripts\distinctionC.cs" />
->>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
     <Compile Include="Assets\gameRocket\Scripts\GameDirector.cs" />
     <Compile Include="Assets\gameRocket\Scripts\move_sceneW.cs" />
     <Compile Include="Assets\gameRocket\Scripts\RocketGameUI.cs" />
@@ -416,15 +405,7 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnitySpatialTracking/RuntimeEditor/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="ArdunityCore">
-<<<<<<< HEAD
-<<<<<<< HEAD
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
-=======
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
->>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
-=======
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
->>>>>>> sunjookim1
     </Reference>
     <Reference Include="UnityEngine.Analytics">
       <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.analytics@2.0.16/UnityEngine.Analytics.dll</HintPath>

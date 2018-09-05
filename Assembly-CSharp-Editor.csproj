@@ -380,24 +380,10 @@
       <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/windowsstandalonesupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="ArdunityCore">
-<<<<<<< HEAD
-<<<<<<< HEAD
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
     </Reference>
     <Reference Include="ArdunityCoreEditor">
       <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
-=======
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCoreEditor">
-      <HintPath>C:/Users/sunjoo/Documents/vrhealth/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
->>>>>>> a5cdc6041edcba942c5e6c403df02d6f67861739
-=======
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/ArdunityCore.dll</HintPath>
-    </Reference>
-    <Reference Include="ArdunityCoreEditor">
-      <HintPath>C:/Users/DooHyun/Documents/유니티 프로젝트/graduation/Assets/ARDUnity/Scripts/Internal/Editor/ArdunityCoreEditor.dll</HintPath>
->>>>>>> sunjookim1
     </Reference>
     <Reference Include="UnityEditor.Advertisements">
       <HintPath>C:/Users/DooHyun/AppData/Local/Unity/cache/packages/packages.unity.com/com.unity.ads@2.0.8/Editor/UnityEditor.Advertisements.dll</HintPath>

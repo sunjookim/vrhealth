@@ -16,6 +16,7 @@ public class GameUI: MonoBehaviour
     public Text txtCount;
 
     public int corner;
+    public float startTime;
 
     //public float done = 13.0f; // 컨트롤러 초기화 영상 재생될 시간
 
@@ -25,11 +26,13 @@ public class GameUI: MonoBehaviour
         corner = 4;
         txtGameOverMs.text = "";
         txtCount.text = "";
+
         float bestTime = PlayerPrefs.GetFloat("BestScore");
         if (bestTime < 20f) // 설마 20초안에 들어온 사람이 없을거니까 이 때는 최고 기록을 5분으로 초기화함
             bestTime = 300f;
         txtBestScore.text = "<color=#00ff00ff>Best time : </color> <color=#ff0000>" +
         ((int)bestTime / 60) + " : " + ((int)bestTime % 60) + " : " + (int)((bestTime % 1) * 100) + "</color>";
+        startTime = GameObject.FindWithTag("Player").GetComponent<Ardunity.Player>().startTime;
     }
 
     public void ChangeCorner(int Corner)
@@ -104,11 +107,12 @@ public class GameUI: MonoBehaviour
 
     void Update()
     {
+        startTime = GameObject.FindWithTag("Player").GetComponent<Ardunity.Player>().startTime;
         // 진행 시간 표시
         _time += Time.deltaTime; // 초
         int minute = (int)_time / 60;
         _timerText.text = minute.ToString();
-        if(corner > 0)
-            ChangeScore(_time);
+        if(corner > 0 && _time > startTime)
+            ChangeScore(_time - startTime);
     }
 }
