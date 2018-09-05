@@ -49,6 +49,7 @@ namespace Ardunity
                 //운동을 수행한다면(발을 올린다면) true, 발을 거의 내린다면 false;
                 distinctionC CCC = GameObject.Find("RocketControl").GetComponent<distinctionC>(); // 1번
                 if (CCC.waterrocket == true)
+                //if(Input.GetKey(KeyCode.Space))
                 {
                     exerciseRight = true;
                     timer_check = timer;

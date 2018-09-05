@@ -6,7 +6,7 @@ public class GameDirector : MonoBehaviour {
 
     public float x;
     private float y;
-    private float mouse_x;
+    public float mouse_x;
     private float mouse_y;
     public Material Mat;
     public GameObject target1;

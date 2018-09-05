@@ -15492,6 +15492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: 0
+  mouse_x: 0
   Mat: {fileID: 2100000, guid: dfc13bc6f7a4dec4ea3b4f965c7f80a8, type: 2}
   target1: {fileID: 801109127}
   target2: {fileID: 1014169560}
@@ -15511,7 +15512,6 @@ MonoBehaviour:
   sndPause: {fileID: 8300000, guid: eedc9cbb2f596064780c055c438da61e, type: 3}
   sndPauseButton: {fileID: 8300000, guid: 67b404e2b5dc9c04ca358bf99e77c0cf, type: 3}
   PauseButton: {fileID: 1188075353}
-  done: 20
   _time: 0
 --- !u!82 &534669908
 AudioSource:
