@@ -8,15 +8,15 @@ Prefab:
     m_TransformParent: {fileID: 0}
     m_Modifications: []
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 0}
+  m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1721445021163126}
-  m_IsPrefabParent: 1
+  m_IsPrefabAsset: 1
 --- !u!1 &1001545993217550
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4074747616263186}
   - component: {fileID: 328967790913143990}
@@ -31,9 +31,9 @@ GameObject:
 --- !u!1 &1585470626256578
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4605163630666728}
   - component: {fileID: 33171284421881038}
@@ -49,9 +49,9 @@ GameObject:
 --- !u!1 &1721445021163126
 GameObject:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
+  serializedVersion: 6
   m_Component:
   - component: {fileID: 4409970435838038}
   m_Layer: 0
@@ -64,7 +64,7 @@ GameObject:
 --- !u!4 &4074747616263186
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001545993217550}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -77,7 +77,7 @@ Transform:
 --- !u!4 &4409970435838038
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1721445021163126}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
@@ -92,7 +92,7 @@ Transform:
 --- !u!4 &4605163630666728
 Transform:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585470626256578}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
@@ -105,7 +105,7 @@ Transform:
 --- !u!23 &23314922262052424
 MeshRenderer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585470626256578}
   m_Enabled: 1
@@ -140,14 +140,14 @@ MeshRenderer:
 --- !u!33 &33171284421881038
 MeshFilter:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585470626256578}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &65742346541321732
 BoxCollider:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1585470626256578}
   m_Material: {fileID: 0}
@@ -159,13 +159,13 @@ BoxCollider:
 --- !u!82 &82811022750030420
 AudioSource:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001545993217550}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 2347d5d646c3fb8488f745fa10795a55, type: 3}
+  m_audioClip: {fileID: 8300000, guid: e759980e6203e5346a04080ac3c107d5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -254,11 +254,11 @@ AudioSource:
 --- !u!328 &328967790913143990
 VideoPlayer:
   m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1001545993217550}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: 9a55b4ffdb8218e4ca9f012c2f96a72b, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: a136436753f805b4989f082b81e54510, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

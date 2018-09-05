@@ -53,6 +53,9 @@ TagManager:
   - rotation_02
   - rotation_03
   - rotation_04
+  - Total_01
+  - Total_02
+  - button
   layers:
   - Default
   - TransparentFX

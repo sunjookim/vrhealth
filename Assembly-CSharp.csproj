@@ -148,6 +148,7 @@
     <Compile Include="Assets\gameRope\living birds\scripts\lb_Bird.cs" />
     <Compile Include="Assets\gameRope\living birds\scripts\lb_BirdController.cs" />
     <Compile Include="Assets\gameRope\living birds\scripts\lb_CrowProximity.cs" />
+    <Compile Include="Assets\gameRope\script\buttonClick.cs" />
     <Compile Include="Assets\gameRope\script\distinctionB.cs" />
     <Compile Include="Assets\gameRope\script\Game2.cs" />
     <Compile Include="Assets\gameRope\script\Manual.cs" />

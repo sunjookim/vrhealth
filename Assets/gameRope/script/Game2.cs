@@ -98,19 +98,12 @@ namespace Ardunity
             Time.timeScale = 1; // 일시정지 버튼 - 재시작 버튼을 눌렀을 때 time이 멈추는 현상 방지
 
             // 초기화 영상 재생
-            GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; 
+            //GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject; 
 
             // 애니메이터 설정
             animator1 = GameObject.Find("unitychan").GetComponent<Animator>();
             animator2 = GameObject.Find("teacher").GetComponent<Animator>();
-
-            /*
-            // 네비메쉬
-            playerNav = GameObject.FindWithTag("Player").GetComponent<Transform>();
-            destination3 = GameObject.FindWithTag("finishLine").GetComponent<Transform>();
-            */
-
-            //nvAgent = gameObject.GetComponent<NavMeshAgent>(); // 네비메쉬
+            
         }
         
 
@@ -621,8 +614,8 @@ namespace Ardunity
             // 마우스 커서로 시선 회전
             v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             GameObject.FindWithTag("MainCamera").transform.Rotate(v3 * turnspeed);
-            
 
+            distinctionB BBB = GameObject.Find("movingPerson").GetComponent<distinctionB>(); // 1번
 
             // Arduinity
             // 다른 스크립트에서 아두이노 컨트롤러 값을 받아온다
@@ -649,7 +642,7 @@ namespace Ardunity
 
 
             // 컨초_허리 영상 끝나면 캐릭터 출발시키고 이동하기
-            if(_time >= 18)
+            if(BBB.count2 >= 300)
             {
                 Destroy(GameObject.FindWithTag("Initialize")); // 컨초_허리 영상 제거하기
 
@@ -703,13 +696,21 @@ namespace Ardunity
 
 
             // 기울여 내려가는 애니메이션이 끝났을 때 성공/실패여부를 검사
-            if ((int)SlopeGoTime == 0 && isNotSlope == false) 
+            // ((int)SlopeGoTime == 0 && isNotSlope == false) 
+             if((int)SlopeGoTime == 0)
             {
                 if(slopeGoodtime >= 3.0f)
                 {
                     animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
-                    animator1.SetBool("LeftBack", true); // 성공 동작
 
+                    if(isLeftSlope == true)
+                    {
+                        animator1.SetBool("LeftBack", true); // 성공 동작
+                    } else if(isRightSlope == true)
+                    {
+                        animator1.SetBool("RightBack", true); // 성공 동작
+                    }
+                    
                     isDeath = false;
                 } else
                 {
@@ -838,7 +839,8 @@ namespace Ardunity
             // 남은 목숨이 없을 경우 게임 종료시키기
             if (Life == 0)
             {
-                SceneManager.LoadScene("Fail");
+                //SceneManager.LoadScene("Fail");
+                GameObject.Find("movingPerson").transform.Find("EndMenu").gameObject.SetActive(true);
             }
           
 

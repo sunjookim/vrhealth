@@ -10,13 +10,13 @@ namespace Ardunity
 {
     
 
-        [AddComponentMenu("ARDUnity/Reactor/gameRope/script/distinctionB")]
+        [AddComponentMenu("ARDUnity/Reactor/Transform/distinctionB")]
     [HelpURL("https://sites.google.com/site/ardunitydoc/references/reactor/distinction")]
 	public class distinctionB : ArdunityReactor
     {
 
-        
-         
+
+        bool isTotal_02 = false;
         
         public Animator animator;
         public bool smoothFollow = true;
@@ -33,12 +33,13 @@ namespace Ardunity
         private bool k = true;
         private int count = 0;
         private int count1 = 0;
+        public int count2 = 0;
         private int decision = 0;
         public double a1,a2,a3,a4 = 0;
         public int F = 0;
         public bool snow0, snow1, snow2 = false;
         private Quaternion abc1,abc2,abc3,abc4,abc5,abc6;
-        private bool c1, c2, c3, c4, c5, c6 = false;
+        public bool c1, c2, c3, c4, c5, c6 = false;
         private bool d1 = false;
         public bool rightback, leftback, waterrocket = false;
 
@@ -72,7 +73,7 @@ namespace Ardunity
         {
 
 
-            time += Time.deltaTime;
+            time  += Time.deltaTime;
             time2 += Time.deltaTime;
 
             if (_time < 1f && smoothFollow == true)
@@ -126,36 +127,36 @@ namespace Ardunity
 
                             // 1,2,3,4번 센서중 오른팔동작범위를 만족하는 센서가 오른팔에 부착한 센서가 됨
 
-                            if ((Math.Abs(_curRotation1._curRotation.x) > 0.3f && Math.Abs(_curRotation1._curRotation.x) < 0.6f) //0.3 < x < 0.6 이면 오른팔
-                                &&(Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.6f) // 0.3 < y < 0.6
-                                &&(Math.Abs(_curRotation1._curRotation.z) > 0.3f && Math.Abs(_curRotation1._curRotation.z) < 0.6f)) // 0.3 < z < 0.6
+                            if ((Math.Abs(_curRotation1._curRotation.x) > 0.2f && Math.Abs(_curRotation1._curRotation.x) < 0.6f) //0.2 < x < 0.6 이면 오른팔
+                                &&(Math.Abs(_curRotation1._curRotation.y) > 0.25f && Math.Abs(_curRotation1._curRotation.y) < 0.6f) // 0.25 < y < 0.6
+                                &&(Math.Abs(_curRotation1._curRotation.z) > 0.4f && Math.Abs(_curRotation1._curRotation.z) < 0.65f)) // 0.4 < z < 0.65
                             {                                                                                                  // 손번쩍드는동작
                                 a1 = 1.1; // 1번센서가 썰매운동 오른팔
                                 c1 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation2._curRotation.x) > 0.3f && Math.Abs(_curRotation2._curRotation.x) < 0.6f) //0.3 < x < 0.6 이면 오른팔
-                                && (Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.6f) // 0.3 < y < 0.6
-                                && (Math.Abs(_curRotation2._curRotation.z) > 0.3f && Math.Abs(_curRotation2._curRotation.z) < 0.6f)) // 0.3 < z < 0.6
+                            else if ((Math.Abs(_curRotation2._curRotation.x) > 0.2f && Math.Abs(_curRotation2._curRotation.x) < 0.6f) //0.2 < x < 0.6 이면 오른팔
+                                && (Math.Abs(_curRotation2._curRotation.y) > 0.25f && Math.Abs(_curRotation2._curRotation.y) < 0.6f) // 0.25 < y < 0.6
+                                && (Math.Abs(_curRotation2._curRotation.z) > 0.4f && Math.Abs(_curRotation2._curRotation.z) < 0.65f)) // 0.4 < z < 0.65
                             {
                                 a2 = 1.1; // 2번센서가 썰매운동 오른팔
                                 c1 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation3._curRotation.x) > 0.3f && Math.Abs(_curRotation3._curRotation.x) < 0.6f) //0.3 < x < 0.6 이면 오른팔
-                                && (Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.6f) // 0.3 < y < 0.6
-                                && (Math.Abs(_curRotation3._curRotation.z) > 0.3f && Math.Abs(_curRotation3._curRotation.z) < 0.6f)) // 0.3 < z < 0.6
+                            else if ((Math.Abs(_curRotation3._curRotation.x) > 0.2f && Math.Abs(_curRotation3._curRotation.x) < 0.6f) //0.2 < x < 0.6 이면 오른팔
+                                && (Math.Abs(_curRotation3._curRotation.y) > 0.25f && Math.Abs(_curRotation3._curRotation.y) < 0.6f) // 0.25 < y < 0.6
+                                && (Math.Abs(_curRotation3._curRotation.z) > 0.4f && Math.Abs(_curRotation3._curRotation.z) < 0.65f)) // 0.4 < z < 0.65
                             {
                                 a3 = 1.1; // 3번센서가 썰매운동 오른팔
                                 c1 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation4._curRotation.x) > 0.3f && Math.Abs(_curRotation4._curRotation.x) < 0.6f) //0.3 < x < 0.6 이면 오른팔
-                                && (Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.6f) // 0.3 < y < 0.6
-                                && (Math.Abs(_curRotation4._curRotation.z) > 0.3f && Math.Abs(_curRotation4._curRotation.z) < 0.6f)) // 0.3 < z < 0.6
+                            else if ((Math.Abs(_curRotation4._curRotation.x) > 0.2f && Math.Abs(_curRotation4._curRotation.x) < 0.6f) //0.2 < x < 0.6 이면 오른팔
+                                && (Math.Abs(_curRotation4._curRotation.y) > 0.25f && Math.Abs(_curRotation4._curRotation.y) < 0.6f) // 0.25 < y < 0.6
+                                && (Math.Abs(_curRotation4._curRotation.z) > 0.4f && Math.Abs(_curRotation4._curRotation.z) < 0.65f)) // 0.4 < z < 0.65
                             {
                                 a4 = 1.1; // 4번센서가 썰매운동 오른팔
                                 c1 = true;
@@ -185,28 +186,34 @@ namespace Ardunity
 
                             // 1,2,3,4번 센서중 왼팔동작범위를 만족하는 센서가 왼팔에 부착한 센서가 됨
 
-                            if (Math.Abs(_curRotation1._curRotation.y) > 0.5f && Math.Abs(_curRotation1._curRotation.y) < 0.8f) // 0.5 < y < 0.8이면 왼팔
-                            {                                                                                                    // 손을 수평으로 펴는동작
+                            if ((Math.Abs(_curRotation1._curRotation.y) > 0.4f && Math.Abs(_curRotation1._curRotation.y) < 0.8f) // 0.4 < y < 0.8
+                                && (Math.Abs(_curRotation1._curRotation.z) > 0.0f && Math.Abs(_curRotation1._curRotation.z) < 0.25f)) // 0.0 < z < 0.25 이면 왼팔
+                                                                                                                                      // 손을 수평으로 펴는 동작
+
+                            {                                                                                                    
                                 a1 = 1.2; // 1번센서가 썰매운동 왼팔
                                 c2 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation2._curRotation.y) > 0.5f && Math.Abs(_curRotation2._curRotation.y) < 0.8f)
+                            else if (Math.Abs(_curRotation2._curRotation.y) > 0.4f && Math.Abs(_curRotation2._curRotation.y) < 0.8f
+                                     && (Math.Abs(_curRotation2._curRotation.z) > 0.0f && Math.Abs(_curRotation2._curRotation.z) < 0.25f))
                             {
                                 a2 = 1.2; // 2번센서가 썰매운동 왼팔
                                 c2 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation3._curRotation.y) > 0.5f && Math.Abs(_curRotation3._curRotation.y) < 0.8f)
+                            else if (Math.Abs(_curRotation3._curRotation.y) > 0.4f && Math.Abs(_curRotation3._curRotation.y) < 0.8f
+                                     && (Math.Abs(_curRotation3._curRotation.z) > 0.0f && Math.Abs(_curRotation3._curRotation.z) < 0.25f)) 
                             {
                                 a3 = 1.2; // 3번센서가 썰매운동 왼팔
                                 c2 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation4._curRotation.y) > 0.5f && Math.Abs(_curRotation4._curRotation.y) < 0.8f)
+                            else if (Math.Abs(_curRotation4._curRotation.y) > 0.4f && Math.Abs(_curRotation4._curRotation.y) < 0.8f
+                                     && (Math.Abs(_curRotation4._curRotation.z) > 0.0f && Math.Abs(_curRotation4._curRotation.z) < 0.25f))
                             {
                                 a4 = 1.2; // 4번센서가 썰매운동 왼팔
                                 c2 = true;
@@ -237,36 +244,36 @@ namespace Ardunity
 
                             // 1,2,3,4번 센서중 등 동작범위를 만족하는 센서가 등에 부착한 센서가 됨
 
-                            if ((Math.Abs(_curRotation1._curRotation.z) > 0.0f && Math.Abs(_curRotation1._curRotation.z) < 0.2f) // 0 < z < 0.2 
-                                && Math.Abs(_curRotation1._curRotation.x) < 0.1f   //0 < x < 0.1
-                                && Math.Abs(_curRotation1._curRotation.y) < 0.1f ) //0 < y < 0.1
+                            if ((Math.Abs(_curRotation1._curRotation.z) > 0.0f && Math.Abs(_curRotation1._curRotation.z) < 0.3f) // 0 < z < 0.3 
+                                && (Math.Abs(_curRotation1._curRotation.x) > 0.0f && Math.Abs(_curRotation1._curRotation.x) < 0.15f)   //0 < x < 0.15
+                                && (Math.Abs(_curRotation1._curRotation.y) > 0.0f && Math.Abs(_curRotation1._curRotation.y) < 0.15f)) //0 < y < 0.15
                             {
                                 a1 = 1.3; // 1번센서가 썰매운동 등
                                 c3 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation2._curRotation.z) > 0.0f && Math.Abs(_curRotation2._curRotation.z) < 0.2f) // 0 < z < 0.2 
-                                && Math.Abs(_curRotation2._curRotation.x) < 0.1f   // x < 0.1
-                                && Math.Abs(_curRotation2._curRotation.y) < 0.1f) // y < 0.1
+                            else if ((Math.Abs(_curRotation2._curRotation.z) > 0.0f && Math.Abs(_curRotation2._curRotation.z) < 0.3f) // 0 < z < 0.3 
+                                && (Math.Abs(_curRotation2._curRotation.x) > 0.0f && Math.Abs(_curRotation2._curRotation.x) < 0.15f)   //0 < x < 0.15
+                                && (Math.Abs(_curRotation2._curRotation.y) > 0.0f && Math.Abs(_curRotation2._curRotation.y) < 0.15f)) //0 < y < 0.15
                             {
                                 a2 = 1.3; // 2번센서가 썰매운동 등
                                 c3 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation3._curRotation.z) > 0.0f && Math.Abs(_curRotation3._curRotation.z) < 0.2f) // 0 < z < 0.2 
-                                && Math.Abs(_curRotation3._curRotation.x) < 0.1f   // x < 0.1
-                                && Math.Abs(_curRotation3._curRotation.y) < 0.1f) // y < 0.1
+                            else if ((Math.Abs(_curRotation3._curRotation.z) > 0.0f && Math.Abs(_curRotation3._curRotation.z) < 0.3f) // 0 < z < 0.3 
+                                && (Math.Abs(_curRotation3._curRotation.x) > 0.0f && Math.Abs(_curRotation3._curRotation.x) < 0.15f)   //0 < x < 0.15
+                                && (Math.Abs(_curRotation3._curRotation.y) > 0.0f && Math.Abs(_curRotation3._curRotation.y) < 0.15f)) //0 < y < 0.15
                             {
                                 a3 = 1.3; // 3번센서가 썰매운동 등
                                 c3 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if ((Math.Abs(_curRotation4._curRotation.z) > 0.0f && Math.Abs(_curRotation4._curRotation.z) < 0.2f) // 0 < z < 0.2 
-                                && Math.Abs(_curRotation4._curRotation.x) < 0.1f   // x < 0.1
-                                && Math.Abs(_curRotation4._curRotation.y) < 0.1f) // y < 0.1
+                            else if ((Math.Abs(_curRotation4._curRotation.z) > 0.0f && Math.Abs(_curRotation4._curRotation.z) < 0.3f) // 0 < z < 0.3 
+                                && (Math.Abs(_curRotation4._curRotation.x) > 0.0f && Math.Abs(_curRotation4._curRotation.x) < 0.15f)   //0 < x < 0.15
+                                && (Math.Abs(_curRotation4._curRotation.y) > 0.0f && Math.Abs(_curRotation4._curRotation.y) < 0.15f)) //0 < y < 0.15
                             {
                                 a4 = 1.3; // 4번센서가 썰매운동 등
                                 c3 = true;
@@ -361,36 +368,36 @@ namespace Ardunity
 
                             // 1,2,3,4번 센서중 왼쪽다리 동작범위를 만족하는 센서가 왼쪽다리에 부착한 센서가 됨
 
-                            if (Math.Abs(_curRotation1._curRotation.x) > 0.4f && Math.Abs(_curRotation1._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation1._curRotation.y) > 0.4f && Math.Abs(_curRotation1._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation1._curRotation.z) > 0.4f && Math.Abs(_curRotation1._curRotation.z) < 0.6f) 
-                            { // 오른쪽 다리에 왼쪽다리 올리기  0.4 < x,y,z < 0.6
+                            if (Math.Abs(_curRotation1._curRotation.x) > 0.3f && Math.Abs(_curRotation1._curRotation.x) < 0.65f
+                                && Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.65f
+                                && Math.Abs(_curRotation1._curRotation.z) > 0.3f && Math.Abs(_curRotation1._curRotation.z) < 0.65f) 
+                            { // 오른쪽 다리에 왼쪽다리 올리기  0.3 < x,y,z < 0.65
                                 a1 = 2.2; // 1번센서가 로켓게임 왼쪽다리
                                 c5 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation2._curRotation.x) > 0.4f && Math.Abs(_curRotation2._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation2._curRotation.y) > 0.4f && Math.Abs(_curRotation2._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation2._curRotation.z) > 0.4f && Math.Abs(_curRotation2._curRotation.z) < 0.6f)
+                            else if (Math.Abs(_curRotation2._curRotation.x) > 0.3f && Math.Abs(_curRotation2._curRotation.x) < 0.65f
+                                && Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.65f
+                                && Math.Abs(_curRotation2._curRotation.z) > 0.3f && Math.Abs(_curRotation2._curRotation.z) < 0.65f)
                             {
                                 a2 = 2.2; // 2번센서가 로켓게임 왼쪽다리
                                 c5 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation3._curRotation.x) > 0.4f && Math.Abs(_curRotation3._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation3._curRotation.y) > 0.4f && Math.Abs(_curRotation3._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation3._curRotation.z) > 0.4f && Math.Abs(_curRotation3._curRotation.z) < 0.6f)
+                            else if (Math.Abs(_curRotation3._curRotation.x) > 0.3f && Math.Abs(_curRotation3._curRotation.x) < 0.65f
+                                && Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.65f
+                                && Math.Abs(_curRotation3._curRotation.z) > 0.3f && Math.Abs(_curRotation3._curRotation.z) < 0.65f)
                             {
                                 a3 = 2.2; // 3번센서가 로켓게임 왼쪽다리
                                 c5 = true;
 
                                 // print("확인되었습니다.");  UI
                             }
-                            else if (Math.Abs(_curRotation4._curRotation.x) > 0.4f && Math.Abs(_curRotation4._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation4._curRotation.y) > 0.4f && Math.Abs(_curRotation4._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation4._curRotation.z) > 0.4f && Math.Abs(_curRotation4._curRotation.z) < 0.6f)
+                            else if (Math.Abs(_curRotation4._curRotation.x) > 0.3f && Math.Abs(_curRotation4._curRotation.x) < 0.65f
+                                && Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.65f
+                                && Math.Abs(_curRotation4._curRotation.z) > 0.3f && Math.Abs(_curRotation4._curRotation.z) < 0.65f)
                             {
                                 a4 = 2.2; // 4번센서가 로켓게임 왼쪽다리
                                 c5 = true;
@@ -430,36 +437,36 @@ namespace Ardunity
                     if (time2 > 20.0f) // 20초 후에  허리 위치확인 시작
                     {
 
+                        // 허리통합_01 활성화
+                        GameObject.Find("movingPerson").transform.Find("Total_01").gameObject.SetActive(true);
+
                         // print("측정을 시작합니다.");
 
                         // 1,2,3,4번 센서중 허리동작범위를 만족하는 센서가 허리에 부착한 센서가 됨
 
-                        if (Math.Abs(_curRotation1._curRotation.x) > 0.1f && Math.Abs(_curRotation1._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.6f)
+                        if (Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.6f) // 0.3 < y < 0.6 
+                           
                         {
                             a1 = 3.1; // 1번센서가 외줄타기게임 허리
                             c6 = true;
 
                             // print("확인되었습니다.");  UI
                         }
-                        else if (Math.Abs(_curRotation2._curRotation.x) > 0.1f && Math.Abs(_curRotation2._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.6f)
+                        else if (Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.6f)
                         {
                             a2 = 3.1; // 2번센서가 외줄타기게임 허리
                             c6 = true;
 
                             // print("확인되었습니다.");  UI
                         }
-                        else if (Math.Abs(_curRotation3._curRotation.x) > 0.1f && Math.Abs(_curRotation3._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.6f)
+                        else if (Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.6f)
                         {
                             a3 = 3.1; // 3번센서가 외줄타기게임 허리
                             c6 = true;
 
                             // print("확인되었습니다.");  UI
                         }
-                        else if (Math.Abs(_curRotation4._curRotation.x) > 0.1f && Math.Abs(_curRotation4._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.6f)
+                        else if (Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.6f)
                         {
                             a4 = 3.1; // 4번센서가 외줄타기게임 허리
                             c6 = true;
@@ -472,12 +479,36 @@ namespace Ardunity
                         }
 
                     }
-                    if (c6 == true)
-                    {
-                        //print("모듈이 인식되었습니다.");
-                    }
+                    
 
                 }
+                if (c6 == true)
+                {
+                    //print("모듈이 인식되었습니다.");
+
+                    // 허리통합_01 비활성화
+                    // GameObject.Find("movingPerson").transform.Find("Total_01").gameObject.SetActive(false);
+                    Destroy(GameObject.FindWithTag("Total_01"));
+
+                    
+
+                    if(isTotal_02 == false)
+                    {
+                        // 허리통합_02 활성화
+                        GameObject.Find("movingPerson").transform.Find("Total_02").gameObject.SetActive(true);
+
+                        isTotal_02 = true;
+                    }
+
+                    count2++;
+                }
+                
+            }
+
+            print(count2);
+            if(count2 == 200)
+            {
+                GameObject.Find("movingPerson").transform.Find("Total_02").gameObject.SetActive(false);
             }
            
 
@@ -651,8 +682,8 @@ namespace Ardunity
            
                 if (decision == 0) // 팔운동1 
                 {
-                    if (Math.Abs(abc1.y) < 0.8f && Math.Abs(abc1.y) > 0.4f      // 1번 오른팔 y: 0.4 < 현재값 < 0.8
-                          && Math.Abs(abc2.y) < 0.8f && Math.Abs(abc2.y) > 0.4f) // 4번 왼팔 y: 0.4 < 현재값 < 0.8
+                    if (Math.Abs(abc1.y) < 0.45f && Math.Abs(abc1.y) > 0.4f      //  오른팔 y: 0.45 < 현재값 < 0.8
+                          && Math.Abs(abc2.y) < 0.45f && Math.Abs(abc2.y) > 0.4f) //  왼팔 y: 0.45 < 현재값 < 0.8
                     {
 
                         //animator.Play("Makehuman_gameskel|gun_game_1_bullet", -1, 0);  // 팔운동1 애니메이션 실행
@@ -674,11 +705,11 @@ namespace Ardunity
 
                 if (decision == 1) // 팔운동2
                 {
-
-                    if (Math.Abs(abc1.x) < 0.8f && Math.Abs(abc1.x) > 0.4f && Math.Abs(abc1.y) < 0.3f     // 1번 x: 0.4 < 현재값 < 0.8  y : 현재값 <0.3f
-                         && Math.Abs(abc2.x) < 0.8f && Math.Abs(abc2.x) > 0.4f) // 4번 x: 0.4 < 현재값 < 0.8
-
-                    {   // and 3번 : 현재값 < 0.15f  and 4번 : 현재값 > 0.3f 
+                                                                                                                                    // 오른팔 y : 0 < 현재값 < 0.3
+                    if (Math.Abs(abc1.x) < 0.8f && Math.Abs(abc1.x) > 0.4f && Math.Abs(abc1.y) < 0.3f && Math.Abs(abc1.y) > 0.0f    // 오른팔 x : 0.4 < 현재값 < 0.8 
+                     && Math.Abs(abc2.x) < 0.8f && Math.Abs(abc2.x) > 0.4f && Math.Abs(abc2.y) < 0.3f && Math.Abs(abc2.y) > 0.0f) //  왼팔 x: 0.4 < 현재값 < 0.8
+                                                                                                                                  // 오른팔 y : 0 < 현재값 < 0.3
+                    {  
 
                         //animator.Play("Makehuman_gameskel|gun_game_2_sholder", -1, 0); // 팔운동2 애니메이션 실행
                         snow1 = true;
@@ -698,7 +729,7 @@ namespace Ardunity
             
                 if (decision == 2)  // 팔운동3
                 {
-                    if (Math.Abs(abc3.z) < 0.4f) // 2번 z: 현재값 < 0.4f
+                    if (Math.Abs(abc3.z) < 0.4f && Math.Abs(abc3.z) > 0.0f) // 등 z: 0  < 현재값 < 0.4f
 
 
                     {
@@ -714,9 +745,9 @@ namespace Ardunity
 
 
 
-            if ((Math.Abs(abc4.z) < 0.15f || Math.Abs(abc5.z) < 0.15f)
-                 && (Math.Abs(abc4.z) > 0.0f || Math.Abs(abc5.z) > 0.0f))
-            // 다리운동조건:  0 < z < 0.15
+            if ((Math.Abs(abc4.z) < 0.2f || Math.Abs(abc5.z) < 0.2f)  // 오른쪽 다리 z : 0 < 현재값 < 0.2
+                 && (Math.Abs(abc4.z) > 0.0f || Math.Abs(abc5.z) > 0.0f)) // 왼쪽다리 z : 0 < 현재값 < 0.2
+            
             {                                                                // Math.Abs(abc4.z) > 0.0f 조건은 캘레브레이션이 되기 전에 첫번째 조건을 
                                                                              // 만족해서 애니메이션이 실행되는것을 방지하기 위함
                 waterrocket = true;
@@ -735,16 +766,16 @@ namespace Ardunity
 
             // 허리운동조건 : 0.1 < x < 0.4  and 0.3 < y < 0.6  왼쪽 오른쪽 같음
 
-            if ( 0.1f < Math.Abs(abc6.x) && Math.Abs(abc6.x) < 0.4f
-                   && 0.3f < Math.Abs(abc6.y) &&  Math.Abs(abc6.y) < 0.6f)
+            if (( 0.1f < Math.Abs(abc6.x) && Math.Abs(abc6.x) < 0.4f)
+                   &&( 0.3f < Math.Abs(abc6.y) &&  Math.Abs(abc6.y) < 0.6f))
                 {
-                    if ((abc6.x + abc6.y + abc6.z < -1.0f) || (abc6.x + abc6.y + abc6.z > 1.0f))  // 왼쪽
-                    {                                                                                                       // x+y+z >1 or x+y+z <-1
+                    if ((abc6.x + abc6.y + abc6.z < - 0.9f) || (abc6.x + abc6.y + abc6.z > 0.9f))  // 왼쪽
+                    {                                                                                                       // x+y+z > 0.9 or x+y+z < -0.9
                         leftback = true;
                         //animator.Play("abc6|Rope_2_Right_back", -1, 0);
                         
                     }
-                    else                                                          // 오른쪽조건 :  -1 < x+y+z < 1
+                    else                                                          // 오른쪽조건 :  -0.9 < x+y+z < 0.9
                     {
                         rightback = true;
                         //animator.Play("180725_makehuman_model|Rope_1_Left_back", -1, 0);

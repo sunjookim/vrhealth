@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.6320754, g: 0.623131, b: 0.623131, a: 1}
+  m_AmbientSkyColor: {r: 0.44644782, g: 0.44090188, b: 0.44090188, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -1254,7 +1254,6 @@ MonoBehaviour:
   sndPause: {fileID: 0}
   sndPauseButton: {fileID: 8300000, guid: 67b404e2b5dc9c04ca358bf99e77c0cf, type: 3}
   PauseButton: {fileID: 0}
-  done: 13
   _time: 0
 --- !u!82 &1694036729
 AudioSource:
