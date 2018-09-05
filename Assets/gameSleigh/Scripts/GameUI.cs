@@ -16,7 +16,10 @@ public class GameUI: MonoBehaviour
     public Text txtCount;
 
     public int corner;
+<<<<<<< HEAD
     public float startTime;
+=======
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
 
     //public float done = 13.0f; // 컨트롤러 초기화 영상 재생될 시간
 
@@ -26,7 +29,10 @@ public class GameUI: MonoBehaviour
         corner = 4;
         txtGameOverMs.text = "";
         txtCount.text = "";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
         float bestTime = PlayerPrefs.GetFloat("BestScore");
         if (bestTime < 20f) // 설마 20초안에 들어온 사람이 없을거니까 이 때는 최고 기록을 5분으로 초기화함
             bestTime = 300f;
@@ -112,7 +118,12 @@ public class GameUI: MonoBehaviour
         _time += Time.deltaTime; // 초
         int minute = (int)_time / 60;
         _timerText.text = minute.ToString();
+<<<<<<< HEAD
         if(corner > 0 && _time > startTime)
             ChangeScore(_time - startTime);
+=======
+        if(corner > 0)
+            ChangeScore(_time);
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
     }
 }

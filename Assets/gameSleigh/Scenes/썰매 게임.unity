@@ -85053,10 +85053,34 @@ MonoBehaviour:
       width: 113
       height: 18
     updated: 1
-  foundDevices: []
+  foundDevices:
+  - name: COM12
+    address: //./COM12
+    args: []
+  - name: COM13
+    address: //./COM13
+    args: []
+  - name: COM6
+    address: //./COM6
+    args: []
+  - name: COM7
+    address: //./COM7
+    args: []
+  - name: COM8
+    address: //./COM8
+    args: []
+  - name: COM9
+    address: //./COM9
+    args: []
+  - name: COM10
+    address: //./COM10
+    args: []
+  - name: COM11
+    address: //./COM11
+    args: []
   device:
-    name: 
-    address: 
+    name: COM13
+    address: //./COM13
     args: []
   OnOpen:
     m_PersistentCalls:
@@ -85258,10 +85282,34 @@ MonoBehaviour:
       width: 113
       height: 18
     updated: 1
-  foundDevices: []
+  foundDevices:
+  - name: COM12
+    address: //./COM12
+    args: []
+  - name: COM13
+    address: //./COM13
+    args: []
+  - name: COM6
+    address: //./COM6
+    args: []
+  - name: COM7
+    address: //./COM7
+    args: []
+  - name: COM8
+    address: //./COM8
+    args: []
+  - name: COM9
+    address: //./COM9
+    args: []
+  - name: COM10
+    address: //./COM10
+    args: []
+  - name: COM11
+    address: //./COM11
+    args: []
   device:
-    name: 
-    address: 
+    name: COM6
+    address: //./COM6
     args: []
   OnOpen:
     m_PersistentCalls:
@@ -85448,10 +85496,34 @@ MonoBehaviour:
       width: 113
       height: 18
     updated: 1
-  foundDevices: []
+  foundDevices:
+  - name: COM12
+    address: //./COM12
+    args: []
+  - name: COM13
+    address: //./COM13
+    args: []
+  - name: COM6
+    address: //./COM6
+    args: []
+  - name: COM7
+    address: //./COM7
+    args: []
+  - name: COM8
+    address: //./COM8
+    args: []
+  - name: COM9
+    address: //./COM9
+    args: []
+  - name: COM10
+    address: //./COM10
+    args: []
+  - name: COM11
+    address: //./COM11
+    args: []
   device:
-    name: 
-    address: 
+    name: COM8
+    address: //./COM8
     args: []
   OnOpen:
     m_PersistentCalls:
@@ -85638,10 +85710,34 @@ MonoBehaviour:
       width: 113
       height: 18
     updated: 1
-  foundDevices: []
+  foundDevices:
+  - name: COM12
+    address: //./COM12
+    args: []
+  - name: COM13
+    address: //./COM13
+    args: []
+  - name: COM6
+    address: //./COM6
+    args: []
+  - name: COM7
+    address: //./COM7
+    args: []
+  - name: COM8
+    address: //./COM8
+    args: []
+  - name: COM9
+    address: //./COM9
+    args: []
+  - name: COM10
+    address: //./COM10
+    args: []
+  - name: COM11
+    address: //./COM11
+    args: []
   device:
-    name: 
-    address: 
+    name: COM11
+    address: //./COM11
     args: []
   OnOpen:
     m_PersistentCalls:

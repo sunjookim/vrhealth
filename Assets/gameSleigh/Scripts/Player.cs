@@ -70,7 +70,30 @@ namespace Ardunity
             gameTime += Time.deltaTime; // 초
             if(gameTime > startTime)
             {
+<<<<<<< HEAD
                 if (Life <= 0) // 게임 오버 메시지 뜨게 함- 목숨을 다 소모했다고 함
+=======
+                UIObj.ChangeGameOver(0);
+                if (isCollEnemy) // 장애물이랑 부딪힘 - 제자리에서 뱅글돎, 반짝거림
+                {
+                    transform.Rotate(0, 20, 0);
+                    float flicker = Mathf.Abs(Mathf.Sin(Time.time * 10));
+                    lamp.material.color = originColor * flicker;
+                }
+            }
+            else // 아직 살아 있음
+            {
+                distinctionA snowsnow = GameObject.Find("사람").GetComponent<distinctionA>(); // 나중에 형이 바꿔줌
+                if (cornerCount != 5) // 코너를 다 돌지 않았으면 계속 코너를 따라가도록 함
+                {
+                    nvAgent.speed = nvSpeed; // 코너를 따라가는 속도
+                }
+                // 눈 이벤트 위치 조정
+                Vector3 vector3 = new Vector3(transform.position.x, transform.position.y + 30, transform.position.z);
+                snowing.transform.position = vector3;
+
+                if(isCollEnemy) // 장애물이랑 부딪힘 - 제자리에서 뱅글돎, 반짝거림
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
                 {
                     UIObj.ChangeGameOver(0);
                     if (isCollEnemy) // 장애물이랑 부딪힘 - 제자리에서 뱅글돎, 반짝거림
@@ -106,10 +129,17 @@ namespace Ardunity
                         // 회전반경 제한
                         if (x < -0.5f) x = -0.5f; if (x > 0.5f) x = 0.5f;
 
+<<<<<<< HEAD
                         Quaternion turn = Quaternion.Euler(0, x * 180 + 90 * (cornerCount - 1), 0);
                         transform.rotation = turn;
                         //transform.rotation = Quaternion.Slerp(transform.rotation, turn, 7 * Time.deltaTime); // 부드럽게 턴
                         transform.Translate(Vector3.forward * pSpeed); // 가속
+=======
+                        // 속도 제한
+                        if (pSpeed >= 0.3f) pSpeed = 0.3f;
+                        if (nvSpeed >= 3f) nvSpeed = 3f;
+                    }
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
 
                         if (!isBoost) // 부스터가 아니면 속도가 서서히 줆
                         {
@@ -118,11 +148,40 @@ namespace Ardunity
                         }
                         else // 부스터 상태면 속도가 붙는다.
                         {
+<<<<<<< HEAD
                             if (newEf) // 오브젝트가 할당 된 상태야 함, 부스터 이펙트 생성
+=======
+                            UIObj.ChangeCount((int)(countTime - Time.time));
+                            //if (Input.GetKeyDown(KeyCode.Q) && isSt3) // Time.time <= countTime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
+                            //{
+                            //    stepCtrl.StepOne();
+                            //    isSt1 = true;
+                            //    isSt3 = false;
+                            //    CountDown();
+                            //}
+                            //else if (Input.GetKeyDown(KeyCode.W) && isSt1)
+                            //{
+                            //    stepCtrl.StepTwo();
+                            //    isSt1 = false;
+                            //    isSt2 = true;
+                            //    CountDown();
+                            //}
+                            //else if (Input.GetKeyDown(KeyCode.E) && isSt2)
+                            //{
+                            //    stepCtrl.StepThree();
+                            //    isSt2 = false;
+                            //    isSt3 = true;
+                            //    isCountOk = false;
+                            //    Invoke("CountDown", 2f);
+                            //}
+                            /**** 밑에는 아두니티 쓰는거 *****/
+                            if (snowsnow.snow0)
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
                             {
                                 newEf.transform.position = transform.position;
                                 newEf.transform.Translate(new Vector3(0, 2, 0));
                             }
+<<<<<<< HEAD
 
                             pSpeed *= 1.2f;
                             nvSpeed *= 1.2f;
@@ -135,6 +194,9 @@ namespace Ardunity
                         if (isCountOk)
                         {
                             if (Time.time <= countTime) // 제한 시간안에 올바른 동작을 함
+=======
+                            else if (snowsnow.snow1)
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
                             {
                                 UIObj.ChangeCount((int)(countTime - Time.time));
                                 if (Input.GetKeyDown(KeyCode.Q) && isSt3) // Time.time <= countTime 나중에 이것도 추가 - 제한 시간안에 올바른 동작을 함
@@ -160,7 +222,11 @@ namespace Ardunity
                                     Invoke("CountDown", 2f);
                                 }
                             }
+<<<<<<< HEAD
                             else // 동작을 수행하지 못함 : 목숨 깎이고 실패하는 애니메이션 - 미끄러지는 애니메이션 말고, 속도는 그대로
+=======
+                            else if (snowsnow.snow2)
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
                             {
                                 UIObj.ChangeCount(0);
                                 isCountOk = false;
@@ -174,8 +240,25 @@ namespace Ardunity
                                 Invoke("CountDown", 4f);
                             }
                         }
+<<<<<<< HEAD
+=======
+                        else // 동작을 수행하지 못함 : 목숨 깎이고 실패하는 애니메이션 - 미끄러지는 애니메이션 말고, 속도는 그대로
+                        {
+                            UIObj.ChangeCount(0);
+                            isCountOk = false;
+                            Debug.Log("동작 못함 ㅜㅜ : life" + Life + "번 깎임");
+                            Destroy(GameObject.Find("life" + Life));
+                            Life--;
+                            
+                            stepCtrl.StepFail();
+                            Invoke("isCollFalse", 4f); // 2초 후에 정상
+                            Clear();
+                            Invoke("CountDown", 4f);
+                        }
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
                     }
 
+<<<<<<< HEAD
 
                     /**** 밑에는 아두니티 쓰는거 *****/
                     //if (snowsnow.snow0)
@@ -191,6 +274,10 @@ namespace Ardunity
                     //    stepCtrl.StepThree();
                     //}
                 }
+=======
+                
+
+>>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
             }
         }
 
@@ -274,7 +361,7 @@ namespace Ardunity
 
         void CountDown() // 동작을 실행하기 위해 시간을 초기화
         {
-            countTime = Time.time + 6f; // 5초 추가
+            countTime = Time.time + 60f; // 5초 추가
             isCountOk = true;
         }
 

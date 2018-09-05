@@ -22,7 +22,11 @@ public class RocketGameUI : MonoBehaviour {
         int minute = (int)time / 60;
         timerText.text = (minute.ToString());
 
-        //19
+        // 컨초_허리 영상 끝나는 시간이 되면 영상 삭제하기
+        if(time >= 19)
+        {
+            Destroy(GameObject.FindWithTag("Initialize")); // 컨초_허리 영상 제거하기
+        }
     }
 
 }
