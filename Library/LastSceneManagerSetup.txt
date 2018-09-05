@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< HEAD
 - path: "Assets/gameSleigh/Scenes/\uC370\uB9E4 \uAC8C\uC784.unity"
-=======
-- path: Assets/gameRope/Scene/manual.unity
->>>>>>> 6675901ed4a85f0086dbe0197b50b4ce6cc10694
   isLoaded: 1
   isActive: 1
