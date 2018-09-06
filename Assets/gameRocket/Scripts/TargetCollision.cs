@@ -64,7 +64,6 @@ namespace Ardunity
                 else
                 {
                     Destroy(this.gameObject);
-                    //추가된 부분
                     mainCamera.GetComponent<GameDirector>().setPlusPoint(50);
                 }
 

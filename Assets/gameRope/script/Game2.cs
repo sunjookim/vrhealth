@@ -511,10 +511,10 @@ namespace Ardunity
 
             } else if(other.gameObject.tag == "rotation_02") // 두 번째 회전
             {
-                transform.rotation = Quaternion.Euler(0, -65.1f, 0); // 플레이어 회전
+                transform.rotation = Quaternion.Euler(0, -65.5f, 0); // 플레이어 회전
             } else if(other.gameObject.tag == "rotation_03") // 세 번째 회전
             {
-                transform.rotation = Quaternion.Euler(0, -93.7f, 0); // 플레이어 회전
+                transform.rotation = Quaternion.Euler(0, -94f, 0); // 플레이어 회전
             } else if(other.gameObject.tag == "rotation_04") // 네 번째 회전
             {
                 transform.rotation = Quaternion.Euler(0, 1.51f, 0); // 플레이어 회전
@@ -537,7 +537,7 @@ namespace Ardunity
                 if(isDeath == true)
                 {
                     // 별 제거
-                    
+                    /*
                     if (animator1.GetBool("slopeFail") == true)
                     {
                         Destroy(GameObject.FindWithTag("Life" + Life));
@@ -545,7 +545,7 @@ namespace Ardunity
 
                         isFail = true; // 캐릭터 깜박이기 시작
                     }
-                    
+                    */
                 }
 
                 // 안내문 초기화
@@ -641,6 +641,7 @@ namespace Ardunity
             _timerText.text = (minute.ToString());
 
 
+            /*
             // 컨초_허리 영상 끝나면 캐릭터 출발시키고 이동하기
             if(BBB.count2 >= 300)
             {
@@ -652,10 +653,17 @@ namespace Ardunity
                 // 상태바 이동
                 float fMove2 = Time.deltaTime * speed;
                 GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
+            
             }
+            */
 
-            
-            
+            PlayerMove = Time.deltaTime * PlayerSpeed;
+            transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
+
+            // 상태바 이동
+            float fMove2 = Time.deltaTime * speed;
+            GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
+
 
 
             if (isLeftSlope == true) //왼쪽 슬로프에 도달

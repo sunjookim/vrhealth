@@ -25,10 +25,8 @@ namespace Ardunity
         public GameObject player;
         private Animator animator;
 
-        // 추가한 부분
-        public int Life;
-        public GameObject life_Img1, life_Img2, life_Img3, life_Img4;
-        public GameObject[] LifeSet;
+        private int Life;
+        private GameObject life_img1, life_img2, life_img3, life_img4;
 
         // Use this for initialization
         void Start() {
@@ -45,22 +43,21 @@ namespace Ardunity
             animator = player.GetComponent<Animator>();
             animator.SetBool("kickstate", true);
 
-            // 추가한 부분
             Life = 4;
-            life_Img1 = GameObject.FindWithTag("Life1");
-            life_Img2 = GameObject.FindWithTag("Life2");
-            life_Img3 = GameObject.FindWithTag("Life3");
-            life_Img4 = GameObject.FindWithTag("Life4");
+            life_img1 = GameObject.FindWithTag("Life1");
+            life_img2 = GameObject.FindWithTag("Life2");
+            life_img3 = GameObject.FindWithTag("Life3");
+            life_img4 = GameObject.FindWithTag("Life4");
         }
 
         // Update is called once per frame
         void Update() {
             timer_game += Time.deltaTime;
-            if(timer_game >= 2)
+            if (timer_game >= 60)
             {
-                if(Life <= 0)
+                if (Life <= 0)
                 {
-                    // 게임 끝
+                    //게임 끝
                 }
                 else
                 {
@@ -118,20 +115,15 @@ namespace Ardunity
 
                             try
                             {
-                                //바꾼 부분
                                 Launch(target.transform.position, speed);
-                                //바꾼 부분 끝
                             }
                             catch (Exception e)
                             {
                                 target = GameObject.Find("fake_target");
-                                //바꾼 부분
                                 Launch(target.transform.position, speed);
-                                //바꾼 부분
                             }
 
-                            //숫자 4를 숫자 5로
-                            if (exerciseRight == false && timer_check < 5) // 실패 부분
+                            if (exerciseRight == false && timer_check < 5)
                             {
                                 Destroy(GameObject.Find("Life" + Life));
                                 Life--;
@@ -159,7 +151,7 @@ namespace Ardunity
                         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
                     }
 
-                    if (timer >= 5)
+                    if (timer >= 6)
                     {
                         mainCameraOn();
                     }
@@ -170,8 +162,6 @@ namespace Ardunity
                     }
                 }
             }
-            
-            
         }
 
         private void Launch(Vector3 posit, float speed)
