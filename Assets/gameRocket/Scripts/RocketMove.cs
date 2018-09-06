@@ -28,6 +28,10 @@ namespace Ardunity
         private int Life;
         private GameObject life_img1, life_img2, life_img3, life_img4;
 
+        /**추가된 부분***/
+        private AudioSource audioSource; // 효과음 재생용 객체
+        private RocketGameUI gameUI;    // UI스크립트 객체
+
         // Use this for initialization
         void Start() {
             angle = 30f;
@@ -48,12 +52,15 @@ namespace Ardunity
             life_img2 = GameObject.FindWithTag("Life2");
             life_img3 = GameObject.FindWithTag("Life3");
             life_img4 = GameObject.FindWithTag("Life4");
+
+            // 추가된 부분
+            gameUI = GameObject.Find("GameUI").GetComponent<RocketGameUI>(); // 객체 초기화
         }
 
         // Update is called once per frame
         void Update() {
             timer_game += Time.deltaTime;
-            if (timer_game >= 60)
+            if (timer_game >= 6)   // 초기화 과정 끝나고 게임 시작
             {
                 if (Life <= 0)
                 {
@@ -67,7 +74,7 @@ namespace Ardunity
                     if(Input.GetKey(KeyCode.Space))
                     {
                         exerciseRight = true;
-                        timer_check = timer;
+                        timer_check = timer; 
 
                         if (mainCamera.GetComponent<GameDirector>().getX() > -0.137 && mainCamera.GetComponent<GameDirector>().getX() < -0.1258)
                             target = GameObject.FindWithTag("target");
@@ -93,7 +100,7 @@ namespace Ardunity
                         rocketLaunchReady = true;
                     }
 
-                    if (rocketLaunchReady)
+                    if (rocketLaunchReady) // 로켓 발사 준비 완료
                     {
                         timer += Time.deltaTime;
                         Debug.Log(timer);
@@ -107,12 +114,14 @@ namespace Ardunity
                         {
                             animator.SetBool("kickstate", false);
                             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+                            /**추가된 부분**/
+                            audioSource = GameObject.Find("StartSound").GetComponent<AudioSource>();
+                            audioSource.Play();
                         }
 
                         if (animator.GetBool("kickstate") == false && animator.GetBool("gamestate") == true)
                         {
                             subCameraOn();
-
                             try
                             {
                                 Launch(target.transform.position, speed);
@@ -123,13 +132,18 @@ namespace Ardunity
                                 Launch(target.transform.position, speed);
                             }
 
-                            if (exerciseRight == false && timer_check < 5)
+                            if (exerciseRight == false && timer_check < 5) // 5초 미만이면 실패
                             {
                                 Destroy(GameObject.Find("Life" + Life));
                                 Life--;
                                 //로켓을 폭발시키자
                                 GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
                                 rocketLaunchReady = false;
+
+                                /**추가된 부분**/
+                                audioSource = GameObject.Find("FailSound").GetComponent<AudioSource>();
+                                audioSource.Play(); // 효과음 재생
+                                gameUI.ChangeMs(0); // 실패 문구 띄움
                             }
                             //else if (exerciseRight == false && timer_check >= 4 && timer_check <= 6)
                             //{
