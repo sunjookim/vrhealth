@@ -16,10 +16,12 @@ public class GameDirector : MonoBehaviour {
     private bool random_check;
     private int random_number;
     private List<int> random_array = new List<int>();
+    private int point; //점수
 
     // Use this for initialization
     void Start () {
-        random_check = false;        
+        random_check = false;
+        point = 0;
     }
 	
 	// Update is called once per frame
@@ -110,5 +112,21 @@ public class GameDirector : MonoBehaviour {
     public int getRandom_number()
     {
         return random_number;
+    }
+
+    //추가한 부분
+    public int getPoint()
+    {
+        return point;
+    }
+
+    public void setPoint(int po)
+    {
+        point = po;
+    }
+
+    public void setPlusPoint(int po)
+    {
+        point = point + po;
     }
 }
