@@ -12,7 +12,7 @@ public class RocketGameUI : MonoBehaviour {
     void Start()
     {
         // 초기화 영상 재생
-        GameObject obj = Instantiate(Resources.Load("InitializingRocket")) as GameObject;
+        //GameObject obj = Instantiate(Resources.Load("InitializingRocket")) as GameObject;
     }
 
     // Update is called once per frame

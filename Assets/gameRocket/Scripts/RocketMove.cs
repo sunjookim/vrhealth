@@ -25,6 +25,9 @@ namespace Ardunity
         public GameObject player;
         private Animator animator;
 
+        private int Life;
+        private GameObject life_img1, life_img2, life_img3, life_img4;
+
         // Use this for initialization
         void Start() {
             angle = 30f;
@@ -39,113 +42,126 @@ namespace Ardunity
             player_init_pos = player.transform.position;
             animator = player.GetComponent<Animator>();
             animator.SetBool("kickstate", true);
+
+            Life = 4;
+            life_img1 = GameObject.FindWithTag("Life1");
+            life_img2 = GameObject.FindWithTag("Life2");
+            life_img3 = GameObject.FindWithTag("Life3");
+            life_img4 = GameObject.FindWithTag("Life4");
         }
 
         // Update is called once per frame
         void Update() {
             timer_game += Time.deltaTime;
-            if(timer_game >= 60)
+            if (timer_game >= 60)
             {
-                //운동을 수행한다면(발을 올린다면) true, 발을 거의 내린다면 false;
-                distinctionC CCC = GameObject.Find("RocketControl").GetComponent<distinctionC>(); // 1번
-                if (CCC.waterrocket == true)
-                //if(Input.GetKey(KeyCode.Space))
+                if (Life <= 0)
                 {
-                    exerciseRight = true;
-                    timer_check = timer;
-
-                    if (mainCamera.GetComponent<GameDirector>().getX() > -0.137 && mainCamera.GetComponent<GameDirector>().getX() < -0.1258)
-                        target = GameObject.FindWithTag("target");
-                    else if (mainCamera.GetComponent<GameDirector>().getX() > -0.1128 && mainCamera.GetComponent<GameDirector>().getX() < -0.0946)
-                        target = GameObject.FindWithTag("target (1)");
-                    else if (mainCamera.GetComponent<GameDirector>().getX() > -0.027 && mainCamera.GetComponent<GameDirector>().getX() < -0.0012)
-                        target = GameObject.FindWithTag("target (2)");
-                    else if (mainCamera.GetComponent<GameDirector>().getX() > 0.063 && mainCamera.GetComponent<GameDirector>().getX() < 0.0894)
-                        target = GameObject.FindWithTag("target (3)");
-                    else
-                        target = GameObject.Find("fake_target");
-
-                    animator.SetBool("gamestate", true);
+                    //게임 끝
                 }
                 else
                 {
-                    exerciseRight = false;
-                }
-
-                //운동이 정상적으로 시행된다면, 로켓의 준비 및 발사
-                if (exerciseRight)
-                {
-                    rocketLaunchReady = true;
-                }
-
-                if (rocketLaunchReady)
-                {
-                    timer += Time.deltaTime;
-                    Debug.Log(timer);
-
-                    if (animator.GetBool("kickstate") && animator.GetBool("gamestate"))
+                    //운동을 수행한다면(발을 올린다면) true, 발을 거의 내린다면 false;
+                    distinctionC CCC = GameObject.Find("RocketControl").GetComponent<distinctionC>(); // 1번
+                    //if (CCC.waterrocket == true)
+                    if(Input.GetKey(KeyCode.Space))
                     {
-                        activeCameraOn();
-                    }
+                        exerciseRight = true;
+                        timer_check = timer;
 
-                    if (animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.kick") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.83f)
-                    {
-                        animator.SetBool("kickstate", false);
-                        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-                    }
-
-                    if (animator.GetBool("kickstate") == false && animator.GetBool("gamestate") == true)
-                    {
-                        subCameraOn();
-
-                        try
-                        {
-                            Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
-                        }
-                        catch (Exception e)
-                        {
+                        if (mainCamera.GetComponent<GameDirector>().getX() > -0.137 && mainCamera.GetComponent<GameDirector>().getX() < -0.1258)
+                            target = GameObject.FindWithTag("target");
+                        else if (mainCamera.GetComponent<GameDirector>().getX() > -0.1128 && mainCamera.GetComponent<GameDirector>().getX() < -0.0946)
+                            target = GameObject.FindWithTag("target (1)");
+                        else if (mainCamera.GetComponent<GameDirector>().getX() > -0.027 && mainCamera.GetComponent<GameDirector>().getX() < -0.0012)
+                            target = GameObject.FindWithTag("target (2)");
+                        else if (mainCamera.GetComponent<GameDirector>().getX() > 0.063 && mainCamera.GetComponent<GameDirector>().getX() < 0.0894)
+                            target = GameObject.FindWithTag("target (3)");
+                        else
                             target = GameObject.Find("fake_target");
-                            Launch(new Vector3(target.transform.position.x, target.transform.position.y + 8, target.transform.position.z), speed); //target + 알파 로 보냄
+
+                        animator.SetBool("gamestate", true);
+                    }
+                    else
+                    {
+                        exerciseRight = false;
+                    }
+
+                    //운동이 정상적으로 시행된다면, 로켓의 준비 및 발사
+                    if (exerciseRight)
+                    {
+                        rocketLaunchReady = true;
+                    }
+
+                    if (rocketLaunchReady)
+                    {
+                        timer += Time.deltaTime;
+                        Debug.Log(timer);
+
+                        if (animator.GetBool("kickstate") && animator.GetBool("gamestate"))
+                        {
+                            activeCameraOn();
                         }
 
-                        if (exerciseRight == false && timer_check < 4)
+                        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Base Layer.kick") && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.83f)
                         {
-                            //로켓을 폭발시키자
-                            GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
-                            rocketLaunchReady = false;
+                            animator.SetBool("kickstate", false);
+                            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                         }
-                        else if (exerciseRight == false && timer_check >= 4 && timer_check <= 6)
+
+                        if (animator.GetBool("kickstate") == false && animator.GetBool("gamestate") == true)
                         {
-                            Launch(target.transform.position, speed);
+                            subCameraOn();
+
+                            try
+                            {
+                                Launch(target.transform.position, speed);
+                            }
+                            catch (Exception e)
+                            {
+                                target = GameObject.Find("fake_target");
+                                Launch(target.transform.position, speed);
+                            }
+
+                            if (exerciseRight == false && timer_check < 5)
+                            {
+                                Destroy(GameObject.Find("Life" + Life));
+                                Life--;
+                                //로켓을 폭발시키자
+                                GameObject newExplosion = Instantiate(explosion, this.transform.position, this.transform.rotation) as GameObject;
+                                rocketLaunchReady = false;
+                            }
+                            //else if (exerciseRight == false && timer_check >= 4 && timer_check <= 6)
+                            //{
+                            //    Launch(target.transform.position, speed);
+                            //}
                         }
                     }
-                }
-                else
-                {
-                    mainCameraOn();
-                    transform.position = rocket_init_pos;
-                    transform.rotation = rocket_init_rot;
-                    player.transform.position = player_init_pos;
-                    timer = 0;
-                    target = GameObject.FindWithTag("target");
-                    exerciseRight = false;
-                    animator.SetBool("kickstate", true);
-                    animator.SetBool("gamestate", false);
-                    GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
-                }
+                    else
+                    {
+                        mainCameraOn();
+                        transform.position = rocket_init_pos;
+                        transform.rotation = rocket_init_rot;
+                        player.transform.position = player_init_pos;
+                        timer = 0;
+                        target = GameObject.FindWithTag("target");
+                        exerciseRight = false;
+                        animator.SetBool("kickstate", true);
+                        animator.SetBool("gamestate", false);
+                        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+                    }
 
-                if (timer >= 6)
-                {
-                    mainCameraOn();
-                }
+                    if (timer >= 6)
+                    {
+                        mainCameraOn();
+                    }
 
-                if (timer >= 10)
-                {
-                    rocketLaunchReady = false;
+                    if (timer >= 10)
+                    {
+                        rocketLaunchReady = false;
+                    }
                 }
             }
-            
-            
         }
 
         private void Launch(Vector3 posit, float speed)

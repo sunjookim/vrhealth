@@ -64,6 +64,7 @@ namespace Ardunity
                 else
                 {
                     Destroy(this.gameObject);
+                    mainCamera.GetComponent<GameDirector>().setPlusPoint(50);
                 }
 
                 mainCamera.GetComponent<GameDirector>().setRandom_check(false);
