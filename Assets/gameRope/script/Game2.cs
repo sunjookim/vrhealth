@@ -658,7 +658,7 @@ namespace Ardunity
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
 
-
+        
             /*
             // 컨초_허리 영상 끝나면 캐릭터 출발시키고 이동하기
             if(BBB.count2 >= 300)
@@ -674,14 +674,14 @@ namespace Ardunity
             
             }
             */
-
+            
             PlayerMove = Time.deltaTime * PlayerSpeed;
             transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
 
             // 상태바 이동
             float fMove2 = Time.deltaTime * speed;
             GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
-
+            
 
 
             if (isLeftSlope == true) //왼쪽 슬로프에 도달
