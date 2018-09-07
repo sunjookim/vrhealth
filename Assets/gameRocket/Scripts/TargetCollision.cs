@@ -61,7 +61,7 @@ namespace Ardunity
 
                     //GameObject newtarget = Instantiate(target, this.transform.position, this.transform.rotation) as GameObject;
                 }
-                else
+                else // 맞춘 타겟과 초록 점이 일치할 때
                 {
                     Destroy(this.gameObject);
                     mainCamera.GetComponent<GameDirector>().setPlusPoint(50);
