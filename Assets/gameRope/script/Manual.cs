@@ -20,10 +20,17 @@ public class Manual : MonoBehaviour {
 
     public void Manual_Leg()
     {
-        //GameObject obj = Instantiate(Resources.Load("leg")) as GameObject;
 
         isPlaying = 1;
 
+        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+
+
+        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(true);
+
+        /*
         Destroy(GameObject.Find("arm(Clone)"));
         Destroy(GameObject.Find("waist(Clone)"));
         Destroy(GameObject.Find("leg(Clone)"));
@@ -36,14 +43,22 @@ public class Manual : MonoBehaviour {
         //LegButton.interactable = false;
 
         //OnGUI();
+        */
     }
 
     public void Manual_Waist()
     {
-        //GameObject obj = Instantiate(Resources.Load("waist")) as GameObject;
-
+        
         isPlaying = 1;
 
+        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+
+
+        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(true);
+
+        /*
         Destroy(GameObject.Find("arm(Clone)"));
         Destroy(GameObject.Find("waist(Clone)"));
         Destroy(GameObject.Find("leg(Clone)"));
@@ -55,6 +70,7 @@ public class Manual : MonoBehaviour {
         //LegButton.interactable = false;
 
         //OnGUI();
+        */
     }
 
     public void Manual_Arm()
@@ -63,6 +79,14 @@ public class Manual : MonoBehaviour {
 
         isPlaying = 1;
 
+        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+
+
+        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(true);
+
+        /*
         Destroy(GameObject.Find("arm(Clone)"));
         Destroy(GameObject.Find("waist(Clone)"));
         Destroy(GameObject.Find("leg(Clone)"));
@@ -74,6 +98,7 @@ public class Manual : MonoBehaviour {
         //LegButton.interactable = false;
 
         //OnGUI();
+        */
     }
 
     /*

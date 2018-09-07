@@ -164,6 +164,48 @@ public class buttonClick : MonoBehaviour {
                     gazeTimer = 0;
                 }
             }
+
+            //Manual_Arm()
+            if (hit.transform.tag == "button_manual_arm")
+            {
+                hpgaze.SetActive(true);
+                gazeTimer += 1.0f / 3.0f * Time.deltaTime;
+                hpgaze.GetComponent<Image>().fillAmount -= 0.33f * Time.deltaTime;
+                Debug.Log(gazeTimer);
+                if (gazeTimer >= 1)
+                {
+                    GetComponent<Manual>().Manual_Arm();
+                    gazeTimer = 0;
+                }
+            }
+
+            //Manual_Leg()
+            if (hit.transform.tag == "button_manual_leg")
+            {
+                hpgaze.SetActive(true);
+                gazeTimer += 1.0f / 3.0f * Time.deltaTime;
+                hpgaze.GetComponent<Image>().fillAmount -= 0.33f * Time.deltaTime;
+                Debug.Log(gazeTimer);
+                if (gazeTimer >= 1)
+                {
+                    GetComponent<Manual>().Manual_Leg();
+                    gazeTimer = 0;
+                }
+            }
+
+            //Manual_Waist()
+            if (hit.transform.tag == "button_manual_waist")
+            {
+                hpgaze.SetActive(true);
+                gazeTimer += 1.0f / 3.0f * Time.deltaTime;
+                hpgaze.GetComponent<Image>().fillAmount -= 0.33f * Time.deltaTime;
+                Debug.Log(gazeTimer);
+                if (gazeTimer >= 1)
+                {
+                    GetComponent<Manual>().Manual_Waist();
+                    gazeTimer = 0;
+                }
+            }
         }
         else
         {

@@ -517,7 +517,7 @@ namespace Ardunity
                 transform.rotation = Quaternion.Euler(0, -94f, 0); // 플레이어 회전
             } else if(other.gameObject.tag == "rotation_04") // 네 번째 회전
             {
-                transform.rotation = Quaternion.Euler(0, 1.51f, 0); // 플레이어 회전
+                transform.rotation = Quaternion.Euler(0, 1.3f, 0); // 플레이어 회전
             }
 
 
@@ -537,7 +537,7 @@ namespace Ardunity
                 if(isDeath == true)
                 {
                     // 별 제거
-                    /*
+                    
                     if (animator1.GetBool("slopeFail") == true)
                     {
                         Destroy(GameObject.FindWithTag("Life" + Life));
@@ -545,7 +545,7 @@ namespace Ardunity
 
                         isFail = true; // 캐릭터 깜박이기 시작
                     }
-                    */
+                    
                 }
 
                 // 안내문 초기화
@@ -567,6 +567,10 @@ namespace Ardunity
                 animator1.SetBool("IsSlopeRight", false);
                 animator2.SetBool("IsSlopeLeft", false);
                 animator2.SetBool("IsSlopeRight", false);
+                animator1.SetBool("LeftBack", false);
+                animator1.SetBool("RightBack", false);
+
+                isDeath = false;
 
                 isSlopeGoTime = false;
                 SlopeGoTime = 4.0f;
@@ -611,6 +615,19 @@ namespace Ardunity
 
         void Update()
         {
+            
+            // 키보드로 테스트
+            /*
+            if(Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                leftGood = true;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                rightGood = true;
+            }
+            */
+            
             // 마우스 커서로 시선 회전
             v3 = new Vector3(0, Input.GetAxis("Mouse X"), 0);
             GameObject.FindWithTag("MainCamera").transform.Rotate(v3 * turnspeed);
@@ -633,6 +650,7 @@ namespace Ardunity
             print(Controller.rightback);
             print("slopeGoodtime: " + slopeGoodtime);
             print("isSlope: " + isSlope);
+            print("SlopeGoTime: " + SlopeGoTime);
 
 
             // 진행 시간 표시
@@ -640,7 +658,7 @@ namespace Ardunity
             int minute = (int)_time / 60;
             _timerText.text = (minute.ToString());
 
-
+        
             /*
             // 컨초_허리 영상 끝나면 캐릭터 출발시키고 이동하기
             if(BBB.count2 >= 300)
@@ -656,14 +674,14 @@ namespace Ardunity
             
             }
             */
-
+            
             PlayerMove = Time.deltaTime * PlayerSpeed;
             transform.Translate(Vector3.forward * PlayerMove); // 플레이어 이동
 
             // 상태바 이동
             float fMove2 = Time.deltaTime * speed;
             GameObject.FindGameObjectWithTag("barPlayer").transform.Translate(Vector3.right * fMove2);
-
+            
 
 
             if (isLeftSlope == true) //왼쪽 슬로프에 도달
@@ -707,14 +725,15 @@ namespace Ardunity
             // ((int)SlopeGoTime == 0 && isNotSlope == false) 
              if((int)SlopeGoTime == 0)
             {
-                if(slopeGoodtime >= 3.0f)
+                if(slopeGoodtime >= 2.0f) // 올바른 동작 3초를 채웠다면
                 {
                     animator1.SetBool("slopeFail", false); // 시간 구간 내에서 true가 되므로, 빠져나갈 때 바꿔줘야 함
 
-                    if(isLeftSlope == true)
+                    if(isLeftSlope == true) // 왼쪽 기울이기 동작 구간이라면
                     {
                         animator1.SetBool("LeftBack", true); // 성공 동작
-                    } else if(isRightSlope == true)
+                    }
+                    else if(isRightSlope == true) // 오른쪽 기울이기 동작 구간이라면
                     {
                         animator1.SetBool("RightBack", true); // 성공 동작
                     }
@@ -728,7 +747,7 @@ namespace Ardunity
 
                     txtLifeReason.text = "※ 동작을 좀 더 오랫동안 해주세요!"; // 별이 깎인 이유 출력
                 }
-            } else if(SlopeGoTime <= -2.1f)
+            } else if(SlopeGoTime <= -1.5f)
             {
                 PlayerSpeed = 4;
             }

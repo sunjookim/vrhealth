@@ -75,6 +75,9 @@ TagManager:
   - button_backgame
   - button_replaygame1
   - button_replaygame3
+  - button_manual_leg
+  - button_manual_waist
+  - button_manual_arm
   layers:
   - Default
   - TransparentFX
