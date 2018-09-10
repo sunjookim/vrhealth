@@ -23,12 +23,12 @@ public class Manual : MonoBehaviour {
 
         isPlaying = 1;
 
-        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("leg").gameObject.SetActive(false);
 
 
-        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(true);
+        GameObject.Find("movie").transform.Find("leg").gameObject.SetActive(true);
 
         /*
         Destroy(GameObject.Find("arm(Clone)"));
@@ -51,12 +51,12 @@ public class Manual : MonoBehaviour {
         
         isPlaying = 1;
 
-        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("leg").gameObject.SetActive(false);
 
 
-        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(true);
+        GameObject.Find("movie").transform.Find("waist").gameObject.SetActive(true);
 
         /*
         Destroy(GameObject.Find("arm(Clone)"));
@@ -79,12 +79,12 @@ public class Manual : MonoBehaviour {
 
         isPlaying = 1;
 
-        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("waist").gameObject.SetActive(false);
-        GameObject.Find("movie").transform.FindChild("leg").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("arm").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("waist").gameObject.SetActive(false);
+        GameObject.Find("movie").transform.Find("leg").gameObject.SetActive(false);
 
 
-        GameObject.Find("movie").transform.FindChild("arm").gameObject.SetActive(true);
+        GameObject.Find("movie").transform.Find("arm").gameObject.SetActive(true);
 
         /*
         Destroy(GameObject.Find("arm(Clone)"));
