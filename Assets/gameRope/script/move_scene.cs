@@ -10,14 +10,11 @@ using UnityEngine.Video; // 초기화 영상 제어
  * 0 : 메인(Main)
  * 1 : 게임 선택 메뉴(Menu)
  * 2 : 매뉴얼(manual)
- * 3 : 외줄타기 게임 설명(howto_game_2)
- * 4 : 외줄타기 게임(game_2)
- * 5 : 성공화면(Success)
- * 6 : 실패화면(Fail)
- * 7 : 물로켓 게임(WaterRocket)
- * 8 : 썰매 게임(썰매 게임)
- * 9 : 썰매 게임 방법(썰매 게임 방법)
- * 10 : 물로켓 게임 방법(WaterRocket_howto)
+ * 3 : 외줄타기 게임(game_2)
+ * 4 : 성공화면(Success)
+ * 5 : 실패화면(Fail)
+ * 6 : 물로켓 게임(WaterRocket)
+ * 7 : 썰매 게임(썰매 게임)
  */
 
 
@@ -28,9 +25,8 @@ public class move_scene : MonoBehaviour {
 
     public Button PauseButton; // 일시정지 버튼
     //int isInitializing = 0; // 초기화 중인지 검사
-    //public float done = 20f; // 컨트롤러 초기화 영상 재생될 시간
     public float _time = 0.0f; // 타이머 변수 초기화
-    
+
 
     // 메인 화면
     public void SceneChange1()
@@ -55,12 +51,6 @@ public class move_scene : MonoBehaviour {
         SceneManager.LoadScene("썰매 게임");
     }
 
-    // 외줄타기 허리운동게임 선택 버튼(게임 방법부터 보기)
-    public void SceneToGame2()
-    {
-        SceneManager.LoadScene("howto_game_2");
-    }
-
     // 외줄타기 허리운동게임 선택 버튼(게임 시작부터 하기)
     public void SceneToGame2_Play()
     {
@@ -70,6 +60,23 @@ public class move_scene : MonoBehaviour {
     public void SceneToGame3()
     {
         SceneManager.LoadScene("WaterRocket");
+    }
+
+    // 재시작 버튼
+    public void ReStart()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 3) // 외줄타기
+        {
+
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 6) // 물로켓
+        {
+
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 7) // 썰매
+        {
+
+        }
     }
 
     // 종료 버튼 기능
@@ -85,14 +92,6 @@ public class move_scene : MonoBehaviour {
 
     public void Pause()
     {
-        if(SceneManager.GetActiveScene().buildIndex == 4)
-        {
-            GetComponent<AudioSource>().Pause(); // 배경음 일시정지
-        }
-        
-
-        AudioSource.PlayClipAtPoint(sndPause, transform.position); // 효과음 출력
-
         /*
         if (null != GameObject.FindWithTag("Initialize"))
         {
@@ -105,32 +104,38 @@ public class move_scene : MonoBehaviour {
         PauseButton.interactable = false;
 
         // 화면을 어둡게 한다
-        Light light = GameObject.FindWithTag("Light").GetComponent<Light>();
-        light.intensity = -3; // -1로 할 수록 밝아짐
+        //Light light = GameObject.FindWithTag("Light").GetComponent<Light>();
+        //light.intensity = -3; // -1로 할 수록 밝아짐
+
 
         // 화면을 정지시킨다 (초기화 영상 나오고 있는 경우는 적용되지 않음)
-        Time.timeScale = 0; // 일시정지
+        //Time.timeScale = 0; // 일시정지
 
-        if(SceneManager.GetActiveScene().buildIndex == 8) // 썰매 게임
+
+        if(SceneManager.GetActiveScene().buildIndex == 7) // 썰매 게임
         {
-            GameObject.Find("Game_UI").transform.Find("pauseMenu").gameObject.SetActive(true);
-        } else if(SceneManager.GetActiveScene().buildIndex == 4) // 외줄타기 게임
+            GameObject.Find("Game_UI").transform.Find("PauseMenu").gameObject.SetActive(true);
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 3) // 외줄타기 게임
         {
+            GetComponent<AudioSource>().Pause(); // 배경음 일시정지
+
+            AudioSource.PlayClipAtPoint(sndPause, transform.position); // 효과음 출력
+
             GameObject.Find("movingPerson").transform.Find("PauseMenu").gameObject.SetActive(true);
-        } else if(SceneManager.GetActiveScene().buildIndex == 7) // 물로켓 게임
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 6) // 물로켓 게임
         {
             GameObject.Find("GameUI").transform.Find("PauseMenu").gameObject.SetActive(true);
         }
 
     } 
 
+    // 메뉴닫기 버튼
     public void pause_GoOn()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 4)
-        {
-            GetComponent<AudioSource>().UnPause();
-        }
-            
+
+        GetComponent<AudioSource>().UnPause(); // 배경음 다시 재생
 
         /*
         if (isInitializing == 1) // 초기화 중이었다면
@@ -148,35 +153,39 @@ public class move_scene : MonoBehaviour {
         }
         */
 
-        if (SceneManager.GetActiveScene().buildIndex == 8)
+        if (SceneManager.GetActiveScene().buildIndex == 7)
         {
             GameObject.Find("Game_UI").transform.Find("pauseMenu").gameObject.SetActive(false);
-        } else if (SceneManager.GetActiveScene().buildIndex == 4)
+        }
+        else if (SceneManager.GetActiveScene().buildIndex == 3) // 외줄타기 게임
         {
+
             GameObject.Find("movingPerson").transform.Find("PauseMenu").gameObject.SetActive(false);
-        } else if(SceneManager.GetActiveScene().buildIndex == 7)
+        }
+        else if(SceneManager.GetActiveScene().buildIndex == 6)
         {
             GameObject.Find("GameUI").transform.Find("PauseMenu").gameObject.SetActive(false);
         }
             
-
+        /*
         PauseButton.interactable = true;
         Light light = GameObject.FindWithTag("Light").GetComponent<Light>();
 
 
         // 라이트 다시 밝게 함
-        if(SceneManager.GetActiveScene().buildIndex == 8)
+        if(SceneManager.GetActiveScene().buildIndex == 7)
         {
             light.intensity = +0.5f;
         }
-        else if(SceneManager.GetActiveScene().buildIndex == 4 || SceneManager.GetActiveScene().buildIndex == 7)
+        else if(SceneManager.GetActiveScene().buildIndex == 3 || SceneManager.GetActiveScene().buildIndex == 6)
         {
 
             light.intensity = +1;
         } 
-        
-        Time.timeScale = 1;
+        */
 
+        //Time.timeScale = 1;
+        
         AudioSource.PlayClipAtPoint(sndPauseButton, transform.position);
     }
 }

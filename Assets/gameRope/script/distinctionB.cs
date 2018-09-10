@@ -42,6 +42,7 @@ namespace Ardunity
         public bool c1, c2, c3, c4, c5, c6 = false;
         private bool d1 = false;
         public bool rightback, leftback, waterrocket = false;
+        private bool initial = false;
 
         protected override void Awake()
 		{
@@ -426,17 +427,24 @@ namespace Ardunity
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0)) // 4번 연결
 
             {
+                if (initial == false)
+                {
+                    // 초기화 영상 재생
+                    GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject;
+                    initial = true;
+                }
 
-                if (time2 > 15.0f && c6 == false)  // 외줄타기게임  connect 후 15초후에 모듈위치확인 시작
+                if (time2 > 18.0f && c6 == false)  // 외줄타기게임  connect 후 15초후에 모듈위치확인 시작
                                                  // c6의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                 {
+                    Destroy(GameObject.FindWithTag("Initialize")); // 컨초_허리 영상 제거하기
 
                     // print("허리 모듈의 위치를 확인합니다.");  UI
                     // print("허리를 " " 해주세요.");  UI
 
                     if (time2 > 20.0f) // 20초 후에  허리 위치확인 시작
                     {
-
+                        
                         // 허리통합_01 활성화
                         GameObject.Find("movingPerson").transform.Find("Total_01").gameObject.SetActive(true);
 
@@ -487,8 +495,8 @@ namespace Ardunity
                     //print("모듈이 인식되었습니다.");
 
                     // 허리통합_01 비활성화
-                    // GameObject.Find("movingPerson").transform.Find("Total_01").gameObject.SetActive(false);
-                    Destroy(GameObject.FindWithTag("Total_01"));
+                     GameObject.Find("movingPerson").transform.Find("Total_01").gameObject.SetActive(false);
+                    //Destroy(GameObject.FindWithTag("Total_01"));
 
                     
 

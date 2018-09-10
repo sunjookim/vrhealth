@@ -29,6 +29,7 @@ public class GameDirector : MonoBehaviour {
         mouse_x = Input.mousePosition.x;
         mouse_y = Input.mousePosition.y;
 
+        /*
         //플레이어 회전 구현
         // 코너 1 : -90~90, 코너 2 : 0~180 ....
         x = (Input.mousePosition.x - Screen.width / 2) / Screen.width; // x의 범위는 -0.5~ 0.5
@@ -42,7 +43,7 @@ public class GameDirector : MonoBehaviour {
 
         Quaternion turn = Quaternion.Euler(y * 180, x * 180, 0);
         transform.rotation = Quaternion.Slerp(transform.rotation, turn, 7 * Time.deltaTime); // 부드럽게 턴
-
+        */
 
         //랜덤으로 과녁을 선택
         if (random_check == false)

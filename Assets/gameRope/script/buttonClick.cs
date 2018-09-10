@@ -9,6 +9,7 @@ public class buttonClick : MonoBehaviour {
     private Vector3 ScreenCenter;
     public GameObject hpgaze;
 
+
     // Use this for initialization
     void Start()
     {
@@ -23,7 +24,7 @@ public class buttonClick : MonoBehaviour {
         Ray ray = Camera.main.ScreenPointToRay(ScreenCenter);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, 10000.0f))
+        if (Physics.Raycast(ray, out hit, 3.0f))
         {
             //SceneToGame1()
             if (hit.transform.tag == "button_replaygame1")
@@ -40,7 +41,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //SceneToGame2()
-            if (hit.transform.tag == "button_replay")
+            else if (hit.transform.tag == "button_replay")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -48,13 +49,13 @@ public class buttonClick : MonoBehaviour {
                 Debug.Log(gazeTimer);
                 if (gazeTimer >= 1)
                 {
-                    GetComponent<move_scene>().SceneToGame2();
+                    GetComponent<move_scene>().SceneToGame2_Play();
                     gazeTimer = 0;
                 }
             }
 
             //SceneToGame3()
-            if (hit.transform.tag == "button_replaygame3")
+            else if (hit.transform.tag == "button_replaygame3")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -68,7 +69,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //SceneChange2()
-            if (hit.transform.tag == "button_back")
+            else if (hit.transform.tag == "button_back")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -82,7 +83,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Pause
-            if (hit.transform.tag == "button_menu")
+            else if (hit.transform.tag == "button_menu")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -96,7 +97,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //SceneToGame2_Play()
-            if (hit.transform.tag == "button_start")
+            else if (hit.transform.tag == "button_start")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -110,7 +111,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //SceneToManual()
-            if (hit.transform.tag == "button_manuel")
+            else if (hit.transform.tag == "button_manuel")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -124,7 +125,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Exit()
-            if (hit.transform.tag == "button_exit")
+            else if (hit.transform.tag == "button_exit")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -138,7 +139,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Exit()
-            if (hit.transform.tag == "button_exit")
+            else if (hit.transform.tag == "button_exit")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -152,7 +153,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //SceneChange1()
-            if (hit.transform.tag == "button_backgame")
+            else if (hit.transform.tag == "button_backgame")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -166,7 +167,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Manual_Arm()
-            if (hit.transform.tag == "button_manual_arm")
+            else if (hit.transform.tag == "button_manual_arm")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -180,7 +181,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Manual_Leg()
-            if (hit.transform.tag == "button_manual_leg")
+            else if (hit.transform.tag == "button_manual_leg")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -194,7 +195,7 @@ public class buttonClick : MonoBehaviour {
             }
 
             //Manual_Waist()
-            if (hit.transform.tag == "button_manual_waist")
+            else if (hit.transform.tag == "button_manual_waist")
             {
                 hpgaze.SetActive(true);
                 gazeTimer += 1.0f / 3.0f * Time.deltaTime;
@@ -205,6 +206,41 @@ public class buttonClick : MonoBehaviour {
                     GetComponent<Manual>().Manual_Waist();
                     gazeTimer = 0;
                 }
+            }
+
+            //ReStart()
+            else if (hit.transform.tag == "button_restart")
+            {
+                hpgaze.SetActive(true);
+                gazeTimer += 1.0f / 3.0f * Time.deltaTime;
+                hpgaze.GetComponent<Image>().fillAmount -= 0.33f * Time.deltaTime;
+                Debug.Log(gazeTimer);
+                if (gazeTimer >= 1)
+                {
+                    GetComponent<move_scene>().ReStart();
+                    gazeTimer = 0;
+                }
+            }
+
+            //pause_GoOn()
+            else if (hit.transform.tag == "button_goon")
+            {
+                hpgaze.SetActive(true);
+                gazeTimer += 1.0f / 3.0f * Time.deltaTime;
+                hpgaze.GetComponent<Image>().fillAmount -= 0.33f * Time.deltaTime;
+                Debug.Log(gazeTimer);
+                if (gazeTimer >= 1)
+                {
+                    GetComponent<move_scene>().pause_GoOn();
+                    gazeTimer = 0;
+                }
+            }
+
+            else
+            {
+                gazeTimer = 0;
+                hpgaze.SetActive(false);
+                hpgaze.GetComponent<Image>().fillAmount = 1;
             }
         }
         else

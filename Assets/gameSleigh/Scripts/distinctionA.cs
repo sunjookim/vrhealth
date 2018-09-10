@@ -33,6 +33,7 @@ namespace Ardunity
         private bool k = true;
         private int count = 0;
         private int count1 = 0;
+        public int count3 = 0;
         private int decision = 0;
         public double a1,a2,a3,a4 = 0;
         public int F = 0;
@@ -41,7 +42,8 @@ namespace Ardunity
         private bool c1, c2, c3, c4, c5, c6 = false;
         private bool d1 = false;
         public bool rightback, leftback, waterrocket = false;
-
+        private bool initial = false;
+        private bool e1, e2, e3, e4, e5, e6, e7 = false;
         protected override void Awake()
 		{
             base.Awake();
@@ -86,32 +88,38 @@ namespace Ardunity
             print("시간 :" + time2);
          
 
-
             RotationReactorA _curRotation1 = GameObject.Find("사람").GetComponent<RotationReactorA>(); // 1번
             RotationReactor2A _curRotation2 = GameObject.Find("사람").GetComponent<RotationReactor2A>(); // 2번
             RotationReactor3A _curRotation3 = GameObject.Find("사람").GetComponent<RotationReactor3A>(); // 3번
             RotationReactor4A _curRotation4 = GameObject.Find("사람").GetComponent<RotationReactor4A>(); // 4번
 
 
-            if (d1 == false) // 센서가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.
-            {
-                if (_curRotation1._curRotation.x != 0 || _curRotation2._curRotation.x != 0 || _curRotation3._curRotation.x != 0 || _curRotation4._curRotation.x != 0) // connect가 되면 if문이 실행 
-                {
-                    time2 = 0.0f;
-                    d1 = true;
-                }
-            }
+
+            
             // 썰매운동 : 총 3개의 센서를 이용하는 경우의 수
             if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) //1,2,3번 연결
                || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 1,2,4번 연결
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x != 0) // 2,3,4번 연결
                || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x != 0)) // 1,3,4번 연결
                {
-                if (time2 > 15.0f && c3 == false) // time2 = 15  즉, connect후  15초 후에 모듈의 위치 확인 시작 
+                if(d1 == false) // 센서 3개가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.
+                {
+                    time2 = 0.0f;
+                        d1 = true;
+                }
+
+                if (initial == false)
+                {
+                    // 초기화 영상 재생
+                    GameObject obj = Instantiate(Resources.Load("Initializing")) as GameObject;
+                    initial = true;
+                }
+
+                if (time2 > 18.0f && c3 == false) // time2 = 15  즉, connect후  15초 후에 모듈의 위치 확인 시작 
                 {                               // c3 = true 가 되면 모든 모듈의 위치가 확인 되었으므로 더이상 모듈의 위치를 확인할 필요가 없음
                                                 // 썰매게임 
 
-
+                    Destroy(GameObject.FindWithTag("Initialize")); // 컨초_팔운동 영상 제거하기
 
                     if (c1 == false)  // c1의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                     {
@@ -123,6 +131,11 @@ namespace Ardunity
                         if (time2 > 20.0f) // 20초 후에 오른팔 위치확인 시작
                         {
                             // print("측정을 시작합니다.");
+                            if (e1 == false) {
+                                GameObject.Find("사람").transform.Find("STotal_01").gameObject.SetActive(true);
+                                e1 = true;
+
+                                    }
 
                             // 1,2,3,4번 센서중 오른팔동작범위를 만족하는 센서가 오른팔에 부착한 센서가 됨
 
@@ -173,13 +186,20 @@ namespace Ardunity
 
                     if (c1 == true && c2 == false)  // c2의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                     {
+                        GameObject.Find("사람").transform.Find("STotal_01").gameObject.SetActive(false);
+                      //  if (e2 == false)
+                      //  {
+                       //     GameObject.Find("사람").transform.Find("STotal_02").gameObject.SetActive(true);
+                       //     e2 = true;
+                      //  }
 
                         // print("왼팔 모듈의 위치를 확인합니다.");  UI
                         // print("왼팔을 " " 해주세요.");  UI
 
-                        if (time2 > 40.0f) //  40초 이후부터 왼팔 위치확인 시작
+                        if (time2 > 30.0f) //  30초 이후부터 왼팔 위치확인 시작
                         {
-
+                         //   GameObject.Find("사람").transform.Find("STotal_02").gameObject.SetActive(false);
+                         //   GameObject.Find("사람").transform.Find("STotal_03").gameObject.SetActive(true);
 
                             // print("측정을 시작합니다.");
 
@@ -227,14 +247,16 @@ namespace Ardunity
 
                     if (c2 == true && c3 == false)  // c3의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                     {
-
+                    //    GameObject.Find("사람").transform.Find("STotal_03").gameObject.SetActive(false);
+                    //    GameObject.Find("사람").transform.Find("STotal_04").gameObject.SetActive(true);
                         // print("등 모듈의 위치를 확인합니다.");  UI
                         // print("등을" " 해주세요.");  UI
 
-                        if (time2 > 60.0f) // count = 3000 일 때 등 위치확인 시작
+                        if (time2 > 40.0f) // time2 == 40.0 일 때 등 위치확인 시작
                         {
                             // print("측정을 시작합니다.");
-
+                     //       GameObject.Find("사람").transform.Find("STotal_04").gameObject.SetActive(false);
+                      //      GameObject.Find("사람").transform.Find("STotal_05").gameObject.SetActive(true);
                             // 1,2,3,4번 센서중 등 동작범위를 만족하는 센서가 등에 부착한 센서가 됨
 
                             if ((Math.Abs(_curRotation1._curRotation.z) > 0.0f && Math.Abs(_curRotation1._curRotation.z) < 0.2f) // 0 < z < 0.2 
@@ -282,205 +304,215 @@ namespace Ardunity
 
                     }
 
-                    if (c1 == true && c2 == true && c3 == true)
-                    {
-                        //print("모듈이 인식되었습니다.");
-                    }
+                   
                 }
-            }
 
-            if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0)   // 1,2번 연결
-               || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 1,3번 연결
-               || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 1,4번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 2,3번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 2,4번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x != 0))// 3,4번 연결
+            }
+            if (c1 == true && c2 == true && c3 == true)
             {
-                if (time2 > 15.0f && c5 == false) // 로켓게임 / 왼쪽다리와 오른쪽다리 모듈이 확인되면 c5가 true가 되므로 더이상 반복문이 실행되지 않는다.
-                {
-                    if (c4 == false)  // c4의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
-                    {
-
-                        // print("오른쪽 다리 모듈의 위치를 확인합니다.");  UI
-                        // print("오른쪽다리를 " " 해주세요.");  UI
-
-                        if (time2 > 20.0f) // connect 후 20초후에 오른쪽 다리 위치확인 시작
-                        {
-
-                            // print("측정을 시작합니다.");
-
-                            // 1,2,3,4번 센서중 오른쪽다리 동작범위를 만족하는 센서가 오른쪽다리에 부착한 센서가 됨
-
-                            if (Math.Abs(_curRotation1._curRotation.z) < 0.15f && Math.Abs(_curRotation1._curRotation.z) > 0.0f)  // 0 < z < 0.15 다리운동과 동작같음
-                            {
-                                a1 = 2.1; // 1번센서가 로켓게임 오른쪽다리
-                                c4 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation2._curRotation.z) < 0.15f && Math.Abs(_curRotation2._curRotation.z) > 0.0f)
-                            {
-                                a2 = 2.1; // 2번센서가 로켓게임 오른쪽다리
-                                c4 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation3._curRotation.z) < 0.15f && Math.Abs(_curRotation3._curRotation.z) > 0.0f)
-                            {
-                                a3 = 2.1; // 3번센서가 로켓게임 오른쪽다리
-                                c4 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation4._curRotation.z) < 0.15f && Math.Abs(_curRotation4._curRotation.z) > 0.0f)
-                            {
-                                a4 = 2.1; // 4번센서가 로켓게임 오른쪽다리
-                                c4 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else
-                            {
-                                // print("오른쪽 다리 인식에 실패하였습니다. 다시 동작을 해주세요.");
-                            }
-
-                        }
-
-                    }
-
-                    if (c4 == true && c5 == false)  // c5의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
-                    {
-
-                        // print("왼쪽 다리 모듈의 위치를 확인합니다.");  UI
-                        // print("왼쪽다리를 " " 해주세요.");  UI
-
-                        if (time2 > 40) // connect후 40초후에 왼쪽다리 위치확인 시작
-                        {
-
-                            // print("측정을 시작합니다.");
-
-                            // 1,2,3,4번 센서중 왼쪽다리 동작범위를 만족하는 센서가 왼쪽다리에 부착한 센서가 됨
-
-                            if (Math.Abs(_curRotation1._curRotation.x) > 0.4f && Math.Abs(_curRotation1._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation1._curRotation.y) > 0.4f && Math.Abs(_curRotation1._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation1._curRotation.z) > 0.4f && Math.Abs(_curRotation1._curRotation.z) < 0.6f) 
-                            { // 오른쪽 다리에 왼쪽다리 올리기  0.4 < x,y,z < 0.6
-                                a1 = 2.2; // 1번센서가 로켓게임 왼쪽다리
-                                c5 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation2._curRotation.x) > 0.4f && Math.Abs(_curRotation2._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation2._curRotation.y) > 0.4f && Math.Abs(_curRotation2._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation2._curRotation.z) > 0.4f && Math.Abs(_curRotation2._curRotation.z) < 0.6f)
-                            {
-                                a2 = 2.2; // 2번센서가 로켓게임 왼쪽다리
-                                c5 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation3._curRotation.x) > 0.4f && Math.Abs(_curRotation3._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation3._curRotation.y) > 0.4f && Math.Abs(_curRotation3._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation3._curRotation.z) > 0.4f && Math.Abs(_curRotation3._curRotation.z) < 0.6f)
-                            {
-                                a3 = 2.2; // 3번센서가 로켓게임 왼쪽다리
-                                c5 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else if (Math.Abs(_curRotation4._curRotation.x) > 0.4f && Math.Abs(_curRotation4._curRotation.x) < 0.6f
-                                && Math.Abs(_curRotation4._curRotation.y) > 0.4f && Math.Abs(_curRotation4._curRotation.y) < 0.6f
-                                && Math.Abs(_curRotation4._curRotation.z) > 0.4f && Math.Abs(_curRotation4._curRotation.z) < 0.6f)
-                            {
-                                a4 = 2.2; // 4번센서가 로켓게임 왼쪽다리
-                                c5 = true;
-
-                                // print("확인되었습니다.");  UI
-                            }
-                            else
-                            {
-                                // print("왼쪽다리 인식에 실패하였습니다. 다시 동작을 해주세요.");
-                            }
-
-                        }
-
-                    }
-                    if (c4 == true && c5 == true)
-                    {
-                        //print("모듈이 인식되었습니다.");
-                    }
-                }
+                //   GameObject.Find("사람").transform.Find("STotal_05").gameObject.SetActive(false);
+                //    GameObject.Find("사람").transform.Find("STotal_06").gameObject.SetActive(true);
+                count3++;
+                //print("모듈이 인식되었습니다.");
             }
-
-
-            if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0)   // 1번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0) // 2번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 3번 연결
-               || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0)) // 4번 연결
-
+            print("count3 : " + count3);
+            if (count3 == 200)
             {
-
-                if (time2 > 15.0f && c6 == false)  // 외줄타기게임  connect 후 15초후에 모듈위치확인 시작
-                                                 // c6의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
-                {
-
-                    // print("허리 모듈의 위치를 확인합니다.");  UI
-                    // print("허리를 " " 해주세요.");  UI
-
-                    if (time2 > 20.0f) // 20초 후에  허리 위치확인 시작
-                    {
-
-                        // print("측정을 시작합니다.");
-
-                        // 1,2,3,4번 센서중 허리동작범위를 만족하는 센서가 허리에 부착한 센서가 됨
-
-                        if (Math.Abs(_curRotation1._curRotation.x) > 0.1f && Math.Abs(_curRotation1._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.6f)
-                        {
-                            a1 = 3.1; // 1번센서가 외줄타기게임 허리
-                            c6 = true;
-
-                            // print("확인되었습니다.");  UI
-                        }
-                        else if (Math.Abs(_curRotation2._curRotation.x) > 0.1f && Math.Abs(_curRotation2._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.6f)
-                        {
-                            a2 = 3.1; // 2번센서가 외줄타기게임 허리
-                            c6 = true;
-
-                            // print("확인되었습니다.");  UI
-                        }
-                        else if (Math.Abs(_curRotation3._curRotation.x) > 0.1f && Math.Abs(_curRotation3._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.6f)
-                        {
-                            a3 = 3.1; // 3번센서가 외줄타기게임 허리
-                            c6 = true;
-
-                            // print("확인되었습니다.");  UI
-                        }
-                        else if (Math.Abs(_curRotation4._curRotation.x) > 0.1f && Math.Abs(_curRotation4._curRotation.x) < 0.4f
-                            && Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.6f)
-                        {
-                            a4 = 3.1; // 4번센서가 외줄타기게임 허리
-                            c6 = true;
-
-                            // print("확인되었습니다.");  UI
-                        }
-                        else
-                        {
-                            // print("허리 인식에 실패하였습니다. 다시 동작을 해주세요.");
-                        }
-
-                    }
-                    if (c6 == true)
-                    {
-                        //print("모듈이 인식되었습니다.");
-                    }
-
-                }
+                GameObject.Find("사람").transform.Find("STotal_06").gameObject.SetActive(false);
             }
-           
+            /*
+                        if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0)   // 1,2번 연결
+                           || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 1,3번 연결
+                           || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 1,4번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 2,3번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 2,4번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x != 0))// 3,4번 연결
+                        {
+                            if (time2 > 15.0f && c5 == false) // 로켓게임 / 왼쪽다리와 오른쪽다리 모듈이 확인되면 c5가 true가 되므로 더이상 반복문이 실행되지 않는다.
+                            {
+                                if (c4 == false)  // c4의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
+                                {
 
+                                    // print("오른쪽 다리 모듈의 위치를 확인합니다.");  UI
+                                    // print("오른쪽다리를 " " 해주세요.");  UI
+
+                                    if (time2 > 20.0f) // connect 후 20초후에 오른쪽 다리 위치확인 시작
+                                    {
+
+                                        // print("측정을 시작합니다.");
+
+                                        // 1,2,3,4번 센서중 오른쪽다리 동작범위를 만족하는 센서가 오른쪽다리에 부착한 센서가 됨
+
+                                        if (Math.Abs(_curRotation1._curRotation.z) < 0.15f && Math.Abs(_curRotation1._curRotation.z) > 0.0f)  // 0 < z < 0.15 다리운동과 동작같음
+                                        {
+                                            a1 = 2.1; // 1번센서가 로켓게임 오른쪽다리
+                                            c4 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation2._curRotation.z) < 0.15f && Math.Abs(_curRotation2._curRotation.z) > 0.0f)
+                                        {
+                                            a2 = 2.1; // 2번센서가 로켓게임 오른쪽다리
+                                            c4 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation3._curRotation.z) < 0.15f && Math.Abs(_curRotation3._curRotation.z) > 0.0f)
+                                        {
+                                            a3 = 2.1; // 3번센서가 로켓게임 오른쪽다리
+                                            c4 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation4._curRotation.z) < 0.15f && Math.Abs(_curRotation4._curRotation.z) > 0.0f)
+                                        {
+                                            a4 = 2.1; // 4번센서가 로켓게임 오른쪽다리
+                                            c4 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else
+                                        {
+                                            // print("오른쪽 다리 인식에 실패하였습니다. 다시 동작을 해주세요.");
+                                        }
+
+                                    }
+
+                                }
+
+                                if (c4 == true && c5 == false)  // c5의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
+                                {
+
+                                    // print("왼쪽 다리 모듈의 위치를 확인합니다.");  UI
+                                    // print("왼쪽다리를 " " 해주세요.");  UI
+
+                                    if (time2 > 40) // connect후 40초후에 왼쪽다리 위치확인 시작
+                                    {
+
+                                        // print("측정을 시작합니다.");
+
+                                        // 1,2,3,4번 센서중 왼쪽다리 동작범위를 만족하는 센서가 왼쪽다리에 부착한 센서가 됨
+
+                                        if (Math.Abs(_curRotation1._curRotation.x) > 0.4f && Math.Abs(_curRotation1._curRotation.x) < 0.6f
+                                            && Math.Abs(_curRotation1._curRotation.y) > 0.4f && Math.Abs(_curRotation1._curRotation.y) < 0.6f
+                                            && Math.Abs(_curRotation1._curRotation.z) > 0.4f && Math.Abs(_curRotation1._curRotation.z) < 0.6f) 
+                                        { // 오른쪽 다리에 왼쪽다리 올리기  0.4 < x,y,z < 0.6
+                                            a1 = 2.2; // 1번센서가 로켓게임 왼쪽다리
+                                            c5 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation2._curRotation.x) > 0.4f && Math.Abs(_curRotation2._curRotation.x) < 0.6f
+                                            && Math.Abs(_curRotation2._curRotation.y) > 0.4f && Math.Abs(_curRotation2._curRotation.y) < 0.6f
+                                            && Math.Abs(_curRotation2._curRotation.z) > 0.4f && Math.Abs(_curRotation2._curRotation.z) < 0.6f)
+                                        {
+                                            a2 = 2.2; // 2번센서가 로켓게임 왼쪽다리
+                                            c5 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation3._curRotation.x) > 0.4f && Math.Abs(_curRotation3._curRotation.x) < 0.6f
+                                            && Math.Abs(_curRotation3._curRotation.y) > 0.4f && Math.Abs(_curRotation3._curRotation.y) < 0.6f
+                                            && Math.Abs(_curRotation3._curRotation.z) > 0.4f && Math.Abs(_curRotation3._curRotation.z) < 0.6f)
+                                        {
+                                            a3 = 2.2; // 3번센서가 로켓게임 왼쪽다리
+                                            c5 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else if (Math.Abs(_curRotation4._curRotation.x) > 0.4f && Math.Abs(_curRotation4._curRotation.x) < 0.6f
+                                            && Math.Abs(_curRotation4._curRotation.y) > 0.4f && Math.Abs(_curRotation4._curRotation.y) < 0.6f
+                                            && Math.Abs(_curRotation4._curRotation.z) > 0.4f && Math.Abs(_curRotation4._curRotation.z) < 0.6f)
+                                        {
+                                            a4 = 2.2; // 4번센서가 로켓게임 왼쪽다리
+                                            c5 = true;
+
+                                            // print("확인되었습니다.");  UI
+                                        }
+                                        else
+                                        {
+                                            // print("왼쪽다리 인식에 실패하였습니다. 다시 동작을 해주세요.");
+                                        }
+
+                                    }
+
+                                }
+                                if (c4 == true && c5 == true)
+                                {
+                                    //print("모듈이 인식되었습니다.");
+                                }
+                            }
+                        }
+
+
+                        if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0)   // 1번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0) // 2번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 3번 연결
+                           || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0)) // 4번 연결
+
+                        {
+
+                            if (time2 > 15.0f && c6 == false)  // 외줄타기게임  connect 후 15초후에 모듈위치확인 시작
+                                                             // c6의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
+                            {
+
+                                // print("허리 모듈의 위치를 확인합니다.");  UI
+                                // print("허리를 " " 해주세요.");  UI
+
+                                if (time2 > 20.0f) // 20초 후에  허리 위치확인 시작
+                                {
+
+                                    // print("측정을 시작합니다.");
+
+                                    // 1,2,3,4번 센서중 허리동작범위를 만족하는 센서가 허리에 부착한 센서가 됨
+
+                                    if (Math.Abs(_curRotation1._curRotation.x) > 0.1f && Math.Abs(_curRotation1._curRotation.x) < 0.4f
+                                        && Math.Abs(_curRotation1._curRotation.y) > 0.3f && Math.Abs(_curRotation1._curRotation.y) < 0.6f)
+                                    {
+                                        a1 = 3.1; // 1번센서가 외줄타기게임 허리
+                                        c6 = true;
+
+                                        // print("확인되었습니다.");  UI
+                                    }
+                                    else if (Math.Abs(_curRotation2._curRotation.x) > 0.1f && Math.Abs(_curRotation2._curRotation.x) < 0.4f
+                                        && Math.Abs(_curRotation2._curRotation.y) > 0.3f && Math.Abs(_curRotation2._curRotation.y) < 0.6f)
+                                    {
+                                        a2 = 3.1; // 2번센서가 외줄타기게임 허리
+                                        c6 = true;
+
+                                        // print("확인되었습니다.");  UI
+                                    }
+                                    else if (Math.Abs(_curRotation3._curRotation.x) > 0.1f && Math.Abs(_curRotation3._curRotation.x) < 0.4f
+                                        && Math.Abs(_curRotation3._curRotation.y) > 0.3f && Math.Abs(_curRotation3._curRotation.y) < 0.6f)
+                                    {
+                                        a3 = 3.1; // 3번센서가 외줄타기게임 허리
+                                        c6 = true;
+
+                                        // print("확인되었습니다.");  UI
+                                    }
+                                    else if (Math.Abs(_curRotation4._curRotation.x) > 0.1f && Math.Abs(_curRotation4._curRotation.x) < 0.4f
+                                        && Math.Abs(_curRotation4._curRotation.y) > 0.3f && Math.Abs(_curRotation4._curRotation.y) < 0.6f)
+                                    {
+                                        a4 = 3.1; // 4번센서가 외줄타기게임 허리
+                                        c6 = true;
+
+                                        // print("확인되었습니다.");  UI
+                                    }
+                                    else
+                                    {
+                                        // print("허리 인식에 실패하였습니다. 다시 동작을 해주세요.");
+                                    }
+
+                                }
+                                if (c6 == true)
+                                {
+                                    //print("모듈이 인식되었습니다.");
+                                }
+
+                            }
+                        }
+
+                */
             print(count);
             Debug.Log("c1 :" + c1 + " / " + "c2 :" + c2 + " / " + "c3 :" + c3 + " / " + "c4 :" + c4 + " / " + "c5 :" + c5 + " / " + "c6 :" + c6);
             Debug.Log("a1 :" + a1 + " / " + "a2 :" + a2 + " / " + "a3 :" + a3 + " / " + "a4 :" + a4);

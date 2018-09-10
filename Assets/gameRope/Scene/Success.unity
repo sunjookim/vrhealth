@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 082b2b0806cebba4ba47a6c742348dff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpgaze: {fileID: 0}
+  hpgaze: {fileID: 709860713}
 --- !u!1 &289660541
 GameObject:
   m_ObjectHideFlags: 0
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_FillMethod: 4
   m_FillAmount: 1
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
 --- !u!222 &709860716
 CanvasRenderer:
   m_ObjectHideFlags: 0

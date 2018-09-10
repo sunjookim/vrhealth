@@ -78,6 +78,8 @@ TagManager:
   - button_manual_leg
   - button_manual_waist
   - button_manual_arm
+  - button_restart
+  - button_goon
   layers:
   - Default
   - TransparentFX

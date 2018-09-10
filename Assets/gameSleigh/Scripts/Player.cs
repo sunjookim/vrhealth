@@ -67,7 +67,9 @@ namespace Ardunity
         // Update is called once per frame
         void Update()
         {
+            distinctionA AAA = GameObject.Find("사람").GetComponent<distinctionA>(); 
             gameTime += Time.deltaTime;
+            //if(gameTime > startTime)
             if(gameTime > startTime)
             {
                 if (Life <= 0) // 게임 오버 메시지 뜨게 함- 목숨을 다 소모했다고 함

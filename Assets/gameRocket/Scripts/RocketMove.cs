@@ -60,7 +60,7 @@ namespace Ardunity
         // Update is called once per frame
         void Update() {
             timer_game += Time.deltaTime;
-            if (timer_game >= 6)   // 초기화 과정 끝나고 게임 시작
+            if (timer_game >= 60)   // 초기화 과정 끝나고 게임 시작
             {
                 if (Life <= 0)
                 {

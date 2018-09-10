@@ -41,6 +41,9 @@ namespace Ardunity
         private bool c1, c2, c3, c4, c5, c6 = false;
         private bool d1 = false;
         public bool rightback, leftback, waterrocket = false;
+        private bool initial = false;
+        private bool e1, e2, e3, e4, e5, e6, e7 = false;
+        public int count2 = 0;
 
         protected override void Awake()
 		{
@@ -93,7 +96,7 @@ namespace Ardunity
 
 
 
-            if (d1 == false) // 센서가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.
+          /*  if (d1 == false) // 센서가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.
             {
                 if (_curRotation1._curRotation.x != 0 || _curRotation2._curRotation.x != 0 || _curRotation3._curRotation.x != 0 || _curRotation4._curRotation.x != 0) // connect가 되면 if문이 실행 
                 {
@@ -101,6 +104,7 @@ namespace Ardunity
                     d1 = true;
                 }
             }
+            */
             // 썰매운동 : 총 3개의 센서를 이용하는 경우의 수
             if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) //1,2,3번 연결
                || (_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 1,2,4번 연결
@@ -302,8 +306,22 @@ namespace Ardunity
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x != 0) // 2,4번 연결
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x != 0))// 3,4번 연결
             {
-                if (time2 > 15.0f && c5 == false) // 로켓게임 / 왼쪽다리와 오른쪽다리 모듈이 확인되면 c5가 true가 되므로 더이상 반복문이 실행되지 않는다.
+
+                if (d1 == false) // 센서 3개가 connect 되면 time2가 0초로 초기화 된다.  초기화가 되면 d1 = true로 해서 더이상 초기화 되지 않도록 한다.
                 {
+                    time2 = 0.0f;
+                    d1 = true;
+                }
+                if (initial == false)
+                {
+                    // 초기화 영상 재생
+                    GameObject obj = Instantiate(Resources.Load("InitializingRocket")) as GameObject;
+                    initial = true;
+                }
+                if (time2 > 18.0f && c5 == false) // 로켓게임 / 왼쪽다리와 오른쪽다리 모듈이 확인되면 c5가 true가 되므로 더이상 반복문이 실행되지 않는다.
+                {
+                    Destroy(GameObject.FindWithTag("Initialize")); // 컨초_다리 영상 제거하기
+
                     if (c4 == false)  // c4의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                     {
 
@@ -312,6 +330,13 @@ namespace Ardunity
 
                         if (time2 > 20.0f) // connect 후 20초후에 오른쪽 다리 위치확인 시작
                         {
+                            // 로켓통합_01 활성화
+                            if (e1 == false)
+                            {
+                                GameObject.Find("RocketControl").transform.Find("RTotal_01").gameObject.SetActive(true);
+                                e1 = true;
+
+                            }
 
                             // print("측정을 시작합니다.");
 
@@ -356,13 +381,25 @@ namespace Ardunity
 
                     if (c4 == true && c5 == false)  // c5의 초기값이 false 이므로 실행되고 모듈의 위치를 인식하면 true를 반환하기 때문에 if문은 한번만 실행됨
                     {
+                        GameObject.Find("RocketControl").transform.Find("RTotal_01").gameObject.SetActive(false);
+                        if (e2 == false)
+                        {
+                            GameObject.Find("RocketControl").transform.Find("RTotal_02").gameObject.SetActive(true);
+                            e2 = true;
 
+                        }
                         // print("왼쪽 다리 모듈의 위치를 확인합니다.");  UI
                         // print("왼쪽다리를 " " 해주세요.");  UI
 
-                        if (time2 > 40) // connect후 40초후에 왼쪽다리 위치확인 시작
+                        if (time2 > 30) // connect후 40초후에 왼쪽다리 위치확인 시작
                         {
+                            GameObject.Find("RocketControl").transform.Find("RTotal_02").gameObject.SetActive(false);
+                            if (e3 == false)
+                            {
+                                GameObject.Find("RocketControl").transform.Find("RTotal_03").gameObject.SetActive(true);
+                                e3 = true;
 
+                            }
                             // print("측정을 시작합니다.");
 
                             // 1,2,3,4번 센서중 왼쪽다리 동작범위를 만족하는 센서가 왼쪽다리에 부착한 센서가 됨
@@ -411,14 +448,29 @@ namespace Ardunity
                         }
 
                     }
-                    if (c4 == true && c5 == true)
-                    {
-                        //print("모듈이 인식되었습니다.");
-                    }
+                    
                 }
+                
+            }
+            if (c4 == true && c5 == true)
+            {
+                GameObject.Find("RocketControl").transform.Find("RTotal_03").gameObject.SetActive(false);
+                if (e4 == false)
+                {
+                    GameObject.Find("RocketControl").transform.Find("RTotal_04").gameObject.SetActive(true);
+                    e4 = true;
+                    //print("모듈이 인식되었습니다.");
+                }
+
+                count2++;
             }
 
+            print(count2);
 
+            if (count2 == 200)
+            {
+                GameObject.Find("RocketControl").transform.Find("RTotal_04").gameObject.SetActive(false);
+            }
             if ((_curRotation1._curRotation.x != 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0)   // 1번 연결
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x != 0 && _curRotation3._curRotation.x == 0 && _curRotation4._curRotation.x == 0) // 2번 연결
                || (_curRotation1._curRotation.x == 0 && _curRotation2._curRotation.x == 0 && _curRotation3._curRotation.x != 0 && _curRotation4._curRotation.x == 0) // 3번 연결
